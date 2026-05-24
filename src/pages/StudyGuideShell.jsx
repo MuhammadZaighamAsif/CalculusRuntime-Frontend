@@ -1,5 +1,20 @@
 import { useEffect, useRef } from "react";
 
+const integrationStyles = `
+.study-guide-page {
+  min-height: 100vh;
+}
+
+.partial-derivatives-guide .sidebar {
+  top: 58px;
+  height: calc(100vh - 58px);
+}
+
+.vector-calculus-guide nav {
+  top: 58px;
+}
+`;
+
 function loadMathJax() {
   if (window.MathJax?.typesetPromise) {
     return Promise.resolve(window.MathJax);
@@ -175,7 +190,7 @@ function StudyGuideShell({ guideClass, styles, markup }) {
 
   return (
     <main className={`study-guide-page ${guideClass}`}>
-      <style>{styles}</style>
+      <style>{styles + integrationStyles}</style>
       <div ref={rootRef} dangerouslySetInnerHTML={{ __html: markup }} />
     </main>
   );
