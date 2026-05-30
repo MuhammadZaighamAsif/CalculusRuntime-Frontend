@@ -8,7 +8,9 @@ const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8002";
 function loadUser() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const user = JSON.parse(raw);
+    return user?.accessToken ? user : null;
   } catch {
     return null;
   }
