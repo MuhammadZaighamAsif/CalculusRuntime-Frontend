@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 const guideCards = [
@@ -7,6 +8,8 @@ const guideCards = [
       "Limits, continuity, gradients, tangent planes, differentials, and optimization for functions of several variables.",
     path: "/partial-derivatives",
     meta: "7 sections · MCQ practice · Formula review",
+    icon: "∂",
+    color: "teal",
   },
   {
     title: "Vector Calculus",
@@ -14,18 +17,58 @@ const guideCards = [
       "Vector-valued functions, line integrals, conservative fields, Green's theorem, surfaces, and surface area.",
     path: "/vector-calculus",
     meta: "5 modules · Worked examples · Quick reference",
+    icon: "∇",
+    color: "blue",
   },
 ];
 
 const toolLinks = [
-  { label: "Continuity Finder", path: "/test" },
-  { label: "Extreme Value Finder", path: "/extreme" },
-  { label: "Volume Calculator", path: "/volumecalculator" },
+  {
+    label: "Continuity Finder",
+    path: "/test",
+    icon: "≈",
+    desc: "Analyze continuity of multi-variable functions",
+  },
+  {
+    label: "Extreme Value Finder",
+    path: "/extreme",
+    icon: "⬆",
+    desc: "Find maxima and minima using second derivative test",
+  },
+  {
+    label: "Volume Calculator",
+    path: "/volumecalculator",
+    icon: "∬",
+    desc: "Evaluate double integrals with full step-by-step",
+  },
+];
+
+const allItems = [
+  ...guideCards.map((g) => ({ ...g, type: "guide" })),
+  ...toolLinks.map((t) => ({ ...t, type: "tool" })),
 ];
 
 function Home() {
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    if (!q) return allItems;
+    return allItems.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.description?.toLowerCase().includes(q) ||
+        item.desc?.toLowerCase().includes(q) ||
+        item.label?.toLowerCase().includes(q),
+    );
+  }, [query]);
+
+  const filteredGuides = filtered.filter((i) => i.type === "guide");
+  const filteredTools = filtered.filter((i) => i.type === "tool");
+
   return (
     <main className="home-page">
+      {/* Hero */}
       <section className="home-hero">
         <div className="hero-copy">
           <p className="eyebrow">Multivariable Calculus Studio</p>
@@ -56,33 +99,93 @@ function Home() {
         </div>
       </section>
 
-      <section className="guide-section" aria-labelledby="guide-heading">
-        <div className="section-kicker">Study Guides</div>
-        <h2 id="guide-heading">Choose a path</h2>
-        <div className="guide-grid">
-          {guideCards.map((guide) => (
-            <Link className="guide-card" key={guide.path} to={guide.path}>
-              <span>{guide.meta}</span>
-              <h3>{guide.title}</h3>
-              <p>{guide.description}</p>
-            </Link>
-          ))}
+      {/* Search */}
+      <div className="home-search-wrap">
+        <div className="home-search">
+          <span className="home-search-icon">⌕</span>
+          <input
+            type="search"
+            placeholder="Search guides and tools…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search topics and tools"
+          />
+          {query && (
+            <button
+              className="home-search-clear"
+              onClick={() => setQuery("")}
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+          )}
         </div>
-      </section>
+      </div>
 
-      <section className="tool-strip" aria-labelledby="tools-heading">
-        <div>
-          <div className="section-kicker">Companion Tools</div>
-          <h2 id="tools-heading">Calculate while you learn</h2>
+      {/* No results */}
+      {filtered.length === 0 && (
+        <div className="home-no-results">
+          <span>Nothing matched "{query}".</span>
         </div>
-        <div className="tool-links">
-          {toolLinks.map((tool) => (
-            <Link key={tool.path} to={tool.path}>
-              {tool.label}
-            </Link>
-          ))}
+      )}
+
+      {/* Study Guides */}
+      {filteredGuides.length > 0 && (
+        <section className="guide-section" aria-labelledby="guide-heading">
+          <div className="section-kicker">Study Guides</div>
+          <h2 id="guide-heading">Choose a path</h2>
+          <div className="guide-grid">
+            {filteredGuides.map((guide) => (
+              <Link
+                className={`guide-card guide-card--${guide.color}`}
+                key={guide.path}
+                to={guide.path}
+              >
+                <div className="guide-card-icon">{guide.icon}</div>
+                <span>{guide.meta}</span>
+                <h3>{guide.title}</h3>
+                <p>{guide.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Tools */}
+      {filteredTools.length > 0 && (
+        <section className="tool-strip" aria-labelledby="tools-heading">
+          <div>
+            <div className="section-kicker">Companion Tools</div>
+            <h2 id="tools-heading">Calculate while you learn</h2>
+          </div>
+          <div className="tool-links">
+            {filteredTools.map((tool) => (
+              <Link key={tool.path} to={tool.path} title={tool.desc}>
+                <span className="tool-link-icon">{tool.icon}</span>
+                {tool.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Stats strip */}
+      <div className="home-stats">
+        <div className="stat-item">
+          <span className="stat-num">2</span>
+          <span className="stat-label">Study Guides</span>
         </div>
-      </section>
+        <div className="stat-divider" />
+        <div className="stat-item">
+          <span className="stat-num">3</span>
+          <span className="stat-label">Interactive Tools</span>
+        </div>
+        <div className="stat-divider" />
+        <div className="stat-item">
+          <span className="stat-num">∞</span>
+          <span className="stat-label">Practice Problems</span>
+        </div>
+      </div>
     </main>
   );
 }
