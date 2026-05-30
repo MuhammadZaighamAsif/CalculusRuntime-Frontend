@@ -58,13 +58,15 @@ const allItems = [
 
 function Home() {
   const [query, setQuery] = useState("");
+  const { user } = useAuth();
+  const { stats } = useProgress();
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return allItems;
     return allItems.filter(
       (item) =>
-        item.title.toLowerCase().includes(q) ||
+        item.title?.toLowerCase().includes(q) ||
         item.description?.toLowerCase().includes(q) ||
         item.desc?.toLowerCase().includes(q) ||
         item.label?.toLowerCase().includes(q),
@@ -87,13 +89,24 @@ function Home() {
             when you need to compute instead of scroll.
           </p>
           <div className="hero-actions">
-            <Link className="primary-action" to="/partial-derivatives">
+            <Link className="primary-action" to="/partial-derivatives/1">
               Start studying
             </Link>
-            <Link className="secondary-action" to="/vector-calculus">
-              Open vector calculus
-            </Link>
+            {user ? (
+              <Link className="secondary-action" to="/dashboard">
+                My dashboard
+              </Link>
+            ) : (
+              <Link className="secondary-action" to="/signup">
+                Create free account
+              </Link>
+            )}
           </div>
+          {user && stats.completedCount > 0 && (
+            <p className="hero-progress-note">
+              You've completed {stats.completedCount} of {stats.totalSections} sections. Keep it up!
+            </p>
+          )}
         </div>
         <div className="hero-panel" aria-label="Calculus topic map">
           <div className="orbit-grid">
@@ -185,8 +198,13 @@ function Home() {
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <span className="stat-num">3</span>
+          <span className="stat-num">4</span>
           <span className="stat-label">Interactive Tools</span>
+        </div>
+        <div className="stat-divider" />
+        <div className="stat-item">
+          <span className="stat-num">AI</span>
+          <span className="stat-label">Neural Solver</span>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">

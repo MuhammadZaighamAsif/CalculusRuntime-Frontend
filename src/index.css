@@ -589,6 +589,13 @@ select {
   margin-top: 2rem;
 }
 
+.hero-progress-note {
+  font-size: 0.85rem;
+  color: var(--teal);
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
 .primary-action,
 .secondary-action {
   display: inline-flex;
