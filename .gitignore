@@ -62,3 +62,6 @@ venv.bak/
 *.log
 *.tmp
 # Ignore data files
+build-output.txt
+build-output-2.txt
+build-output-direct.txt

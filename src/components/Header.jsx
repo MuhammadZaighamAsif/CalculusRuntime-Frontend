@@ -9,6 +9,7 @@ const navLinks = [
   { to: "/test", label: "Continuity", type: "Tool" },
   { to: "/extreme", label: "Extrema", type: "Tool" },
   { to: "/volumecalculator", label: "Integrals", type: "Tool" },
+  { to: "/taylorx", label: "TaylorX", type: "Tool" },
   { to: "/ai-solver", label: "AI Solver", type: "Tool" },
 ];
 

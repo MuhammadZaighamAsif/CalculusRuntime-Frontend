@@ -27,6 +27,7 @@ import LimitsPart2 from "./pages/LimitsPart2";
 import ContinuityFinder from "./pages/ContinuityFinder";
 import ExtremeValueFunction from "./pages/ExtremeValueFinder";
 import VolumeCalculator from "./pages/VolumeCalculator";
+import DerivativeTool from "./components/DerivativeTool";
 
 function App() {
   return (
@@ -60,15 +61,21 @@ function App() {
               <Route path="/limits-continuity" element={<Navigate to="/limits-continuity/1" replace />} />
               <Route path="/limits-continuity/1" element={<Layout body={<LimitsPart1 />} />} />
               <Route path="/limits-continuity/2" element={<Layout body={<LimitsPart2 />} />} />
-               
-              {/* Multiple Integrals */}
+
+            {/* Multiple Integrals */}
               <Route path="/multiple-integrals" element={<Navigate to="/multiple-integrals/1" replace />} />
               <Route path="/multiple-integrals/1" element={<Layout body={<IntegralsPart1 />} />} />
               <Route path="/multiple-integrals/2" element={<Layout body={<IntegralsPart2 />} />} />
-              {/* Tools */}
+
+            {/* Tools */}
               <Route path="/test" element={<Layout body={<ContinuityFinder />} />} />
               <Route path="/extreme" element={<Layout body={<ExtremeValueFunction />} />} />
               <Route path="/volumecalculator" element={<Layout body={<VolumeCalculator />} />} />
+
+              <Route path="/derivative-visualizer" element={<Navigate to="/taylorx" replace />} />
+              <Route path="/taylorx" element={<Layout body={<DerivativeTool />} />} />
+
+            {/* Catch-all route */}
               <Route path="*" element={<Layout body={<NotFound />} />} />
             </Routes>   
           </ErrorBoundary>
