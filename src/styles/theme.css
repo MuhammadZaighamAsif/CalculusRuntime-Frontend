@@ -1,0 +1,255 @@
+/* ============================================================
+   CalcVoyager — Theme System
+   Usage: Add data-theme="dark" to <html> to force dark mode.
+   Defaults to OS preference via prefers-color-scheme.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --cv-bg-page:       #f5f5f5;
+  --cv-bg-surface:    #ffffff;
+  --cv-bg-raised:     #ffffff;
+  --cv-bg-sunken:     #efefef;
+  --cv-bg-overlay:    rgba(0, 0, 0, 0.04);
+
+  /* Borders */
+  --cv-border:        rgba(0, 0, 0, 0.12);
+  --cv-border-strong: rgba(0, 0, 0, 0.24);
+
+  /* Text */
+  --cv-text-primary:   #111111;
+  --cv-text-secondary: #555555;
+  --cv-text-muted:     #888888;
+  --cv-text-inverse:   #ffffff;
+
+  /* Brand / Accent */
+  --cv-accent:         #2563eb;
+  --cv-accent-hover:   #1d4ed8;
+  --cv-accent-light:   #dbeafe;
+  --cv-accent-text:    #1e40af;
+
+  /* Semantic */
+  --cv-success:        #16a34a;
+  --cv-success-light:  #dcfce7;
+  --cv-error:          #dc2626;
+  --cv-error-light:    #fee2e2;
+  --cv-warning:        #d97706;
+  --cv-warning-light:  #fef3c7;
+
+  /* Calculator-specific button tokens */
+  --cv-btn-digit-bg:      #ffffff;
+  --cv-btn-digit-text:    #111111;
+  --cv-btn-digit-hover:   #f0f0f0;
+  --cv-btn-op-bg:         #e8f0fe;
+  --cv-btn-op-text:       #1d4ed8;
+  --cv-btn-op-hover:      #dbeafe;
+  --cv-btn-fn-bg:         #f3f3f3;
+  --cv-btn-fn-text:       #444444;
+  --cv-btn-fn-hover:      #e8e8e8;
+  --cv-btn-eq-bg:         #2563eb;
+  --cv-btn-eq-text:       #ffffff;
+  --cv-btn-eq-hover:      #1d4ed8;
+  --cv-btn-clear-bg:      #fee2e2;
+  --cv-btn-clear-text:    #b91c1c;
+  --cv-btn-clear-hover:   #fecaca;
+
+  /* Display */
+  --cv-display-bg:        #1a1a2e;
+  --cv-display-text:      #e2e8f0;
+  --cv-display-expr:      #94a3b8;
+  --cv-display-cursor:    #60a5fa;
+
+  /* Input / Form */
+  --cv-input-bg:          #ffffff;
+  --cv-input-border:      rgba(0, 0, 0, 0.18);
+  --cv-input-focus:       #2563eb;
+  --cv-input-placeholder: #aaaaaa;
+
+  /* Shadow */
+  --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08);
+  --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.10);
+  --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Typography */
+  --cv-font-ui:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --cv-font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --cv-font-math: 'KaTeX_Main', 'Computer Modern', serif;
+
+  /* Motion */
+  --cv-transition-fast:   100ms ease;
+  --cv-transition-base:   180ms ease;
+  --cv-transition-slow:   300ms ease;
+
+  /* Radius */
+  --cv-radius-sm:  6px;
+  --cv-radius-md:  10px;
+  --cv-radius-lg:  16px;
+  --cv-radius-xl:  24px;
+  --cv-radius-pill: 999px;
+}
+
+/* ── Dark mode via OS preference ──────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cv-bg-page:       #0f0f13;
+    --cv-bg-surface:    #1a1a22;
+    --cv-bg-raised:     #222230;
+    --cv-bg-sunken:     #12121a;
+    --cv-bg-overlay:    rgba(255, 255, 255, 0.05);
+
+    --cv-border:        rgba(255, 255, 255, 0.10);
+    --cv-border-strong: rgba(255, 255, 255, 0.22);
+
+    --cv-text-primary:   #f0f0f5;
+    --cv-text-secondary: #a0a0b0;
+    --cv-text-muted:     #666680;
+    --cv-text-inverse:   #111111;
+
+    --cv-accent:         #60a5fa;
+    --cv-accent-hover:   #93c5fd;
+    --cv-accent-light:   #1e3a5f;
+    --cv-accent-text:    #93c5fd;
+
+    --cv-success:        #4ade80;
+    --cv-success-light:  #14532d;
+    --cv-error:          #f87171;
+    --cv-error-light:    #7f1d1d;
+    --cv-warning:        #fbbf24;
+    --cv-warning-light:  #78350f;
+
+    --cv-btn-digit-bg:      #222230;
+    --cv-btn-digit-text:    #f0f0f5;
+    --cv-btn-digit-hover:   #2c2c3e;
+    --cv-btn-op-bg:         #1e2d4a;
+    --cv-btn-op-text:       #93c5fd;
+    --cv-btn-op-hover:      #253a5e;
+    --cv-btn-fn-bg:         #1d1d28;
+    --cv-btn-fn-text:       #c0c0d0;
+    --cv-btn-fn-hover:      #252535;
+    --cv-btn-eq-bg:         #3b82f6;
+    --cv-btn-eq-text:       #ffffff;
+    --cv-btn-eq-hover:      #60a5fa;
+    --cv-btn-clear-bg:      #4a1515;
+    --cv-btn-clear-text:    #fca5a5;
+    --cv-btn-clear-hover:   #5c1c1c;
+
+    --cv-display-bg:        #080810;
+    --cv-display-text:      #e2e8f0;
+    --cv-display-expr:      #64748b;
+    --cv-display-cursor:    #60a5fa;
+
+    --cv-input-bg:          #1a1a22;
+    --cv-input-border:      rgba(255, 255, 255, 0.14);
+    --cv-input-focus:       #60a5fa;
+    --cv-input-placeholder: #555566;
+
+    --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.40);
+    --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.50);
+    --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.60);
+  }
+}
+
+/* ── Manual override: force dark ──────────────────────────── */
+[data-theme="dark"] {
+  --cv-bg-page:       #0f0f13;
+  --cv-bg-surface:    #1a1a22;
+  --cv-bg-raised:     #222230;
+  --cv-bg-sunken:     #12121a;
+  --cv-bg-overlay:    rgba(255, 255, 255, 0.05);
+
+  --cv-border:        rgba(255, 255, 255, 0.10);
+  --cv-border-strong: rgba(255, 255, 255, 0.22);
+
+  --cv-text-primary:   #f0f0f5;
+  --cv-text-secondary: #a0a0b0;
+  --cv-text-muted:     #666680;
+  --cv-text-inverse:   #111111;
+
+  --cv-accent:         #60a5fa;
+  --cv-accent-hover:   #93c5fd;
+  --cv-accent-light:   #1e3a5f;
+  --cv-accent-text:    #93c5fd;
+
+  --cv-success:        #4ade80;
+  --cv-success-light:  #14532d;
+  --cv-error:          #f87171;
+  --cv-error-light:    #7f1d1d;
+  --cv-warning:        #fbbf24;
+  --cv-warning-light:  #78350f;
+
+  --cv-btn-digit-bg:      #222230;
+  --cv-btn-digit-text:    #f0f0f5;
+  --cv-btn-digit-hover:   #2c2c3e;
+  --cv-btn-op-bg:         #1e2d4a;
+  --cv-btn-op-text:       #93c5fd;
+  --cv-btn-op-hover:      #253a5e;
+  --cv-btn-fn-bg:         #1d1d28;
+  --cv-btn-fn-text:       #c0c0d0;
+  --cv-btn-fn-hover:      #252535;
+  --cv-btn-eq-bg:         #3b82f6;
+  --cv-btn-eq-text:       #ffffff;
+  --cv-btn-eq-hover:      #60a5fa;
+  --cv-btn-clear-bg:      #4a1515;
+  --cv-btn-clear-text:    #fca5a5;
+  --cv-btn-clear-hover:   #5c1c1c;
+
+  --cv-display-bg:        #080810;
+  --cv-display-text:      #e2e8f0;
+  --cv-display-expr:      #64748b;
+  --cv-display-cursor:    #60a5fa;
+
+  --cv-input-bg:          #1a1a22;
+  --cv-input-border:      rgba(255, 255, 255, 0.14);
+  --cv-input-focus:       #60a5fa;
+  --cv-input-placeholder: #555566;
+
+  --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.40);
+  --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.50);
+  --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.60);
+}
+
+/* ── Manual override: force light ─────────────────────────── */
+[data-theme="light"] {
+  /* explicit resets handled by :root defaults above */
+  color-scheme: light;
+}
+
+/* ── Base resets using theme tokens ──────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--cv-font-ui);
+  background-color: var(--cv-bg-page);
+  color: var(--cv-text-primary);
+  transition: background-color var(--cv-transition-slow), color var(--cv-transition-slow);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Dark mode toggle button (drop anywhere in layout) ────── */
+.cv-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--cv-radius-pill);
+  border: 1px solid var(--cv-border-strong);
+  background: var(--cv-bg-raised);
+  color: var(--cv-text-secondary);
+  font-size: 13px;
+  font-family: var(--cv-font-ui);
+  cursor: pointer;
+  transition: background var(--cv-transition-fast), color var(--cv-transition-fast);
+}
+
+.cv-theme-toggle:hover {
+  background: var(--cv-bg-sunken);
+  color: var(--cv-text-primary);
+}
+
+.cv-theme-toggle .cv-theme-icon {
+  font-size: 15px;
+  line-height: 1;
+}

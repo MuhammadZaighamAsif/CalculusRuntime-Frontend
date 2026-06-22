@@ -1,0 +1,312 @@
+/* ============================================================
+   LatexKeyboard.css — styles for the LaTeX math keyboard
+   Requires theme.css to be loaded first for CV tokens.
+   ============================================================ */
+
+.lkb {
+  display: flex;
+  flex-direction: column;
+  background: var(--cv-bg-surface);
+  border: 1px solid var(--cv-border);
+  border-radius: var(--cv-radius-lg);
+  overflow: hidden;
+  font-family: var(--cv-font-ui);
+  width: 100%;
+}
+
+/* ── Input row ─────────────────────────────────────────────── */
+.lkb__input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-bottom: 1px solid var(--cv-border);
+}
+
+.lkb__input {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  font-family: var(--cv-font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cv-text-primary);
+  background: var(--cv-bg-raised);
+  min-height: 56px;
+}
+
+.lkb__input::placeholder {
+  color: var(--cv-input-placeholder);
+  font-family: var(--cv-font-ui);
+  font-size: 13px;
+}
+
+.lkb__input:focus {
+  background: var(--cv-input-bg);
+  box-shadow: inset 0 0 0 2px var(--cv-input-focus);
+}
+
+.lkb__clear-btn {
+  padding: 0 14px;
+  border: none;
+  background: var(--cv-bg-sunken);
+  color: var(--cv-text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  transition: color var(--cv-transition-fast), background var(--cv-transition-fast);
+  border-left: 1px solid var(--cv-border);
+}
+
+.lkb__clear-btn:hover {
+  color: var(--cv-error);
+  background: var(--cv-error-light);
+}
+
+/* ── Preview area ──────────────────────────────────────────── */
+.lkb__preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  min-height: 52px;
+  border-bottom: 1px solid var(--cv-border);
+  background: var(--cv-display-bg);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.lkb__preview-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cv-display-expr);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.lkb__preview-math {
+  color: var(--cv-display-text);
+  /* KaTeX uses its own sizing — constrain extreme overflow */
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* KaTeX light/dark handling — ensure readability on dark bg */
+.lkb__preview-math .katex {
+  color: var(--cv-display-text);
+}
+
+.lkb__preview-empty {
+  font-size: 13px;
+  color: var(--cv-display-expr);
+  font-style: italic;
+}
+
+/* ── Tab strip ─────────────────────────────────────────────── */
+.lkb__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--cv-border);
+  background: var(--cv-bg-raised);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lkb__tabs::-webkit-scrollbar { display: none; }
+
+.lkb__tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--cv-text-secondary);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition:
+    color        var(--cv-transition-fast),
+    border-color var(--cv-transition-fast);
+}
+
+.lkb__tab:hover {
+  color: var(--cv-text-primary);
+  background: var(--cv-bg-overlay);
+}
+
+.lkb__tab--active {
+  color: var(--cv-accent);
+  border-bottom-color: var(--cv-accent);
+  font-weight: 500;
+}
+
+.lkb__tab-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ── Key panel ─────────────────────────────────────────────── */
+.lkb__panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
+  gap: 4px;
+  padding: 10px;
+  background: var(--cv-bg-sunken);
+}
+
+.lkb__key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 4px 6px;
+  border-radius: var(--cv-radius-sm);
+  border: 1px solid var(--cv-border);
+  background: var(--cv-btn-digit-bg);
+  color: var(--cv-btn-digit-text);
+  font-size: 15px;
+  font-family: var(--cv-font-math);
+  cursor: pointer;
+  transition:
+    background-color var(--cv-transition-fast),
+    transform        var(--cv-transition-fast),
+    border-color     var(--cv-transition-fast);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lkb__key:hover {
+  background: var(--cv-btn-digit-hover);
+  border-color: var(--cv-border-strong);
+}
+
+.lkb__key:active {
+  transform: scale(0.92);
+  background: var(--cv-accent-light);
+  color: var(--cv-accent-text);
+  border-color: var(--cv-accent);
+}
+
+.lkb__key:focus-visible {
+  outline: 2px solid var(--cv-accent);
+  outline-offset: 1px;
+}
+
+/* ── Footer / copy row ─────────────────────────────────────── */
+.lkb__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--cv-border);
+  background: var(--cv-bg-raised);
+  min-height: 38px;
+  overflow: hidden;
+}
+
+.lkb__raw-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cv-text-muted);
+  flex-shrink: 0;
+}
+
+.lkb__raw {
+  flex: 1;
+  font-family: var(--cv-font-mono);
+  font-size: 12px;
+  color: var(--cv-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lkb__copy-btn {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: var(--cv-radius-pill);
+  border: 1px solid var(--cv-border-strong);
+  background: var(--cv-bg-surface);
+  color: var(--cv-text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background var(--cv-transition-fast), color var(--cv-transition-fast);
+}
+
+.lkb__copy-btn:hover:not(:disabled) {
+  background: var(--cv-accent-light);
+  color: var(--cv-accent-text);
+  border-color: var(--cv-accent);
+}
+
+.lkb__copy-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Compact variant (icon-only tabs) ──────────────────────── */
+.lkb--compact .lkb__tab {
+  padding: 8px 12px;
+}
+
+.lkb--compact .lkb__tab-label {
+  display: none;
+}
+
+.lkb--compact .lkb__panel {
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+}
+
+.lkb--compact .lkb__key {
+  min-height: 40px;
+  font-size: 14px;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .lkb__panel {
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 3px;
+    padding: 8px;
+  }
+
+  .lkb__key {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .lkb__tab {
+    padding: 8px 12px;
+  }
+
+  .lkb__tab-label {
+    display: none;
+  }
+
+  .lkb__preview {
+    padding: 8px 12px;
+    min-height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lkb__key,
+  .lkb__tab,
+  .lkb__input,
+  .lkb__copy-btn,
+  .lkb__clear-btn {
+    transition: none;
+  }
+  .lkb__key:active {
+    transform: none;
+  }
+}

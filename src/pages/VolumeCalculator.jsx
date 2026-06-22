@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 // ============================================================================
@@ -176,7 +175,6 @@ const mathEval = (() => {
     };
 })();
 
-// Gauss-Kronrod 15-point
 const GK_NODES_15 = [-0.9914553711208126, -0.9491079123427585, -0.8648644233597691, -0.7401241915785544, -0.5860872354676911, -0.4058451513773972, -0.2077849550078985, 0, 0.2077849550078985, 0.4058451513773972, 0.5860872354676911, 0.7401241915785544, 0.8648644233597691, 0.9491079123427585, 0.9914553711208126];
 const GK_WEIGHTS_15 = [0.02293532201052922, 0.06309209262997856, 0.1047900103222502, 0.1406532597155259, 0.1690047266392679, 0.1903505780647854, 0.2044329400752989, 0.2094821410847278, 0.2044329400752989, 0.1903505780647854, 0.1690047266392679, 0.1406532597155259, 0.1047900103222502, 0.06309209262997856, 0.02293532201052922];
 
@@ -283,37 +281,23 @@ function solveDoubleIntegral(integrand, bounds, order, opts = {}) {
         innerMin = bounds.xMin; innerMax = bounds.xMax;
     }
 
-    steps.push({
-        title: 'Problem Setup',
-        content: 'Evaluating the iterated integral:',
-        formula: `∫_{${outerMin}}^{${outerMax}} ∫_{${innerMin}}^{${innerMax}} (${integrand}) d${innerVar} d${outerVar}`
-    });
-
+    steps.push({ title: 'Problem Setup', content: 'Evaluating the iterated integral:', formula: `∫_{${outerMin}}^{${outerMax}} ∫_{${innerMin}}^{${innerMax}} (${integrand}) d${innerVar} d${outerVar}` });
     const outerMinVal = evalBound(outerMin);
     const outerMaxVal = evalBound(outerMax);
-    steps.push({
-        title: 'Outer Bounds',
-        content: `${outerVar} ranges from:`,
-        formula: `[${formatBound(outerMinVal)}, ${formatBound(outerMaxVal)}]`
-    });
-
+    steps.push({ title: 'Outer Bounds', content: `${outerVar} ranges from:`, formula: `[${formatBound(outerMinVal)}, ${formatBound(outerMaxVal)}]` });
     const hasInf = !isFinite(outerMinVal) || !isFinite(outerMaxVal);
     const innerConst = !innerMin.includes(outerVar) && !innerMax.includes(outerVar);
-
     if (innerConst) {
         const iMin = evalBound(innerMin), iMax = evalBound(innerMax);
         steps.push({ title: 'Inner Bounds (Constant)', content: 'Rectangular region:', formula: `${innerVar} ∈ [${formatBound(iMin)}, ${formatBound(iMax)}]` });
     } else {
         steps.push({ title: `Inner Bounds (Variable)`, content: 'Type I/II region:', formula: `${innerVar} ∈ [${innerMin}, ${innerMax}]` });
     }
-
     const analytical = getAnalyticalForm(integrand, bounds);
     if (analytical) steps.push({ title: 'Analytical Solution', content: 'Known closed form:', formula: `Result = ${analytical}` });
-
     if (hasInf) steps.push({ title: 'Improper Integral', content: 'Using variable transformation for infinite bounds', formula: 't = x/(1-x²) mapping' });
 
     let result, innerEvals = 0, outerEvals = 0;
-
     if (order === 'dydx') {
         result = integrate1DSmart((x) => {
             outerEvals++;
@@ -332,60 +316,18 @@ function solveDoubleIntegral(integrand, bounds, order, opts = {}) {
         }, outerMinVal, outerMaxVal, { oscillatory: integrand.includes('sin') || integrand.includes('cos') });
     }
 
-    steps.push({
-        title: 'Computation Stats',
-        content: 'Numerical integration completed:',
-        formula: `Evaluations: ${outerEvals} outer × ~${Math.round(innerEvals / outerEvals)} inner = ~${innerEvals.toLocaleString()} total`
-    });
-
-    steps.push({
-        title: 'Final Result',
-        content: 'Computed value:',
-        formula: `${result.toFixed(12)}\n≈ ${result.toExponential(6)}`
-    });
+    steps.push({ title: 'Computation Stats', content: 'Numerical integration completed:', formula: `Evaluations: ${outerEvals} outer × ~${Math.round(innerEvals / outerEvals)} inner = ~${innerEvals.toLocaleString()} total` });
+    steps.push({ title: 'Final Result', content: 'Computed value:', formula: `${result.toFixed(12)}\n≈ ${result.toExponential(6)}` });
 
     return { result, steps, analytical, stats: { innerEvals, outerEvals } };
 }
 
 const PRESETS = [
-    {
-        label: "Basic Iterated", presets: [
-            { name: "Ex 1: 2xy over [0,2]×[0,1]", integrand: "2*x*y", xMin: "0", xMax: "2", yMin: "0", yMax: "1", order: "dydx" },
-            { name: "Ex 2: x-y over [0,1]×[-1,0]", integrand: "x-y", xMin: "0", xMax: "1", yMin: "-1", yMax: "0", order: "dydx" },
-            { name: "Ex 5: 4-y² over [0,2]×[0,3]", integrand: "4-y^2", xMin: "0", xMax: "2", yMin: "0", yMax: "3", order: "dydx" },
-            { name: "Ex 9: exp(x+y) with ln bounds", integrand: "exp(x+y)", xMin: "0", xMax: "ln(2)", yMin: "0", yMax: "ln(5)", order: "dydx" },
-        ]
-    },
-    {
-        label: "Variable Bounds", presets: [
-            { name: "Triangular: x+y, y∈[0,1-x]", integrand: "x+y", xMin: "0", xMax: "1", yMin: "0", yMax: "1-x", order: "dydx" },
-            { name: "Circular: 1, x²+y²≤1", integrand: "1", xMin: "-1", xMax: "1", yMin: "-sqrt(1-x^2)", yMax: "sqrt(1-x^2)", order: "dydx" },
-            { name: "Parabolic: x², x∈[0,√y]", integrand: "x^2", xMin: "0", xMax: "sqrt(y)", yMin: "0", yMax: "4", order: "dxdy" },
-        ]
-    },
-    {
-        label: "Special Functions", presets: [
-            { name: "Bessel J₀(x²+y²)", integrand: "besselj0(x^2+y^2)", xMin: "0", xMax: "3", yMin: "0", yMax: "3", order: "dydx" },
-            { name: "Error function erf(x+y)", integrand: "erf(x+y)", xMin: "0", xMax: "2", yMin: "0", yMax: "2", order: "dydx" },
-            { name: "Gamma Γ(x+y)", integrand: "gamma(x+y)", xMin: "0.1", xMax: "1", yMin: "0.1", yMax: "1", order: "dydx" },
-            { name: "Heaviside H(x-y)", integrand: "heaviside(x-y)", xMin: "0", xMax: "2", yMin: "0", yMax: "2", order: "dydx" },
-        ]
-    },
-    {
-        label: "Infinite/Improper", presets: [
-            { name: "Gaussian over ℝ²", integrand: "exp(-x^2-y^2)", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" },
-            { name: "Exponential decay", integrand: "exp(-abs(x)-abs(y))", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" },
-            { name: "Semi-infinite: e^(-xy)", integrand: "exp(-x*y)", xMin: "0", xMax: "inf", yMin: "1", yMax: "2", order: "dydx" },
-            { name: "Bivariate normal", integrand: "exp(-(x^2+y^2)/2)/(2*pi)", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" },
-        ]
-    },
-    {
-        label: "Oscillatory", presets: [
-            { name: "Rapid oscillation: sin(100x)cos(100y)", integrand: "sin(100*x)*cos(100*y)", xMin: "0", xMax: "2*pi", yMin: "0", yMax: "2*pi", order: "dydx" },
-            { name: "Fresnel: sin(x²)cos(y²)", integrand: "sin(x^2)*cos(y^2)", xMin: "0", xMax: "3", yMin: "0", yMax: "3", order: "dydx" },
-            { name: "Sinc: sin(x²+y²)/(x²+y²)", integrand: "sinc(x^2+y^2)", xMin: "0", xMax: "5", yMin: "0", yMax: "5", order: "dydx" },
-        ]
-    },
+    { label: "Basic Iterated", presets: [{ name: "Ex 1: 2xy over [0,2]×[0,1]", integrand: "2*x*y", xMin: "0", xMax: "2", yMin: "0", yMax: "1", order: "dydx" }, { name: "Ex 2: x-y over [0,1]×[-1,0]", integrand: "x-y", xMin: "0", xMax: "1", yMin: "-1", yMax: "0", order: "dydx" }, { name: "Ex 5: 4-y² over [0,2]×[0,3]", integrand: "4-y^2", xMin: "0", xMax: "2", yMin: "0", yMax: "3", order: "dydx" }, { name: "Ex 9: exp(x+y) with ln bounds", integrand: "exp(x+y)", xMin: "0", xMax: "ln(2)", yMin: "0", yMax: "ln(5)", order: "dydx" }] },
+    { label: "Variable Bounds", presets: [{ name: "Triangular: x+y, y∈[0,1-x]", integrand: "x+y", xMin: "0", xMax: "1", yMin: "0", yMax: "1-x", order: "dydx" }, { name: "Circular: 1, x²+y²≤1", integrand: "1", xMin: "-1", xMax: "1", yMin: "-sqrt(1-x^2)", yMax: "sqrt(1-x^2)", order: "dydx" }, { name: "Parabolic: x², x∈[0,√y]", integrand: "x^2", xMin: "0", xMax: "sqrt(y)", yMin: "0", yMax: "4", order: "dxdy" }] },
+    { label: "Special Functions", presets: [{ name: "Bessel J₀(x²+y²)", integrand: "besselj0(x^2+y^2)", xMin: "0", xMax: "3", yMin: "0", yMax: "3", order: "dydx" }, { name: "Error function erf(x+y)", integrand: "erf(x+y)", xMin: "0", xMax: "2", yMin: "0", yMax: "2", order: "dydx" }, { name: "Gamma Γ(x+y)", integrand: "gamma(x+y)", xMin: "0.1", xMax: "1", yMin: "0.1", yMax: "1", order: "dydx" }, { name: "Heaviside H(x-y)", integrand: "heaviside(x-y)", xMin: "0", xMax: "2", yMin: "0", yMax: "2", order: "dydx" }] },
+    { label: "Infinite/Improper", presets: [{ name: "Gaussian over ℝ²", integrand: "exp(-x^2-y^2)", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" }, { name: "Exponential decay", integrand: "exp(-abs(x)-abs(y))", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" }, { name: "Semi-infinite: e^(-xy)", integrand: "exp(-x*y)", xMin: "0", xMax: "inf", yMin: "1", yMax: "2", order: "dydx" }, { name: "Bivariate normal", integrand: "exp(-(x^2+y^2)/2)/(2*pi)", xMin: "-inf", xMax: "inf", yMin: "-inf", yMax: "inf", order: "dydx" }] },
+    { label: "Oscillatory", presets: [{ name: "Rapid oscillation: sin(100x)cos(100y)", integrand: "sin(100*x)*cos(100*y)", xMin: "0", xMax: "2*pi", yMin: "0", yMax: "2*pi", order: "dydx" }, { name: "Fresnel: sin(x²)cos(y²)", integrand: "sin(x^2)*cos(y^2)", xMin: "0", xMax: "3", yMin: "0", yMax: "3", order: "dydx" }, { name: "Sinc: sin(x²+y²)/(x²+y²)", integrand: "sinc(x^2+y^2)", xMin: "0", xMax: "5", yMin: "0", yMax: "5", order: "dydx" }] },
 ];
 
 export default function DoubleIntegralSolver() {
@@ -424,92 +366,170 @@ export default function DoubleIntegralSolver() {
         }, 100);
     };
 
-    const CLR = { accent: '#7c3aed', light: '#f5f3ff', border: '#c4b5fd', text: '#1f2937', sub: '#6b7280' };
-
     return (
-        <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '40px 20px', fontFamily: 'system-ui, sans-serif' }}>
+        <div className="cv-app" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '40px 20px' }}>
             <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+
+                {/* ── Page title ── */}
                 <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                    <h1 style={{ fontSize: '3em', fontWeight: '900', color: 'white', textShadow: '0 4px 12px rgba(0,0,0,0.3)', margin: '0 0 12px' }}>∬ Double Integral Solver</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1em', margin: 0 }}>All complex cases: infinite bounds, singularities, special functions, oscillatory integrands</p>
+                    <h1 style={{ fontSize: '3em', fontWeight: '900', color: 'white', textShadow: '0 4px 12px rgba(0,0,0,0.3)', margin: '0 0 12px' }}>
+                        ∬ Double Integral Solver
+                    </h1>
+                    <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1em', margin: 0 }}>
+                        All complex cases: infinite bounds, singularities, special functions, oscillatory integrands
+                    </p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-                    <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
-                        <h2 style={{ marginTop: 0, color: CLR.text, fontSize: '1.15em', fontWeight: '700', marginBottom: '20px' }}>Configure Integral</h2>
+                {/* ── Two-column grid ── */}
+                <div className="cv-calculator" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', maxWidth: '100%', borderRadius: '0', background: 'transparent', boxShadow: 'none', border: 'none' }}>
 
+                    {/* ── LEFT: Configure panel ── */}
+                    <div style={{ background: 'var(--cv-bg-surface)', borderRadius: '16px', padding: '24px', boxShadow: 'var(--cv-shadow-lg)' }}>
+                        <h2 style={{ marginTop: 0, color: 'var(--cv-text-primary)', fontSize: '1.15em', fontWeight: '700', marginBottom: '20px' }}>
+                            Configure Integral
+                        </h2>
+
+                        {/* Integrand input */}
                         <div style={{ marginBottom: '18px' }}>
-                            <label style={{ display: 'block', fontWeight: '600', marginBottom: '6px', fontSize: '13px', color: CLR.text }}>Integrand f(x, y)</label>
-                            <input type="text" value={integrand} onChange={e => setIntegrand(e.target.value)} style={{ width: '100%', padding: '12px', fontSize: '14px', border: `2px solid ${CLR.border}`, borderRadius: '10px', fontFamily: 'monospace' }} />
+                            <label style={{ display: 'block', fontWeight: '600', marginBottom: '6px', fontSize: '13px', color: 'var(--cv-text-primary)' }}>
+                                Integrand f(x, y)
+                            </label>
+                            <input
+                                type="text"
+                                value={integrand}
+                                onChange={e => setIntegrand(e.target.value)}
+                                style={{ width: '100%', padding: '12px', fontSize: '14px', border: '2px solid var(--cv-border)', borderRadius: '10px', fontFamily: 'monospace', background: 'var(--cv-input-bg)', color: 'var(--cv-text-primary)' }}
+                            />
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px' }}>
+                        {/* Bounds grid */}
+                        <div className="cv-keypad" style={{ gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px', background: 'transparent', padding: '0' }}>
                             {[{ l: 'x min', v: xMin, s: setXMin }, { l: 'x max', v: xMax, s: setXMax }, { l: 'y min', v: yMin, s: setYMin }, { l: 'y max', v: yMax, s: setYMax }].map((b, i) => (
                                 <div key={i}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '6px', fontSize: '13px', color: CLR.text }}>{b.l}</label>
-                                    <input type="text" value={b.v} onChange={e => b.s(e.target.value)} style={{ width: '100%', padding: '10px', fontSize: '13px', border: `2px solid ${CLR.border}`, borderRadius: '8px', fontFamily: 'monospace' }} />
+                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '6px', fontSize: '13px', color: 'var(--cv-text-primary)' }}>{b.l}</label>
+                                    <input
+                                        type="text"
+                                        value={b.v}
+                                        onChange={e => b.s(e.target.value)}
+                                        style={{ width: '100%', padding: '10px', fontSize: '13px', border: '2px solid var(--cv-border)', borderRadius: '8px', fontFamily: 'monospace', background: 'var(--cv-input-bg)', color: 'var(--cv-text-primary)' }}
+                                    />
                                 </div>
                             ))}
                         </div>
 
+                        {/* Integration order */}
                         <div style={{ marginBottom: '20px' }}>
-                            <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '13px', color: CLR.text }}>Integration Order</label>
+                            <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '13px', color: 'var(--cv-text-primary)' }}>
+                                Integration Order
+                            </label>
                             <div style={{ display: 'flex', gap: '10px' }}>
                                 {['dydx', 'dxdy'].map(o => (
-                                    <button key={o} onClick={() => setOrder(o)} style={{ flex: 1, padding: '10px', fontSize: '13px', fontWeight: '600', border: `2px solid ${order === o ? CLR.accent : CLR.border}`, background: order === o ? CLR.light : 'white', color: order === o ? CLR.accent : CLR.sub, borderRadius: '8px', cursor: 'pointer' }}>
+                                    <button
+                                        key={o}
+                                        onClick={() => setOrder(o)}
+                                        className={`cv-btn ${order === o ? 'cv-btn--operator' : 'cv-btn--function'}`}
+                                        style={{ flex: 1, minHeight: '44px', fontSize: '13px', borderRadius: '8px' }}
+                                    >
                                         {o === 'dydx' ? '∫∫ f dy dx' : '∫∫ f dx dy'}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        <button onClick={solve} disabled={computing} style={{ width: '100%', padding: '14px', fontSize: '15px', fontWeight: '700', background: computing ? '#9ca3af' : `linear-gradient(135deg, ${CLR.accent} 0%, #5b21b6 100%)`, color: 'white', border: 'none', borderRadius: '10px', cursor: computing ? 'not-allowed' : 'pointer', marginBottom: '20px' }}>
+                        {/* Solve button */}
+                        <button
+                            onClick={solve}
+                            disabled={computing}
+                            className={`cv-btn ${computing ? 'cv-btn--function' : 'cv-btn--equals'}`}
+                            style={{ width: '100%', fontSize: '15px', fontWeight: '700', marginBottom: '20px', borderRadius: '10px', minHeight: '52px' }}
+                        >
                             {computing ? 'Computing...' : '🧮 Solve Integral'}
                         </button>
 
-                        <div style={{ padding: '16px', background: '#fafafa', borderRadius: '12px', border: `1px solid #e5e7eb` }}>
-                            <h3 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '700', color: CLR.text, textTransform: 'uppercase' }}>Preset Problems</h3>
+                        {/* Presets */}
+                        <div style={{ padding: '16px', background: 'var(--cv-bg-sunken)', borderRadius: '12px', border: '1px solid var(--cv-border)' }}>
+                            <h3 style={{ margin: '0 0 12px', fontSize: '12px', fontWeight: '700', color: 'var(--cv-text-primary)', textTransform: 'uppercase' }}>
+                                Preset Problems
+                            </h3>
                             <div style={{ display: 'flex', gap: '6px', marginBottom: '12px', flexWrap: 'wrap' }}>
                                 {PRESETS.map((c, i) => (
-                                    <button key={i} onClick={() => setActiveCat(i)} style={{ padding: '5px 10px', fontSize: '11px', fontWeight: '600', border: `1.5px solid ${activeCat === i ? CLR.accent : '#e5e7eb'}`, background: activeCat === i ? CLR.light : '#f9fafb', color: activeCat === i ? CLR.accent : '#6b7280', borderRadius: '6px', cursor: 'pointer' }}>{c.label}</button>
+                                    <button
+                                        key={i}
+                                        onClick={() => setActiveCat(i)}
+                                        className={`cv-btn ${activeCat === i ? 'cv-btn--operator' : 'cv-btn--function'}`}
+                                        style={{ padding: '5px 10px', fontSize: '11px', minHeight: '30px', borderRadius: '6px' }}
+                                    >
+                                        {c.label}
+                                    </button>
                                 ))}
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', maxHeight: '200px', overflowY: 'auto' }}>
                                 {PRESETS[activeCat].presets.map((p, i) => (
-                                    <button key={i} onClick={() => loadPreset(p)} style={{ padding: '8px 10px', background: '#f8f9fb', border: '1.5px solid #e5e7eb', borderRadius: '6px', cursor: 'pointer', textAlign: 'left', fontSize: '12px' }}>{p.name}</button>
+                                    <button
+                                        key={i}
+                                        onClick={() => loadPreset(p)}
+                                        className="cv-btn cv-btn--digit"
+                                        style={{ padding: '8px 10px', textAlign: 'left', fontSize: '12px', minHeight: '36px', borderRadius: '6px' }}
+                                    >
+                                        {p.name}
+                                    </button>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
-                        <h2 style={{ marginTop: 0, color: CLR.text, fontSize: '1.15em', fontWeight: '700', marginBottom: '16px' }}>Solution</h2>
+                    {/* ── RIGHT: Solution panel ── */}
+                    <div style={{ background: 'var(--cv-bg-surface)', borderRadius: '16px', padding: '24px', boxShadow: 'var(--cv-shadow-lg)' }}>
+                        <h2 style={{ marginTop: 0, color: 'var(--cv-text-primary)', fontSize: '1.15em', fontWeight: '700', marginBottom: '16px' }}>
+                            Solution
+                        </h2>
 
-                        {error && <div style={{ padding: '12px', background: '#fef2f2', border: '2px solid #fca5a5', borderRadius: '8px', color: '#dc2626', marginBottom: '16px' }}><strong>Error:</strong> {error}</div>}
+                        {error && (
+                            <div style={{ padding: '12px', background: 'var(--cv-error-light)', border: '2px solid var(--cv-error)', borderRadius: '8px', color: 'var(--cv-error)', marginBottom: '16px' }}>
+                                <strong>Error:</strong> {error}
+                            </div>
+                        )}
 
                         {result && (
                             <div>
-                                <div style={{ padding: '16px', background: CLR.light, borderRadius: '12px', marginBottom: '16px', border: `2px solid ${CLR.border}` }}>
-                                    <div style={{ fontSize: '11px', color: CLR.sub, marginBottom: '4px', fontWeight: '600' }}>RESULT</div>
-                                    <div style={{ fontSize: '2em', fontWeight: '800', color: CLR.accent, fontFamily: 'monospace' }}>{result.result.toFixed(10)}</div>
-                                    {result.analytical && <div style={{ marginTop: '8px', padding: '8px', background: '#ecfdf5', borderRadius: '6px', fontSize: '13px', color: '#065f46' }}>Analytical: {result.analytical}</div>}
+                                <div style={{ padding: '16px', background: 'var(--cv-accent-light)', borderRadius: '12px', marginBottom: '16px', border: '2px solid var(--cv-border)' }}>
+                                    <div style={{ fontSize: '11px', color: 'var(--cv-text-secondary)', marginBottom: '4px', fontWeight: '600' }}>RESULT</div>
+                                    <div style={{ fontSize: '2em', fontWeight: '800', color: 'var(--cv-accent)', fontFamily: 'monospace' }}>
+                                        {result.result.toFixed(10)}
+                                    </div>
+                                    {result.analytical && (
+                                        <div style={{ marginTop: '8px', padding: '8px', background: 'var(--cv-success-light)', borderRadius: '6px', fontSize: '13px', color: 'var(--cv-success)' }}>
+                                            Analytical: {result.analytical}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {showSteps && result.steps.map((step, i) => (
-                                    <div key={i} style={{ marginBottom: '12px', padding: '12px', background: '#fafafa', borderRadius: '8px', borderLeft: `4px solid ${CLR.accent}` }}>
-                                        <div style={{ fontWeight: '700', color: CLR.accent, marginBottom: '4px', fontSize: '12px' }}>Step {i + 1}: {step.title}</div>
-                                        <div style={{ fontSize: '12px', color: '#374151', marginBottom: '4px' }}>{step.content}</div>
-                                        <div style={{ padding: '8px', background: 'white', borderRadius: '6px', fontFamily: 'monospace', fontSize: '12px', border: `1px solid ${CLR.border}`, whiteSpace: 'pre-wrap' }}>{step.formula}</div>
+                                    <div key={i} style={{ marginBottom: '12px', padding: '12px', background: 'var(--cv-bg-sunken)', borderRadius: '8px', borderLeft: '4px solid var(--cv-accent)' }}>
+                                        <div style={{ fontWeight: '700', color: 'var(--cv-accent)', marginBottom: '4px', fontSize: '12px' }}>
+                                            Step {i + 1}: {step.title}
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: 'var(--cv-text-secondary)', marginBottom: '4px' }}>{step.content}</div>
+                                        <div style={{ padding: '8px', background: 'var(--cv-bg-surface)', borderRadius: '6px', fontFamily: 'monospace', fontSize: '12px', border: '1px solid var(--cv-border)', whiteSpace: 'pre-wrap', color: 'var(--cv-text-primary)' }}>
+                                            {step.formula}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         )}
 
-                        {!result && !error && <div style={{ textAlign: 'center', padding: '40px', color: '#d1d5db' }}><div style={{ fontSize: '48px', marginBottom: '8px' }}>∬</div><p>Enter integral and click Solve</p></div>}
+                        {!result && !error && (
+                            <div style={{ textAlign: 'center', padding: '40px', color: 'var(--cv-text-muted)' }}>
+                                <div style={{ fontSize: '48px', marginBottom: '8px' }}>∬</div>
+                                <p>Enter integral and click Solve</p>
+                            </div>
+                        )}
 
-                        <div style={{ marginTop: '16px', padding: '12px', background: '#f0fdf4', borderRadius: '8px', border: '1px solid #86efac' }}>
-                            <div style={{ fontWeight: '700', fontSize: '11px', color: '#15803d', marginBottom: '4px' }}>SYNTAX</div>
-                            <div style={{ fontSize: '11px', color: '#374151', fontFamily: 'monospace' }}>x^2, sqrt(x), exp(x), ln(x), sin(x), besselj0(x), erf(x), gamma(x), inf</div>
+                        <div style={{ marginTop: '16px', padding: '12px', background: 'var(--cv-success-light)', borderRadius: '8px', border: '1px solid var(--cv-success)' }}>
+                            <div style={{ fontWeight: '700', fontSize: '11px', color: 'var(--cv-success)', marginBottom: '4px' }}>SYNTAX</div>
+                            <div style={{ fontSize: '11px', color: 'var(--cv-text-primary)', fontFamily: 'monospace' }}>
+                                x^2, sqrt(x), exp(x), ln(x), sin(x), besselj0(x), erf(x), gamma(x), inf
+                            </div>
                         </div>
                     </div>
                 </div>

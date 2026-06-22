@@ -1,0 +1,343 @@
+/* ============================================================
+   CalcVoyager — Responsive Utilities
+   Import after theme.css. Covers calculator grid, layout,
+   touch targets, and typography scaling.
+   ============================================================ */
+
+/* ── Breakpoints (reference — used in media queries below)
+   xs:  < 400px   (very small phones)
+   sm:  < 600px   (phones)
+   md:  < 900px   (tablets / landscape phones)
+   lg:  >= 900px  (desktops)
+   ============================================================ */
+
+/* ── App shell ─────────────────────────────────────────────── */
+.cv-app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cv-bg-page);
+}
+
+.cv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--cv-bg-surface);
+  border-bottom: 1px solid var(--cv-border);
+  gap: 12px;
+}
+
+.cv-header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cv-text-primary);
+  margin: 0;
+}
+
+.cv-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ── Calculator card ─────────────────────────────────────────*/
+.cv-calculator {
+  background: var(--cv-bg-surface);
+  border-radius: var(--cv-radius-lg);
+  box-shadow: var(--cv-shadow-lg);
+  border: 1px solid var(--cv-border);
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+}
+
+/* ── Display panel ───────────────────────────────────────────*/
+.cv-display {
+  background: var(--cv-display-bg);
+  padding: 20px 20px 16px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cv-display__expr {
+  font-family: var(--cv-font-mono);
+  font-size: 13px;
+  color: var(--cv-display-expr);
+  min-height: 18px;
+  word-break: break-all;
+  text-align: right;
+}
+
+.cv-display__value {
+  font-family: var(--cv-font-mono);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--cv-display-text);
+  word-break: break-all;
+  text-align: right;
+  line-height: 1.2;
+}
+
+/* ── Button grid ─────────────────────────────────────────────*/
+.cv-keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--cv-border);
+  padding: 1px;
+}
+
+.cv-keypad--scientific {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ── Individual buttons ──────────────────────────────────────*/
+.cv-btn {
+  /* min touch target */
+  min-height: 60px;
+  min-width: 44px;
+  padding: 0 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--cv-font-ui);
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 0;
+
+  transition:
+    background-color var(--cv-transition-fast),
+    transform      var(--cv-transition-fast);
+
+  /* Prevent double-tap zoom on mobile */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cv-btn:active {
+  transform: scale(0.94);
+}
+
+.cv-btn:focus-visible {
+  outline: 2px solid var(--cv-accent);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+/* Button variants */
+.cv-btn--digit {
+  background: var(--cv-btn-digit-bg);
+  color:      var(--cv-btn-digit-text);
+}
+.cv-btn--digit:hover { background: var(--cv-btn-digit-hover); }
+
+.cv-btn--operator {
+  background: var(--cv-btn-op-bg);
+  color:      var(--cv-btn-op-text);
+  font-weight: 500;
+}
+.cv-btn--operator:hover { background: var(--cv-btn-op-hover); }
+
+.cv-btn--function {
+  background: var(--cv-btn-fn-bg);
+  color:      var(--cv-btn-fn-text);
+  font-size: 14px;
+}
+.cv-btn--function:hover { background: var(--cv-btn-fn-hover); }
+
+.cv-btn--equals {
+  background: var(--cv-btn-eq-bg);
+  color:      var(--cv-btn-eq-text);
+  font-weight: 600;
+}
+.cv-btn--equals:hover { background: var(--cv-btn-eq-hover); }
+
+.cv-btn--clear {
+  background: var(--cv-btn-clear-bg);
+  color:      var(--cv-btn-clear-text);
+  font-weight: 500;
+}
+.cv-btn--clear:hover { background: var(--cv-btn-clear-hover); }
+
+.cv-btn--wide {
+  grid-column: span 2;
+}
+
+/* ── History panel ───────────────────────────────────────────*/
+.cv-history {
+  background: var(--cv-bg-surface);
+  border: 1px solid var(--cv-border);
+  border-radius: var(--cv-radius-md);
+  overflow: hidden;
+}
+
+.cv-history__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--cv-border);
+  background: var(--cv-bg-raised);
+}
+
+.cv-history__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cv-text-secondary);
+  margin: 0;
+}
+
+.cv-history__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cv-history__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--cv-border);
+  cursor: pointer;
+  transition: background var(--cv-transition-fast);
+}
+
+.cv-history__item:last-child { border-bottom: none; }
+.cv-history__item:hover { background: var(--cv-bg-overlay); }
+
+.cv-history__expr {
+  font-size: 12px;
+  color: var(--cv-text-muted);
+  font-family: var(--cv-font-mono);
+}
+
+.cv-history__result {
+  font-size: 16px;
+  color: var(--cv-text-primary);
+  font-family: var(--cv-font-mono);
+}
+
+/* ── Utility classes ─────────────────────────────────────────*/
+.cv-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+.cv-visually-hidden { @extend .cv-sr-only; }
+
+/* ── Responsive overrides ─────────────────────────────────── */
+
+/* Tablet: loosen layout a little */
+@media (max-width: 900px) {
+  .cv-main {
+    padding: 20px 12px;
+  }
+  .cv-calculator {
+    max-width: 480px;
+  }
+}
+
+/* Phone: tighter, finger-friendly */
+@media (max-width: 600px) {
+  .cv-header {
+    padding: 10px 14px;
+  }
+  .cv-header-title {
+    font-size: 16px;
+  }
+  .cv-main {
+    padding: 12px 8px;
+    align-items: flex-start;
+  }
+  .cv-calculator {
+    max-width: 100%;
+    border-radius: var(--cv-radius-md);
+  }
+  .cv-display {
+    padding: 16px 16px 12px;
+    min-height: 88px;
+  }
+  .cv-display__value {
+    font-size: 30px;
+  }
+  .cv-btn {
+    min-height: 56px;
+    font-size: 16px;
+  }
+  .cv-btn--function {
+    font-size: 12px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .cv-display__value {
+    font-size: 26px;
+  }
+  .cv-btn {
+    min-height: 52px;
+    font-size: 15px;
+  }
+  .cv-btn--function {
+    font-size: 11px;
+  }
+}
+
+/* ── Landscape phone: two-column layout with display fixed ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .cv-main {
+    padding: 8px;
+  }
+  .cv-calculator {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    max-width: 640px;
+    max-height: 96dvh;
+  }
+  .cv-display {
+    min-height: unset;
+    justify-content: flex-end;
+    overflow-y: auto;
+  }
+  .cv-keypad {
+    overflow-y: auto;
+    max-height: 96dvh;
+  }
+  .cv-btn {
+    min-height: 48px;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cv-btn {
+    transition: none;
+  }
+  .cv-btn:active {
+    transform: none;
+  }
+  body {
+    transition: none;
+  }
+}

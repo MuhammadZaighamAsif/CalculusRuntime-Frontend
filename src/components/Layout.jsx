@@ -1,15 +1,14 @@
 import Header from "./Header";
 import Footer from "./Footer";
 
-function layout(props){
-    return (
-        <>
-        <Header/>
-        {props.body}
-        <Footer/>
-        </>
-    )
-
+function Layout(props) {
+  return (
+    <>
+      <Header toggle={props.toggle} />
+      {props.body}
+      <Footer />
+    </>
+  );
 }
 
-export default layout;
+export default Layout;
