@@ -79,15 +79,44 @@
 
 /* Launch panel */
 .ai-solver-launch {
-  align-items: center;
+  display: grid;
+  gap: 1.5rem;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 10px;
-  display: flex;
-  gap: 1.25rem;
-  justify-content: space-between;
   margin-bottom: 2rem;
   padding: 1.35rem;
+}
+
+.ai-solver-embed {
+  margin-top: 24px;
+}
+
+.ai-solver-embed-frame {
+  position: relative;
+  min-height: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface, #f6f7fb);
+}
+
+.ai-solver-iframe {
+  width: 100%;
+  min-height: 480px;
+  border: none;
+  display: block;
+}
+
+.ai-solver-embed-fallback {
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.ai-solver-embed-fallback p {
+  margin-bottom: 18px;
+  color: var(--muted-text, #555);
 }
 
 .ai-solver-launch-copy {

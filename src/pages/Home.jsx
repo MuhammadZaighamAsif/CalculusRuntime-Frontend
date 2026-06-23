@@ -1,7 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
+import Skeleton from "../components/Skeleton";
 
 const guideCards = [
   {
@@ -79,7 +80,7 @@ const toolLinks = [
   },
 ];
 
-const allItems = [
+const baseItems = [
   ...guideCards.map((g) => ({ ...g, type: "guide" })),
   ...toolLinks.map((t) => ({ ...t, type: "tool" })),
 ];
@@ -88,9 +89,37 @@ function Home() {
   const [query, setQuery] = useState("");
   const { user } = useAuth();
   const { stats } = useProgress();
+  const [indexItems, setIndexItems] = useState([]);
+  const [loadingIndex, setLoadingIndex] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setLoadingIndex(true);
+    import("../data/guideIndex.json")
+      .then((module) => {
+        if (!active) return;
+        const pages = (module.default || module).map((page) => ({
+          title: page.title,
+          description: page.excerpt || page.description || "",
+          path: page.path,
+          type: "page",
+        }));
+        setIndexItems(pages);
+      })
+      .catch(() => {
+        if (active) setIndexItems([]);
+      })
+      .finally(() => {
+        if (active) setLoadingIndex(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
+    const allItems = [...baseItems, ...indexItems];
     if (!q) return allItems;
     return allItems.filter(
       (item) =>
@@ -99,9 +128,10 @@ function Home() {
         item.desc?.toLowerCase().includes(q) ||
         item.label?.toLowerCase().includes(q),
     );
-  }, [query]);
+  }, [query, indexItems]);
 
   const filteredGuides = filtered.filter((i) => i.type === "guide");
+  const filteredPages = filtered.filter((i) => i.type === "page");
   const filteredTools = filtered.filter((i) => i.type === "tool");
 
   return (
@@ -172,11 +202,19 @@ function Home() {
       </div>
 
       {/* No results */}
-      {filtered.length === 0 && (
+      {loadingIndex ? (
+        <div className="home-no-results">
+          <span>Loading content…</span>
+          <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+            <Skeleton />
+            <Skeleton />
+          </div>
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="home-no-results">
           <span>Nothing matched "{query}".</span>
         </div>
-      )}
+      ) : null}
 
       {/* Study Guides */}
       {filteredGuides.length > 0 && (
@@ -231,6 +269,27 @@ function Home() {
             </div>
           </div>
           <Link to="/ai-solver" className="ai-feature-btn">Try the solver →</Link>
+        </section>
+      )}
+
+      {/* Matched guide pages */}
+      {filteredPages.length > 0 && (
+        <section className="guide-section" aria-labelledby="page-heading">
+          <div className="section-kicker">Guide Pages</div>
+          <h2 id="page-heading">Matching pages</h2>
+          <div className="guide-grid">
+            {filteredPages.map((page) => (
+              <Link
+                className="guide-card guide-card--neutral"
+                key={page.path}
+                to={page.path}
+              >
+                <div className="guide-card-icon">📄</div>
+                <span>{page.excerpt}</span>
+                <h3>{page.title}</h3>
+              </Link>
+            ))}
+          </div>
         </section>
       )}
 

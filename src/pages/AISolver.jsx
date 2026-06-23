@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import "./AISolver.css";
+import Skeleton from "../components/Skeleton";
 
 const STREAMLIT_URL = "https://dapeaqzot5jtellyuyxjrf.streamlit.app/";
 
 function AISolver() {
   const { user } = useAuth();
   const { addSolverHistory, recordVisit } = useProgress();
+  const [iframeLoading, setIframeLoading] = useState(true);
+  const [iframeBlocked, setIframeBlocked] = useState(false);
 
   useEffect(() => {
     recordVisit("ai-solver");
@@ -55,22 +58,59 @@ function AISolver() {
       <div className="ai-solver-launch">
         <div className="ai-solver-launch-copy">
           <div className="ai-solver-launch-kicker">Hosted solver</div>
-          <h2>Open CalculusSolver in a dedicated tab</h2>
+          <h2>Preview the solver or open it in a new tab</h2>
           <p>
-            Streamlit Cloud uses an authentication redirect that browsers block
-            inside embedded frames. Opening it directly avoids the frame error
-            and gives the solver the full page to work with.
+            We attempt to embed the hosted solver below. If the browser blocks the
+            WebView, use the button to open it in full screen.
           </p>
         </div>
-        <a
-          href={STREAMLIT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ai-solver-open-btn"
-          onClick={handleOpenSolver}
-        >
-          Open solver
-        </a>
+
+        <div className="ai-solver-embed">
+          {iframeBlocked ? (
+            <div className="ai-solver-embed-fallback">
+              <p>
+                Embedded previews are blocked by your browser. Opening the solver
+                in a dedicated tab avoids this issue.
+              </p>
+              <a
+                href={STREAMLIT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ai-solver-open-btn"
+                onClick={handleOpenSolver}
+              >
+                Open solver
+              </a>
+            </div>
+          ) : (
+            <div className="ai-solver-embed-frame">
+              {iframeLoading && <Skeleton />}
+              <iframe
+                title="CalculusSolver preview"
+                src={STREAMLIT_URL}
+                onLoad={() => setIframeLoading(false)}
+                onError={() => {
+                  setIframeLoading(false);
+                  setIframeBlocked(true);
+                }}
+                className="ai-solver-iframe"
+              />
+            </div>
+          )}
+          {!iframeBlocked && (
+            <div style={{ marginTop: 16 }}>
+              <a
+                href={STREAMLIT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ai-solver-open-btn"
+                onClick={handleOpenSolver}
+              >
+                Open in full tab
+              </a>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="ai-solver-info">
