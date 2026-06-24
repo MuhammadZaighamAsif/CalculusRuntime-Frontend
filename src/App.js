@@ -1,57 +1,30 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from './components/Layout';
-import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ProgressProvider } from "./context/ProgressContext";
 import Layout from "./components/Layout";
 import ScrollToTop from "./utils/ScrollToTop";
-import IntegralsPart1 from "./pages/IntegralsPart1";
-import IntegralsPart2 from "./pages/IntegralsPart2";
+import ErrorBoundary from "./components/ErrorBoundary";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AISolver from "./pages/AISolver";
 import NotFound from "./pages/NotFound";
-import ErrorBoundary from "./components/ErrorBoundary";
+
+import IntegralsPart1 from "./pages/IntegralsPart1";
+import IntegralsPart2 from "./pages/IntegralsPart2";
 import PartialPart1 from "./pages/PartialPart1";
 import PartialPart2 from "./pages/PartialPart2";
 import VectorPart1 from "./pages/VectorPart1";
 import VectorPart2 from "./pages/VectorPart2";
 import LimitsPart1 from "./pages/LimitsPart1";
 import LimitsPart2 from "./pages/LimitsPart2";
+
 import ContinuityFinder from "./pages/ContinuityFinder";
 import ExtremeValueFunction from "./pages/ExtremeValueFinder";
 import VolumeCalculator from "./pages/VolumeCalculator";
-
-function ThemeToggle() {
-  const [theme, setTheme] = useState(() =>
-    localStorage.getItem('cv-theme') ?? 'auto'
-  );
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'auto') {
-      root.removeAttribute('data-theme');
-    } else {
-      root.setAttribute('data-theme', theme);
-    }
-    localStorage.setItem('cv-theme', theme);
-  }, [theme]);
-
-  const cycle = () =>
-    setTheme(t => t === 'auto' ? 'dark' : t === 'dark' ? 'light' : 'auto');
-
-  const icon = theme === 'dark' ? '🌙' : theme === 'light' ? '☀️' : '🌗';
-
-  return (
-    <button className="cv-theme-toggle" onClick={cycle} aria-label="Toggle theme">
-      <span className="cv-theme-icon">{icon}</span>
-      {theme === 'auto' ? 'Auto' : theme === 'dark' ? 'Dark' : 'Light'}
-    </button>
-  );
-}
+import DerivativeTool from "./components/DerivativeTool";
 
 function App() {
   return (
@@ -61,6 +34,7 @@ function App() {
           <ErrorBoundary>
             <ScrollToTop />
             <Routes>
+              {/* Home */}
               <Route path="/" element={<Layout body={<Home />} />} />
 
               {/* Auth */}
@@ -95,6 +69,10 @@ function App() {
               <Route path="/test" element={<Layout body={<ContinuityFinder />} />} />
               <Route path="/extreme" element={<Layout body={<ExtremeValueFunction />} />} />
               <Route path="/volumecalculator" element={<Layout body={<VolumeCalculator />} />} />
+              <Route path="/derivative-visualizer" element={<Navigate to="/taylorx" replace />} />
+              <Route path="/taylorx" element={<Layout body={<DerivativeTool />} />} />
+
+              {/* Catch-all */}
               <Route path="*" element={<Layout body={<NotFound />} />} />
             </Routes>
           </ErrorBoundary>

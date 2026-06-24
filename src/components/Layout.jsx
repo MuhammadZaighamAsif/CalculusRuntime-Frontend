@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Layout(props) {
+function Layout({ body }) {
   const [darkMode, setDarkMode] = useState(() => {
     try {
       return localStorage.getItem("calculus-dark") === "true";
@@ -12,7 +12,6 @@ function Layout(props) {
   });
 
   useEffect(() => {
-    // Apply to both html and body so all selectors work
     const root = document.documentElement;
     if (darkMode) {
       root.setAttribute("data-theme", "dark");
@@ -31,10 +30,10 @@ function Layout(props) {
   return (
     <>
       <Header darkMode={darkMode} onToggleDark={toggle} />
-
-      {props.body}
+      {body}
       <Footer />
     </>
   );
 }
+
 export default Layout;
