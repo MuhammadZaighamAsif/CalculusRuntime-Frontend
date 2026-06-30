@@ -1,3 +1,4 @@
+import VectorFieldVisualizer from './pages/VectorFieldVisualizer';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ProgressProvider } from "./context/ProgressContext";
@@ -54,6 +55,7 @@ function App() {
               <Route path="/vector-calculus" element={<Navigate to="/vector-calculus/1" replace />} />
               <Route path="/vector-calculus/1" element={<Layout body={<VectorPart1 />} />} />
               <Route path="/vector-calculus/2" element={<Layout body={<VectorPart2 />} />} />
+              <Route path="/vectorfield" element={<Layout body={<VectorFieldVisualizer />} />} />
 
               {/* Limits & Continuity */}
               <Route path="/limits-continuity" element={<Navigate to="/limits-continuity/1" replace />} />
