@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import ScrollToTop from "./utils/ScrollToTop";
 import IntegralsPart1 from "./pages/IntegralsPart1";
 import IntegralsPart2 from "./pages/IntegralsPart2";
+import PractiseSection from './pages/PractiseSection';
 
 // Pages
 import Home from "./pages/Home";
@@ -22,6 +23,14 @@ import VectorPart1 from "./pages/VectorPart1";
 import VectorPart2 from "./pages/VectorPart2";
 import LimitsPart1 from "./pages/LimitsPart1";
 import LimitsPart2 from "./pages/LimitsPart2";
+import TaylorPart1 from "./pages/TaylorPart1";
+import TaylorPart2 from "./pages/TaylorPart2";
+import LagrangePart1 from "./pages/LagrangePart1";  
+import LagrangePart2 from "./pages/LagrangePart2";
+import StokesPart1 from "./pages/StokesPart1";
+import StokesPart2 from "./pages/StokesPart2";
+import DivergencePart1 from "./pages/DivergencePart1";
+import DivergencePart2 from "./pages/DivergencePart2";
 
 // Tools
 import ContinuityFinder from "./pages/ContinuityFinder";
@@ -67,6 +76,26 @@ function App() {
               <Route path="/multiple-integrals/1" element={<Layout body={<IntegralsPart1 />} />} />
               <Route path="/multiple-integrals/2" element={<Layout body={<IntegralsPart2 />} />} />
 
+              {/* Taylor Series */}
+              <Route path="/taylor-series" element={<Navigate to="/taylor-series/1" replace />} />
+              <Route path="/taylor-series/1" element={<Layout body={<TaylorPart1 />} />} />
+              <Route path="/taylor-series/2" element={<Layout body={<TaylorPart2 />} />} />
+
+              {/* Lagrange Multipliers */}
+              <Route path="/lagrange-multipliers" element={<Navigate to="/lagrange-multipliers/1" replace />} />
+              <Route path="/lagrange-multipliers/1" element={<Layout body={<LagrangePart1 />} />} />
+              <Route path="/lagrange-multipliers/2" element={<Layout body={<LagrangePart2 />} />} />
+
+              {/* Stoke's Theorem */}
+              <Route path="/stokes-theorem" element={<Navigate to="/stokes-theorem/1" replace />} />
+              <Route path="/stokes-theorem/1" element={<Layout body={<StokesPart1 />} />} />
+              <Route path="/stokes-theorem/2" element={<Layout body={<StokesPart2 />} />} />
+
+              {/* Divergence and Curl */}
+              <Route path="/divergence-curl" element={<Navigate to="/divergence-curl/1" replace />} />
+              <Route path="/divergence-curl/1" element={<Layout body={<DivergencePart1 />} />} />
+              <Route path="/divergence-curl/2" element={<Layout body={<DivergencePart2 />} />} />
+
             {/* Tools */}
               <Route path="/test" element={<Layout body={<ContinuityFinder />} />} />
               <Route path="/extreme" element={<Layout body={<ExtremeValueFunction />} />} />
@@ -74,6 +103,8 @@ function App() {
 
               <Route path="/derivative-visualizer" element={<Navigate to="/taylorx" replace />} />
               <Route path="/taylorx" element={<Layout body={<DerivativeTool />} />} />
+
+              <Route path="/practice" element={<Layout body={<PractiseSection />} />} />
 
             {/* Catch-all route */}
               <Route path="*" element={<Layout body={<NotFound />} />} />

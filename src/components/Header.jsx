@@ -6,11 +6,22 @@ const navLinks = [
   { to: "/simple-concepts", label: "Concepts", type: "Guide" },
   { to: "/partial-derivatives/1", label: "Partials", type: "Guide" },
   { to: "/vector-calculus/1", label: "Vectors", type: "Guide" },
+  
+  // The 4 Advanced Study Guides:
+  { to: "/multiple-integrals/1", label: "Integrals", type: "Guide" },
+  { to: "/lagrange-multipliers/1", label: "Lagrange", type: "Guide" },
+  { to: "/stokes-theorem/1", label: "Stokes", type: "Guide" },
+  { to: "/divergence-curl/1", label: "Divergence", type: "Guide" },
+
+  // Tools:
   { to: "/test", label: "Continuity", type: "Tool" },
   { to: "/extreme", label: "Extrema", type: "Tool" },
-  { to: "/volumecalculator", label: "Integrals", type: "Tool" },
+  { to: "/volumecalculator", label: "Volume Calc", type: "Tool" }, // Adjusted label to distinguish from guide
   { to: "/taylorx", label: "TaylorX", type: "Tool" },
   { to: "/ai-solver", label: "AI Solver", type: "Tool" },
+  
+  // Workspace:
+  { to: "/practice", label: "Practice", type: "Workspace" }, 
 ];
 
 function Header({ darkMode, onToggleDark }) {
