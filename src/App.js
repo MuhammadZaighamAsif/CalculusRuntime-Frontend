@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { ProgressProvider } from "./context/ProgressContext";
+import { ProgressProvider } from "./pages/ProgressContext";
 import Layout from "./components/Layout";
 import ScrollToTop from "./utils/ScrollToTop";
 import IntegralsPart1 from "./pages/IntegralsPart1";
 import IntegralsPart2 from "./pages/IntegralsPart2";
 import PractiseSection from './pages/PractiseSection';
+import PersonalizedStudyPlan from "./pages/PersonalizedStudyPlan"; // Added for Obj 13
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -30,6 +31,7 @@ import StokesPart2 from "./pages/StokesPart2";
 import DivergencePart1 from "./pages/DivergencePart1";
 import DivergencePart2 from "./pages/DivergencePart2";
 
+// Tools 
 import ContinuityFinder from "./pages/ContinuityFinder";
 import ExtremeValueFunction from "./pages/ExtremeValueFinder";
 import VolumeCalculator from "./pages/VolumeCalculator";
@@ -68,7 +70,7 @@ function App() {
               <Route path="/limits-continuity/1" element={<Layout body={<LimitsPart1 />} />} />
               <Route path="/limits-continuity/2" element={<Layout body={<LimitsPart2 />} />} />
 
-            {/* Multiple Integrals */}
+              {/* Multiple Integrals */}
               <Route path="/multiple-integrals" element={<Navigate to="/multiple-integrals/1" replace />} />
               <Route path="/multiple-integrals/1" element={<Layout body={<IntegralsPart1 />} />} />
               <Route path="/multiple-integrals/2" element={<Layout body={<IntegralsPart2 />} />} />
@@ -93,7 +95,7 @@ function App() {
               <Route path="/divergence-curl/1" element={<Layout body={<DivergencePart1 />} />} />
               <Route path="/divergence-curl/2" element={<Layout body={<DivergencePart2 />} />} />
 
-            {/* Tools */}
+              {/* Tools */}
               <Route path="/test" element={<Layout body={<ContinuityFinder />} />} />
               <Route path="/extreme" element={<Layout body={<ExtremeValueFunction />} />} />
               <Route path="/volumecalculator" element={<Layout body={<VolumeCalculator />} />} />
@@ -101,9 +103,13 @@ function App() {
               <Route path="/derivative-visualizer" element={<Navigate to="/taylorx" replace />} />
               <Route path="/taylorx" element={<Layout body={<DerivativeTool />} />} />
 
+              {/* Practice Section */}
               <Route path="/practice" element={<Layout body={<PractiseSection />} />} />
 
-            {/* Catch-all route */}
+              {/* AI Powered Personalized Study Plan (Objective 13) */}
+              <Route path="/study-plan" element={<Layout body={<PersonalizedStudyPlan />} />} />
+
+              {/* Catch-all route */}
               <Route path="*" element={<Layout body={<NotFound />} />} />
             </Routes>   
           </ErrorBoundary>
