@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StudyGuideShell from "./StudyGuideShell";
 import "./PartialDerivativesGuide.css";
+import {
+  DivCurlExtendedPart1,
+  DivCurlExtendedPart2,
+} from "./GuideExtendedMaterials";
 
 function Divider() {
   return <hr className="divider" />;
@@ -88,6 +92,12 @@ function QuizMcq161() {
         <span className="mcq-section-badge">{"Quiz Section 16.1"}</span>
         <h2 className="mcq-section-title">{"Vector Field Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorefield-concept">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="field-concept" data-q="1" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"1"}</div>
@@ -168,6 +178,12 @@ function QuizMcq162() {
         <span className="mcq-section-badge">{"Quiz Section 16.2"}</span>
         <h2 className="mcq-section-title">{"Divergence Structure Verifications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorediv-formula">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="div-formula" data-q="4" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"4"}</div>
@@ -247,6 +263,12 @@ function QuizMcq163() {
         <span className="mcq-section-badge">{"Quiz Section 16.3"}</span>
         <h2 className="mcq-section-title">{"Curl Reduction Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorecurl-core">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="curl-core" data-q="7" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"7"}</div>
@@ -377,6 +399,12 @@ function QuizMcq164() {
         <span className="mcq-section-badge">{"Quiz Section 16.4"}</span>
         <h2 className="mcq-section-title">{"Physical Catalog Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorevector-catalog">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="vector-catalog" data-q="10" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"10"}</div>
@@ -451,6 +479,12 @@ function QuizMcq165() {
         <span className="mcq-section-badge">{"Quiz Section 16.5"}</span>
         <h2 className="mcq-section-title">{"Vector Identity Verifications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorevector-identity">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="vector-identity" data-q="13" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"13"}</div>
@@ -525,6 +559,12 @@ function QuizMcq166() {
         <span className="mcq-section-badge">{"Quiz Section 16.6"}</span>
         <h2 className="mcq-section-title">{"Divergence Theorem Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorediv-theorem">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="div-theorem" data-q="16" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"16"}</div>
@@ -599,6 +639,12 @@ function QuizMcq167() {
         <span className="mcq-section-badge">{"Quiz Section 16.7"}</span>
         <h2 className="mcq-section-title">{"Stokes Workflow Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorestokes-theorem">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="stokes-theorem" data-q="19" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"19"}</div>
@@ -646,6 +692,86 @@ function QuizMcq167() {
           <span className="mcq-correct-badge">{"Correct Option: C"}</span>
           <div className="mcq-explanation">{"The standard orientation conventions link path rotation to the surface normal heading using the Right-Hand Rule, ensuring consistency across vector cross-product math."}</div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function SectionObj18Enrichment() {
+  return (
+    <section className="section" id="divcurl-enrich">
+      <div className="sec-badge">{"Deeper Dive"}</div>
+      <h2 className="sec-title">{"Reading $\\mathrm{div}$ and $\\mathrm{curl}$ Together"}</h2>
+      <p>
+        {"Divergence measures local expansion/compression of a vector field; curl measures local rotation. A field can have one nonzero and the other zero (e.g. source-free swirling flow)."}
+      </p>
+      <div className="box def">
+        <div className="box-lbl">{"Theory"}</div>
+        <p>{"For $\\mathbf{F}=(P,Q,R)$, $\\nabla\\cdot\\mathbf{F}=P_x+Q_y+R_z$ and $\\nabla\\times\\mathbf{F}$ is the formal determinant with $\\mathbf{i},\\mathbf{j},\\mathbf{k}$ and partials of $P,Q,R$."}</p>
+      </div>
+      <div className="box exm">
+        <div className="box-lbl">{"Worked Example"}</div>
+        <div className="exm-title">{"$\\mathbf{F}=(-y,x,0)$."}</div>
+        <div className="sol">
+          <div className="sol-lbl">{"Solution"}</div>
+          <p>{"$\\nabla\\cdot\\mathbf{F}=0$ (incompressible). $\\nabla\\times\\mathbf{F}=(0,0,2)$ (constant vertical vorticity)."}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function QuizChallengeDivCurl() {
+  return (
+    <section className="mcq-section" id="quiz-divcurl-challenge">
+      <div className="mcq-section-head">
+        <span className="mcq-section-badge">{"Challenge"}</span>
+        <h2 className="mcq-section-title">{"Medium & Hard Practice"}</h2>
+      </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoredivcurl-challenge">{"0 / 4"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+      <div className="mcq-card" data-section="divcurl-challenge" data-q="1" data-answer="A" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"1"}</div><div className="mcq-q-text">{"(Medium) For $\\mathbf{F}=(x,-y,0)$, $\\nabla\\cdot\\mathbf{F}$ equals:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$0$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$1$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$2$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: A"}</span><div className="mcq-explanation">{"$1+(-1)+0=0$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="divcurl-challenge" data-q="2" data-answer="B" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"2"}</div><div className="mcq-q-text">{"(Medium) Curl of a gradient $\\nabla\\times(\\nabla f)$ is:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$\\nabla f$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\mathbf{0}$ (when mixed partials match)"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\nabla\\cdot\\nabla f$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: B"}</span><div className="mcq-explanation">{"Classic vector calculus identity: curl of a gradient vanishes."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="divcurl-challenge" data-q="3" data-answer="C" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"3"}</div><div className="mcq-q-text">{"(Hard) Divergence theorem relates $\\iiint(\\nabla\\cdot\\mathbf{F})\\,dV$ to:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"A line integral of $f\\,ds$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\iint(\\nabla\\times\\mathbf{F})\\cdot d\\mathbf{S}$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Flux $\\iint\\mathbf{F}\\cdot d\\mathbf{S}$ through the closed boundary"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: C"}</span><div className="mcq-explanation">{"Total expansion inside equals net outward flux through $\\partial E$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="divcurl-challenge" data-q="4" data-answer="A" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"4"}</div><div className="mcq-q-text">{"(Hard) Stokes relates circulation on $\\partial S$ to:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$\\iint_S(\\nabla\\times\\mathbf{F})\\cdot d\\mathbf{S}$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\iiint(\\nabla\\cdot\\mathbf{F})\\,dV$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\iint_S\\mathbf{F}\\cdot\\mathbf{T}\\,dS$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: A"}</span><div className="mcq-explanation">{"Circulation = flux of curl through any oriented surface spanning the curve."}</div></div>
       </div>
     </section>
   );
@@ -700,6 +826,12 @@ function DivergenceAndCurlGuide({ section }) {
           <SectionS167 />
           <QuizMcq167 />
           <Divider />
+          <SectionObj18Enrichment />
+          <Divider />
+          <DivCurlExtendedPart2 />
+          <Divider />
+          <QuizChallengeDivCurl />
+          <Divider />
           <SectionSummary />
         </main>
       </StudyGuideShell>
@@ -726,6 +858,12 @@ function DivergenceAndCurlGuide({ section }) {
         <Divider />
         <SectionS163 />
         <QuizMcq163 />
+        <Divider />
+        <SectionObj18Enrichment />
+        <Divider />
+        <DivCurlExtendedPart1 />
+        <Divider />
+        <QuizChallengeDivCurl />
         <Divider />
         <section id="summary1" className="section">
           <div className="sec-badge">{"Reference"}</div>

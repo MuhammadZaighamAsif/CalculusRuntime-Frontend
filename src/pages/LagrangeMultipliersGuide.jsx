@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StudyGuideShell from "./StudyGuideShell";
 import "./PartialDerivativesGuide.css";
+import {
+  LagrangeExtendedPart1,
+  LagrangeExtendedPart2,
+} from "./GuideExtendedMaterials";
 
 function Divider() {
   return <hr className="divider" />;
@@ -89,6 +93,12 @@ function QuizMcq151() {
         <span className="mcq-section-badge">{"Quiz Section 15.1"}</span>
         <h2 className="mcq-section-title">{"Geometric Intuition Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-geometry">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-geometry" data-q="1" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"1"}</div>
@@ -177,6 +187,12 @@ function QuizMcq152() {
         <span className="mcq-section-badge">{"Quiz Section 15.2"}</span>
         <h2 className="mcq-section-title">{"Mathematical Structure Verifications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-math">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-math" data-q="4" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"4"}</div>
@@ -251,6 +267,12 @@ function QuizMcq153() {
         <span className="mcq-section-badge">{"Quiz Section 15.3"}</span>
         <h2 className="mcq-section-title">{"Field Deconstruction Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-fields">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-fields" data-q="7" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"7"}</div>
@@ -385,6 +407,12 @@ function QuizMcq154() {
         <span className="mcq-section-badge">{"Quiz Section 15.4"}</span>
         <h2 className="mcq-section-title">{"Workflow Calculation Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-calc">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-calc" data-q="10" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"10"}</div>
@@ -465,6 +493,12 @@ function QuizMcq155() {
         <span className="mcq-section-badge">{"Quiz Section 15.5"}</span>
         <h2 className="mcq-section-title">{"Multi-Constraint System Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-multi">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-multi" data-q="13" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"13"}</div>
@@ -539,6 +573,12 @@ function QuizMcq156() {
         <span className="mcq-section-badge">{"Quiz Section 15.6"}</span>
         <h2 className="mcq-section-title">{"Verification Theory Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-verify">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-verify" data-q="16" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"16"}</div>
@@ -617,6 +657,12 @@ function QuizMcq157() {
         <span className="mcq-section-badge">{"Quiz Section 15.7"}</span>
         <h2 className="mcq-section-title">{"Industrial Physics Applications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-industry">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="lagrange-industry" data-q="19" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"19"}</div>
@@ -669,6 +715,86 @@ function QuizMcq157() {
   );
 }
 
+function SectionObj18Enrichment() {
+  return (
+    <section className="section" id="lagrange-enrich">
+      <div className="sec-badge">{"Deeper Dive"}</div>
+      <h2 className="sec-title">{"Sensitivity of $\\lambda$ and Second Checks"}</h2>
+      <p>
+        {"Once $\\nabla f = \\lambda \\nabla g$ and $g=c$ are solved, compare objective values at every candidate. On a compact constraint the extreme values must occur among those candidates (provided $\\nabla g \\ne \\mathbf{0}$)."}
+      </p>
+      <div className="box def">
+        <div className="box-lbl">{"Theory"}</div>
+        <p>{"$\\lambda$ is the rate of change of the optimal value of $f$ with respect to the constraint level $c$. A large $|\\lambda|$ means the optimum is very sensitive to small budget or resource changes."}</p>
+      </div>
+      <div className="box exm">
+        <div className="box-lbl">{"Worked Example"}</div>
+        <div className="exm-title">{"Maximize $f=xy$ on $x+y=10$."}</div>
+        <div className="sol">
+          <div className="sol-lbl">{"Solution"}</div>
+          <p>{"$\\nabla f=(y,x)$, $\\nabla g=(1,1)$ gives $y=\\lambda$, $x=\\lambda$, so $x=y$. With $x+y=10$, $x=y=5$, $f=25$, and $\\lambda=5$."}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function QuizChallengeLagrange() {
+  return (
+    <section className="mcq-section" id="quiz-lagrange-challenge">
+      <div className="mcq-section-head">
+        <span className="mcq-section-badge">{"Challenge"}</span>
+        <h2 className="mcq-section-title">{"Medium & Hard Practice"}</h2>
+      </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelagrange-challenge">{"0 / 4"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+      <div className="mcq-card" data-section="lagrange-challenge" data-q="1" data-answer="B" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"1"}</div><div className="mcq-q-text">{"(Medium) For $f=x^2+y^2$ on $x+2y=4$, $\\nabla f=\\lambda\\nabla g$ forces:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$(x,y)$ parallel to $(2,-1)$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$(2x,2y)=\\lambda(1,2)$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\lambda=0$ always"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: B"}</span><div className="mcq-explanation">{"$\\nabla f=(2x,2y)$ and $\\nabla g=(1,2)$ yield $(2x,2y)=\\lambda(1,2)$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="lagrange-challenge" data-q="2" data-answer="A" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"2"}</div><div className="mcq-q-text">{"(Medium) If $\\nabla g=\\mathbf{0}$ at a point on $g=c$, then:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Lagrange may miss that point — check it separately"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"It is automatically an optimum"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\lambda$ must be infinite"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: A"}</span><div className="mcq-explanation">{"The method needs $\\nabla g\\ne 0$. Singular constraint points require a manual check."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="lagrange-challenge" data-q="3" data-answer="C" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"3"}</div><div className="mcq-q-text">{"(Hard) Two constraints $g=c$, $h=d$ require:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"One multiplier only"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\nabla f=\\mathbf{0}$ alone"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\nabla f=\\lambda\\nabla g+\\mu\\nabla h$ plus both constraints"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: C"}</span><div className="mcq-explanation">{"Each active equality constraint contributes its own multiplier."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="lagrange-challenge" data-q="4" data-answer="B" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"4"}</div><div className="mcq-q-text">{"(Hard) On a closed bounded constraint, comparing $f$ at candidates:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Is optional if $\\lambda>0$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"Identifies which critical points are max vs min"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Replaces solving $\\nabla f=\\lambda\\nabla g$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: B"}</span><div className="mcq-explanation">{"Lagrange finds candidates; evaluating $f$ ranks them as max/min on a compact set."}</div></div>
+      </div>
+    </section>
+  );
+}
+
 function SectionSummary() {
   return (
     <section className="section summary-box">
@@ -711,6 +837,12 @@ function LagrangeMultipliersGuide({ section }) {
           <SectionS157 />
           <QuizMcq157 />
           <Divider />
+          <SectionObj18Enrichment />
+          <Divider />
+          <LagrangeExtendedPart2 />
+          <Divider />
+          <QuizChallengeLagrange />
+          <Divider />
           <SectionSummary />
         </main>
       </StudyGuideShell>
@@ -737,6 +869,12 @@ function LagrangeMultipliersGuide({ section }) {
         <Divider />
         <SectionS153 />
         <QuizMcq153 />
+        <Divider />
+        <SectionObj18Enrichment />
+        <Divider />
+        <LagrangeExtendedPart1 />
+        <Divider />
+        <QuizChallengeLagrange />
         <Divider />
         <section id="summary1" className="section">
           <div className="sec-badge">{"Reference"}</div>

@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StudyGuideShell from "./StudyGuideShell";
 import "./PartialDerivativesGuide.css";
+import {
+  TaylorExtendedPart1,
+  TaylorExtendedPart2,
+} from "./GuideExtendedMaterials";
 
 function Divider() {
   return <hr className="divider" />;
@@ -84,6 +88,12 @@ function QuizMcq171() {
         <span className="mcq-section-badge">{"Quiz Section 17.1"}</span>
         <h2 className="mcq-section-title">{"Approximation Space Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-concept">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-concept" data-q="1" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"1"}</div>
@@ -163,6 +173,12 @@ function QuizMcq172() {
         <span className="mcq-section-badge">{"Quiz Section 17.2"}</span>
         <h2 className="mcq-section-title">{"Formula Structure Verifications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-formula">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-formula" data-q="4" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"4"}</div>
@@ -240,6 +256,12 @@ function QuizMcq173() {
         <span className="mcq-section-badge">{"Quiz Section 17.3"}</span>
         <h2 className="mcq-section-title">{"Maclaurin Reduction Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoremaclaurin-core">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="maclaurin-core" data-q="7" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"7"}</div>
@@ -368,6 +390,12 @@ function QuizMcq174() {
         <span className="mcq-section-badge">{"Quiz Section 17.4"}</span>
         <h2 className="mcq-section-title">{"Catalog Manipulation Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-catalog">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-catalog" data-q="10" data-answer="A">
         <div className="mcq-q-row">
           <div className="mcq-num">{"10"}</div>
@@ -441,6 +469,12 @@ function QuizMcq175() {
         <span className="mcq-section-badge">{"Quiz Section 17.5"}</span>
         <h2 className="mcq-section-title">{"Convergence Limit Verifications"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-convergence">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-convergence" data-q="13" data-answer="C">
         <div className="mcq-q-row">
           <div className="mcq-num">{"13"}</div>
@@ -514,6 +548,12 @@ function QuizMcq176() {
         <span className="mcq-section-badge">{"Quiz Section 17.6"}</span>
         <h2 className="mcq-section-title">{"Error Bounder Assessments"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-error">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-error" data-q="16" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"16"}</div>
@@ -585,6 +625,12 @@ function QuizMcq177() {
         <span className="mcq-section-badge">{"Quiz Section 17.7"}</span>
         <h2 className="mcq-section-title">{"Engineering Workflow Drills"}</h2>
       </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-engineering">{"0 / 3"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+
       <div className="mcq-card" data-section="taylor-engineering" data-q="19" data-answer="B">
         <div className="mcq-q-row">
           <div className="mcq-num">{"19"}</div>
@@ -637,6 +683,86 @@ function QuizMcq177() {
   );
 }
 
+function SectionObj18Enrichment() {
+  return (
+    <section className="section" id="taylor-enrich">
+      <div className="sec-badge">{"Deeper Dive"}</div>
+      <h2 className="sec-title">{"Remainder Estimates and Catalog Moves"}</h2>
+      <p>
+        {"After building $T_n(x)$, the size of the next term (or a Lagrange remainder bound) tells you whether the truncation is accurate enough for the interval you care about."}
+      </p>
+      <div className="box def">
+        <div className="box-lbl">{"Theory"}</div>
+        <p>{"If $|f^{(n+1)}|\\le M$ on an interval containing $a$ and $x$, then $|R_n(x)|\\le \\frac{M}{(n+1)!}|x-a|^{n+1}$. Smaller intervals and larger $n$ shrink the error."}</p>
+      </div>
+      <div className="box exm">
+        <div className="box-lbl">{"Worked Example"}</div>
+        <div className="exm-title">{"Approximate $e^{0.1}$ with $T_2(x)=1+x+x^2/2$ about 0."}</div>
+        <div className="sol">
+          <div className="sol-lbl">{"Solution"}</div>
+          <p>{"$T_2(0.1)=1.105$. True $e^{0.1}\\approx 1.10517$, so absolute error is about $1.7\\times 10^{-4}$."}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function QuizChallengeTaylor() {
+  return (
+    <section className="mcq-section" id="quiz-taylor-challenge">
+      <div className="mcq-section-head">
+        <span className="mcq-section-badge">{"Challenge"}</span>
+        <h2 className="mcq-section-title">{"Medium & Hard Practice"}</h2>
+      </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scoretaylor-challenge">{"0 / 4"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>{"Click an option then reveal answer"}</span>
+      </div>
+      <div className="mcq-card" data-section="taylor-challenge" data-q="1" data-answer="B" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"1"}</div><div className="mcq-q-text">{"(Medium) The degree-1 Taylor polynomial of $\\sin x$ at 0 is:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$1$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$x$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$x-x^3/6$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: B"}</span><div className="mcq-explanation">{"$\\sin 0=0$, $\\cos 0=1$, so $T_1(x)=x$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="taylor-challenge" data-q="2" data-answer="A" data-difficulty="medium">
+        <div className="mcq-q-row"><div className="mcq-num">{"2"}</div><div className="mcq-q-text">{"(Medium) Substituting $x\\mapsto -x$ into the series for $e^x$ gives:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"The series for $e^{-x}$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"The series for $\\sin x$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"A divergent series"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: A"}</span><div className="mcq-explanation">{"Catalog substitution: replace $x$ by $-x$ in $e^x=\\sum x^n/n!$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="taylor-challenge" data-q="3" data-answer="C" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"3"}</div><div className="mcq-q-text">{"(Hard) Radius of convergence of $\\sum x^n$ is:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$0$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\infty$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$1$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: C"}</span><div className="mcq-explanation">{"Geometric series $\\sum x^n$ converges for $|x|<1$."}</div></div>
+      </div>
+      <div className="mcq-card" data-section="taylor-challenge" data-q="4" data-answer="B" data-difficulty="hard">
+        <div className="mcq-q-row"><div className="mcq-num">{"4"}</div><div className="mcq-q-text">{"(Hard) To guarantee $|R_n(x)|<10^{-3}$, you typically:"}</div></div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Ignore $M$ and only look at $n$"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"Bound $|f^{(n+1)}|$ by $M$ and choose $n$ large enough that $\\frac{M}{(n+1)!}|x-a|^{n+1}<10^{-3}$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Always take $n=2$"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer"><span className="mcq-correct-badge">{"Correct Option: B"}</span><div className="mcq-explanation">{"Lagrange remainder control is exactly this bound-and-choose-$n$ workflow."}</div></div>
+      </div>
+    </section>
+  );
+}
+
 function SectionSummary() {
   return (
     <section className="section summary-box">
@@ -679,6 +805,12 @@ function TaylorSeriesGuide({ section }) {
           <SectionS177 />
           <QuizMcq177 />
           <Divider />
+          <SectionObj18Enrichment />
+          <Divider />
+          <TaylorExtendedPart2 />
+          <Divider />
+          <QuizChallengeTaylor />
+          <Divider />
           <SectionSummary />
         </main>
       </StudyGuideShell>
@@ -705,6 +837,12 @@ function TaylorSeriesGuide({ section }) {
         <Divider />
         <SectionS173 />
         <QuizMcq173 />
+        <Divider />
+        <SectionObj18Enrichment />
+        <Divider />
+        <TaylorExtendedPart1 />
+        <Divider />
+        <QuizChallengeTaylor />
         <Divider />
         <section id="summary1" className="section">
           <div className="sec-badge">{"Reference"}</div>

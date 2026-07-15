@@ -267,7 +267,14 @@ function renderLatex(root) {
 }
 
 function setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboardOptIn } = {}) {
-  const cards = Array.from(root.querySelectorAll(".mcq-card"));
+  // Only Partial-style cards: data-answer + lettered options + Reveal Answer.
+  // Skips React-owned quizzes (Limits / Integrals) that lack these attributes.
+  const cards = Array.from(root.querySelectorAll(".mcq-card")).filter(
+    (card) =>
+      card.dataset.answer &&
+      card.querySelector(".mcq-opt[data-opt]") &&
+      card.querySelector(".mcq-reveal-btn"),
+  );
   if (!cards.length) return [];
 
   const scores = {};
@@ -277,9 +284,11 @@ function setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboa
   const answered = {};
   const cleanups = [];
   const submitHosts = {};
+  const persisted = {};
 
   cards.forEach((card) => {
     const section = card.dataset.section;
+    if (!section) return;
     totals[section] = (totals[section] || 0) + 1;
     scores[section] = 0;
     answeredCount[section] = 0;
@@ -371,33 +380,53 @@ function setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboa
     });
   };
 
+  const isWiredCard = (card) =>
+    card &&
+    card.classList.contains("mcq-card") &&
+    card.dataset.answer &&
+    card.querySelector(".mcq-opt[data-opt]") &&
+    card.querySelector(".mcq-reveal-btn");
+
+  const cardKey = (card) => `${card.dataset.section}-${card.dataset.q}`;
+
   cards.forEach((card) => {
     const section = card.dataset.section;
-    const correctAnswer = card.dataset.answer;
-    const key = `${section}-${card.dataset.q}`;
-    const options = card.querySelector(".mcq-options");
-    const revealButton = card.querySelector(".mcq-reveal-btn");
-    const answerPanel = card.querySelector(".mcq-answer");
-
+    if (!section) return;
+    const key = cardKey(card);
     state[key] = { chosen: null };
     answered[key] = false;
+    updateScoreDisplay(section);
+    ensureSubmitHost(section);
+    refreshSubmitVisibility(section);
+  });
 
-    const chooseOption = (event) => {
+  // Event delegation on the stable root — survives React child re-renders.
+  const onRootClick = (event) => {
+    const revealButton = event.target.closest(".mcq-reveal-btn");
+    const option = event.target.closest(".mcq-opt");
+    const card = (revealButton || option)?.closest(".mcq-card");
+    if (!isWiredCard(card)) return;
+
+    const section = card.dataset.section;
+    const correctAnswer = card.dataset.answer;
+    const key = cardKey(card);
+    if (!state[key]) state[key] = { chosen: null };
+
+    if (option && card.contains(option)) {
       if (answered[key]) return;
-      const option = event.target.closest(".mcq-opt");
-      if (!option) return;
+      if (!option.dataset.opt) return;
       state[key].chosen = option.dataset.opt;
       applyStyles(card, state[key].chosen, correctAnswer, false);
-    };
+      return;
+    }
 
-    const revealAnswer = () => {
+    if (revealButton && card.contains(revealButton)) {
       if (answered[key]) return;
-
       if (!state[key].chosen) {
         const original = revealButton.textContent;
         revealButton.textContent = "Pick an option first!";
         window.setTimeout(() => {
-          revealButton.textContent = original;
+          if (!answered[key]) revealButton.textContent = original;
         }, 1600);
         return;
       }
@@ -406,6 +435,7 @@ function setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboa
       revealButton.disabled = true;
       revealButton.textContent = "Revealed";
       applyStyles(card, state[key].chosen, correctAnswer, true);
+      const answerPanel = card.querySelector(".mcq-answer");
       answerPanel?.classList.add("visible");
 
       if (state[key].chosen === correctAnswer) {
@@ -415,18 +445,60 @@ function setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboa
       answeredCount[section] = (answeredCount[section] || 0) + 1;
       updateScoreDisplay(section);
       refreshSubmitVisibility(section);
-      if (answerPanel) {
-        renderLatex(answerPanel);
-      }
-    };
 
-    options?.addEventListener("click", chooseOption);
-    revealButton?.addEventListener("click", revealAnswer);
-    cleanups.push(() => options?.removeEventListener("click", chooseOption));
-    cleanups.push(() => revealButton?.removeEventListener("click", revealAnswer));
-    updateScoreDisplay(section);
-    ensureSubmitHost(section);
-    refreshSubmitVisibility(section);
+      if (
+        saveQuizScore &&
+        !persisted[section] &&
+        answeredCount[section] >= (totals[section] || 0)
+      ) {
+        persisted[section] = true;
+        saveQuizScore(
+          `guide-mcq-${section}`,
+          scores[section] || 0,
+          totals[section] || 0,
+        );
+      }
+
+      if (answerPanel) renderLatex(answerPanel);
+    }
+  };
+
+  root.addEventListener("click", onRootClick);
+  cleanups.push(() => root.removeEventListener("click", onRootClick));
+
+  // React progress re-renders can strip imperative .selected/.correct/.wrong classes.
+  // Re-apply from in-memory quiz state whenever the DOM under root mutates.
+  const rehydrate = () => {
+    root.querySelectorAll(".mcq-card[data-answer]").forEach((card) => {
+      if (!isWiredCard(card)) return;
+      const key = cardKey(card);
+      const correctAnswer = card.dataset.answer;
+      const revealButton = card.querySelector(".mcq-reveal-btn");
+      const answerPanel = card.querySelector(".mcq-answer");
+      if (answered[key]) {
+        applyStyles(card, state[key]?.chosen, correctAnswer, true);
+        if (revealButton) {
+          revealButton.disabled = true;
+          revealButton.textContent = "Revealed";
+        }
+        answerPanel?.classList.add("visible");
+      } else if (state[key]?.chosen) {
+        applyStyles(card, state[key].chosen, correctAnswer, false);
+      }
+      updateScoreDisplay(card.dataset.section);
+      refreshSubmitVisibility(card.dataset.section);
+    });
+  };
+
+  let hydrateRaf = 0;
+  const mo = new MutationObserver(() => {
+    window.cancelAnimationFrame(hydrateRaf);
+    hydrateRaf = window.requestAnimationFrame(rehydrate);
+  });
+  mo.observe(root, { childList: true, subtree: true });
+  cleanups.push(() => {
+    mo.disconnect();
+    window.cancelAnimationFrame(hydrateRaf);
   });
 
   return cleanups;
@@ -538,21 +610,38 @@ function StudyGuideShell({
     const root = rootRef.current;
     if (!root) return undefined;
 
-    const cleanups = [
-      ...setupMcqs(root, { publishQuizToLeaderboard, saveQuizScore, setLeaderboardOptIn }),
-      setupSidebar(root),
-    ];
-    const topButton = root.querySelector("#top-btn");
-    const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-    topButton?.addEventListener("click", scrollTop);
-    cleanups.push(() => topButton?.removeEventListener("click", scrollTop));
+    // Do not depend on `children` — parent visit/progress re-renders were tearing
+    // down MCQ listeners and wiping selected / correct / wrong styles mid-click.
+    let cancelled = false;
+    let cleanups = [];
 
-    renderLatex(root);
+    const wire = () => {
+      if (cancelled || !rootRef.current) return;
+      cleanups.forEach((cleanup) => cleanup());
+      cleanups = [
+        ...setupMcqs(rootRef.current, {
+          publishQuizToLeaderboard,
+          saveQuizScore,
+          setLeaderboardOptIn,
+        }),
+        setupSidebar(rootRef.current),
+      ];
+      const topButton = rootRef.current.querySelector("#top-btn");
+      const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+      topButton?.addEventListener("click", scrollTop);
+      cleanups.push(() => topButton?.removeEventListener("click", scrollTop));
+      renderLatex(rootRef.current);
+    };
+
+    // Defer one frame so React finishes committing Partials-style children.
+    const raf = window.requestAnimationFrame(wire);
 
     return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(raf);
       cleanups.forEach((cleanup) => cleanup());
     };
-  }, [markup, children, publishQuizToLeaderboard, saveQuizScore, setLeaderboardOptIn]);
+  }, [markup, publishQuizToLeaderboard, saveQuizScore, setLeaderboardOptIn]);
 
   return (
     <main className={`study-guide-page ${resolvedClass}`}>

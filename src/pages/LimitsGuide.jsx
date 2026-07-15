@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useProgress } from "../context/ProgressContext";
-import SubmitToLeaderboard from "../components/SubmitToLeaderboard";
 import StudyGuideShell from "./StudyGuideShell";
 import "./PartialDerivativesGuide.css";
+import {
+  LimitsExtendedPart1,
+  LimitsExtendedPart2,
+} from "./GuideExtendedMaterials";
 
 function Divider() {
   return <hr className="divider" />;
@@ -215,133 +216,242 @@ function SectionLC5() {
   );
 }
 
+function SectionLCEnrichment() {
+  return (
+    <section className="section" id="lc-enrich">
+      <div className="sec-badge">{"Deeper Dive"}</div>
+      <h2 className="sec-title">{"Path Tests vs. Polar Bounds"}</h2>
+      <p>
+        {"Different path limits prove nonexistence, but matching paths never prove existence. When a polar bound $|f|\\le g(r)\\to 0$, the squeeze theorem closes the argument for every approach."}
+      </p>
+      <div className="box def">
+        <div className="box-lbl">{"Theory"}</div>
+        <p>{"Existence is a single number approached in every way; polar/squeeze tools are the positive tests, while two-path mismatches are the negative tests."}</p>
+      </div>
+      <div className="box exm">
+        <div className="box-lbl">{"Worked Example"}</div>
+        <div className="exm-title">{"$f=\\frac{x^2 y}{x^4+y^2}$ along $y=mx^2$."}</div>
+        <div className="sol">
+          <div className="sol-lbl">{"Solution"}</div>
+          <p>{"Substitute to get $\\frac{m}{1+m^2}$, which depends on $m$ — so the overall limit at the origin does not exist."}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LimitsQuiz({ part }) {
-  const { saveQuizScore } = useProgress();
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  if (part === 1) {
+    return (
+      <section className="mcq-section" id="lc-quiz1">
+        <div className="mcq-section-head">
+          <span className="mcq-section-badge">{"Practice"}</span>
+          <h2 className="mcq-section-title">{"Part 1 Quiz"}</h2>
+        </div>
+        <div className="mcq-score-strip">
+          <span className="score-lbl">{"Score"}</span>
+          <span className="score-val" id="scorelimits-p1">{"0 / 5"}</span>
+          <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>
+            {"Click an option then reveal answer"}
+          </span>
+        </div>
 
-  const QUIZ_DATA = {
-    1: [
-      {
-        q: "Which condition must hold for a multivariable limit to exist?",
-        options: [
-          "The limit along every path must be equal.",
-          "The limit along x-axis must equal limit along y-axis only.",
-          "f(a,b) must be defined.",
-          "The function must be differentiable at (a,b).",
-        ],
-        answer: 0,
-      },
-      {
-        q: "For f(x,y) = xy / (x^2 + y^2), the limit as (x,y) approaches (0,0):",
-        options: ["equals 0", "equals 1", "equals 1/2", "does not exist"],
-        answer: 3,
-      },
-      {
-        q: "The Squeeze Theorem: if |f(x,y)| <= g(x,y) and lim g = 0, then:",
-        options: ["lim f = 1", "lim f = 0", "lim f does not exist", "f is continuous"],
-        answer: 1,
-      },
-    ],
-    2: [
-      {
-        q: "f(x,y) is continuous at (a,b) if:",
-        options: [
-          "It is defined at (a,b) only.",
-          "The limit exists but may differ from f(a,b).",
-          "f(a,b) is defined, the limit exists, and they are equal.",
-          "It is differentiable at (a,b).",
-        ],
-        answer: 2,
-      },
-      {
-        q: "Is f(x,y) = (x^2 - y^2)/(x^2 + y^2) continuous at the origin?",
-        options: [
-          "Yes, it is a rational function.",
-          "No, the limit does not exist at the origin.",
-          "Yes, because f(0,0) = 0.",
-          "No, the domain excludes the origin.",
-        ],
-        answer: 1,
-      },
-      {
-        q: "Compositions of continuous functions are:",
-        options: [
-          "Always discontinuous",
-          "Continuous wherever the composition is defined",
-          "Only continuous on closed sets",
-          "Differentiable but not continuous",
-        ],
-        answer: 1,
-      },
-    ],
-  };
+        <div className="mcq-card" data-section="limits-p1" data-q="1" data-answer="A">
+          <div className="mcq-q-row">
+            <div className="mcq-num">{"1"}</div>
+            <div className="mcq-q-text">{"Which condition must hold for a multivariable limit to exist?"}</div>
+          </div>
+          <div className="mcq-options">
+            <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"The limit along every path must be equal."}</div>
+            <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"The limit along the x-axis must equal the limit along the y-axis only."}</div>
+            <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$f(a,b)$ must be defined."}</div>
+            <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"The function must be differentiable at $(a,b)$."}</div>
+          </div>
+          <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+          <div className="mcq-answer">
+            <span className="mcq-correct-badge">{"Correct Option: A"}</span>
+            <div className="mcq-explanation">{"In two or more variables, path-independence of the limit value is required for the limit to exist."}</div>
+          </div>
+        </div>
 
-  const questions = QUIZ_DATA[part];
-  const quizId = "limits-" + part;
+        <div className="mcq-card" data-section="limits-p1" data-q="2" data-answer="D">
+          <div className="mcq-q-row">
+            <div className="mcq-num">{"2"}</div>
+            <div className="mcq-q-text">{"For $f(x,y) = \\frac{xy}{x^2 + y^2}$, the limit as $(x,y)\\to(0,0)$:"}</div>
+          </div>
+          <div className="mcq-options">
+            <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"equals $0$"}</div>
+            <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"equals $1$"}</div>
+            <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"equals $1/2$"}</div>
+            <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"does not exist"}</div>
+          </div>
+          <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+          <div className="mcq-answer">
+            <span className="mcq-correct-badge">{"Correct Option: D"}</span>
+            <div className="mcq-explanation">{"Along $y=mx$ the limit is $\\frac{m}{1+m^2}$, which depends on $m$, so the overall limit does not exist."}</div>
+          </div>
+        </div>
 
-  function handleSelect(qIdx, oIdx) {
-    if (submitted) return;
-    setAnswers((prev) => ({ ...prev, [qIdx]: oIdx }));
+        <div className="mcq-card" data-section="limits-p1" data-q="3" data-answer="B">
+          <div className="mcq-q-row">
+            <div className="mcq-num">{"3"}</div>
+            <div className="mcq-q-text">{"Squeeze Theorem: if $|f(x,y)| \\le g(x,y)$ and $\\lim g = 0$, then:"}</div>
+          </div>
+          <div className="mcq-options">
+            <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$\\lim f = 1$"}</div>
+            <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$\\lim f = 0$"}</div>
+            <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$\\lim f$ does not exist"}</div>
+            <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"$f$ is continuous"}</div>
+          </div>
+          <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+          <div className="mcq-answer">
+            <span className="mcq-correct-badge">{"Correct Option: B"}</span>
+            <div className="mcq-explanation">{"Since $-g \\le f \\le g$ and both bounding functions go to 0, $f$ is squeezed to 0."}</div>
+          </div>
+        </div>
+
+        <div className="mcq-card" data-section="limits-p1" data-q="4" data-answer="C" data-difficulty="medium">
+          <div className="mcq-q-row">
+            <div className="mcq-num">{"4"}</div>
+            <div className="mcq-q-text">{"(Medium) Along $y=x^2$, $\\lim_{(x,y)\\to(0,0)}\\frac{x^2 y}{x^4+y^2}$ equals:"}</div>
+          </div>
+          <div className="mcq-options">
+            <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"$0$"}</div>
+            <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$1$"}</div>
+            <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$1/2$"}</div>
+            <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"does not exist along this path"}</div>
+          </div>
+          <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+          <div className="mcq-answer">
+            <span className="mcq-correct-badge">{"Correct Option: C"}</span>
+            <div className="mcq-explanation">{"Substitute $y=x^2$: $\\frac{x^4}{x^4+x^4}=\\frac{1}{2}$."}</div>
+          </div>
+        </div>
+
+        <div className="mcq-card" data-section="limits-p1" data-q="5" data-answer="B" data-difficulty="hard">
+          <div className="mcq-q-row">
+            <div className="mcq-num">{"5"}</div>
+            <div className="mcq-q-text">{"(Hard) Polar: if $f=r\\cos\\theta\\sin\\theta$ as $r\\to 0$, what happens?"}</div>
+          </div>
+          <div className="mcq-options">
+            <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Limit fails because $\\theta$ is free"}</div>
+            <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"Limit is $0$ for every approach"}</div>
+            <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Limit is $1/2$"}</div>
+            <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"Limit is $1$"}</div>
+          </div>
+          <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+          <div className="mcq-answer">
+            <span className="mcq-correct-badge">{"Correct Option: B"}</span>
+            <div className="mcq-explanation">{"$|r\\cos\\theta\\sin\\theta|\\le r/2\\to 0$ uniformly in $\\theta$, so the limit is 0."}</div>
+          </div>
+        </div>
+      </section>
+    );
   }
-
-  function handleSubmit() {
-    if (Object.keys(answers).length < questions.length) {
-      alert("Please answer all questions before submitting.");
-      return;
-    }
-    setSubmitted(true);
-    const score = questions.filter((q, i) => answers[i] === q.answer).length;
-    saveQuizScore(quizId, score, questions.length);
-  }
-
-  function handleReset() {
-    setAnswers({});
-    setSubmitted(false);
-  }
-
-  const score = questions.filter((q, i) => answers[i] === q.answer).length;
 
   return (
-    <section className="mcq-section" id={"lc-quiz" + part}>
-      <div className="mcq-section-badge">{"Practice"}</div>
-      <h2 className="mcq-section-title">{"Part " + part + " Quiz"}</h2>
-      {questions.map((q, i) => (
-        <div
-          key={i}
-          className={"mcq-card" + (submitted ? (answers[i] === q.answer ? " correct" : " wrong") : "")}
-        >
-          <p className="mcq-q">{q.q}</p>
-          <ul className="mcq-options">
-            {q.options.map((opt, j) => (
-              <li key={j}>
-                <button
-                  className={"mcq-opt" + (answers[i] === j ? " selected" : "") + (submitted && j === q.answer ? " correct" : "")}
-                  onClick={() => handleSelect(i, j)}
-                  disabled={submitted}
-                >
-                  {opt}
-                </button>
-              </li>
-            ))}
-          </ul>
+    <section className="mcq-section" id="lc-quiz2">
+      <div className="mcq-section-head">
+        <span className="mcq-section-badge">{"Practice"}</span>
+        <h2 className="mcq-section-title">{"Part 2 Quiz"}</h2>
+      </div>
+      <div className="mcq-score-strip">
+        <span className="score-lbl">{"Score"}</span>
+        <span className="score-val" id="scorelimits-p2">{"0 / 5"}</span>
+        <span className="score-lbl" style={{ marginLeft: "auto", opacity: "0.4" }}>
+          {"Click an option then reveal answer"}
+        </span>
+      </div>
+
+      <div className="mcq-card" data-section="limits-p2" data-q="1" data-answer="C">
+        <div className="mcq-q-row">
+          <div className="mcq-num">{"1"}</div>
+          <div className="mcq-q-text">{"$f(x,y)$ is continuous at $(a,b)$ if:"}</div>
         </div>
-      ))}
-      {!submitted ? (
-        <button className="quiz-submit" onClick={handleSubmit}>
-          {"Submit answers"}
-        </button>
-      ) : (
-        <div className="quiz-result">
-          <p>{"Score: "}<strong>{score + " / " + questions.length}</strong></p>
-          <button className="quiz-retry" onClick={handleReset}>{"Try again"}</button>
-          <SubmitToLeaderboard
-            quizId={quizId}
-            score={score}
-            total={questions.length}
-          />
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"It is defined at $(a,b)$ only."}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"The limit exists but may differ from $f(a,b)$."}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"$f(a,b)$ is defined, the limit exists, and they are equal."}</div>
+          <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"It is differentiable at $(a,b)$."}</div>
         </div>
-      )}
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer">
+          <span className="mcq-correct-badge">{"Correct Option: C"}</span>
+          <div className="mcq-explanation">{"Continuity requires the function value to match the limiting value."}</div>
+        </div>
+      </div>
+
+      <div className="mcq-card" data-section="limits-p2" data-q="2" data-answer="B">
+        <div className="mcq-q-row">
+          <div className="mcq-num">{"2"}</div>
+          <div className="mcq-q-text">{"Is $f(x,y)=\\frac{x^2-y^2}{x^2+y^2}$ continuous at the origin?"}</div>
+        </div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Yes, it is a rational function."}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"No, the limit does not exist at the origin."}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Yes, because $f(0,0)=0$."}</div>
+          <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"No, the domain excludes the origin."}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer">
+          <span className="mcq-correct-badge">{"Correct Option: B"}</span>
+          <div className="mcq-explanation">{"Along $y=0$ the limit is 1; along $x=0$ it is $-1$. Different path limits mean discontinuity (even after any redefinition at the origin)."}</div>
+        </div>
+      </div>
+
+      <div className="mcq-card" data-section="limits-p2" data-q="3" data-answer="B">
+        <div className="mcq-q-row">
+          <div className="mcq-num">{"3"}</div>
+          <div className="mcq-q-text">{"Compositions of continuous functions are:"}</div>
+        </div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Always discontinuous"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"Continuous wherever the composition is defined"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Only continuous on closed sets"}</div>
+          <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"Differentiable but not continuous"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer">
+          <span className="mcq-correct-badge">{"Correct Option: B"}</span>
+          <div className="mcq-explanation">{"Continuous functions preserve limits under composition on their common domain."}</div>
+        </div>
+      </div>
+
+      <div className="mcq-card" data-section="limits-p2" data-q="4" data-answer="A" data-difficulty="medium">
+        <div className="mcq-q-row">
+          <div className="mcq-num">{"4"}</div>
+          <div className="mcq-q-text">{"(Medium) If $f$ is a polynomial, then on $\\mathbb{R}^2$ it is:"}</div>
+        </div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Continuous everywhere"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"Continuous only at $(0,0)$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Discontinuous on axes"}</div>
+          <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"Continuous only on open disks"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer">
+          <span className="mcq-correct-badge">{"Correct Option: A"}</span>
+          <div className="mcq-explanation">{"Polynomials (and rational functions away from zeros of the denominator) are continuous."}</div>
+        </div>
+      </div>
+
+      <div className="mcq-card" data-section="limits-p2" data-q="5" data-answer="D" data-difficulty="hard">
+        <div className="mcq-q-row">
+          <div className="mcq-num">{"5"}</div>
+          <div className="mcq-q-text">{"(Hard) Removable discontinuity at $(a,b)$ means:"}</div>
+        </div>
+        <div className="mcq-options">
+          <div className="mcq-opt" data-opt="A"><span className="mcq-opt-letter">{"A"}</span>{"Every path limit fails"}</div>
+          <div className="mcq-opt" data-opt="B"><span className="mcq-opt-letter">{"B"}</span>{"$f$ blows up near $(a,b)$"}</div>
+          <div className="mcq-opt" data-opt="C"><span className="mcq-opt-letter">{"C"}</span>{"Partial derivatives fail to exist"}</div>
+          <div className="mcq-opt" data-opt="D"><span className="mcq-opt-letter">{"D"}</span>{"The limit exists, but $f(a,b)$ is missing or wrong — redefine $f(a,b)$ to fix it"}</div>
+        </div>
+        <button type="button" className="mcq-reveal-btn">{"Reveal Answer"}</button>
+        <div className="mcq-answer">
+          <span className="mcq-correct-badge">{"Correct Option: D"}</span>
+          <div className="mcq-explanation">{"Removable means lim $f$ exists; continuity is restored by setting $f(a,b)$ equal to that limit."}</div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -369,6 +479,10 @@ function LimitsContent({ part }) {
           <Divider />
           <SectionLC3 />
           <Divider />
+          <SectionLCEnrichment />
+          <Divider />
+          <LimitsExtendedPart1 />
+          <Divider />
           <LimitsQuiz part={1} />
           <GuideFooter />
         </main>
@@ -386,6 +500,10 @@ function LimitsContent({ part }) {
         <SectionLC4 />
         <Divider />
         <SectionLC5 />
+        <Divider />
+        <SectionLCEnrichment />
+        <Divider />
+        <LimitsExtendedPart2 />
         <Divider />
         <LimitsQuiz part={2} />
         <GuideFooter />

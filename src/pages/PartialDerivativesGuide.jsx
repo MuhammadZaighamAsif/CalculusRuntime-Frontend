@@ -1,5 +1,9 @@
 import StudyGuideShell from "./StudyGuideShell";
 import "./PartialDerivativesGuide.css";
+import {
+  PartialsExtendedPart1,
+  PartialsExtendedPart2,
+} from "./GuideExtendedMaterials";
 
 function Divider() {
   return <hr className="divider" />;
@@ -3481,6 +3485,8 @@ function PartialDerivativesContent({ part = 1 }) {
           <SectionS143 />
           <Divider />
           <QuizMcq143 />
+          <Divider />
+          <PartialsExtendedPart1 />
           <section id="summary1" className="section">
             <div className="sec-badge">Reference</div>
             <h2 className="sec-title">Part 1 Key Formulas</h2>
@@ -3516,6 +3522,8 @@ function PartialDerivativesContent({ part = 1 }) {
         <QuizMcq146 />
         <Divider />
         <QuizMcq147 />
+        <Divider />
+        <PartialsExtendedPart2 />
         <GuideFooter />
       </main>
     </>
