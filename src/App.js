@@ -40,6 +40,7 @@ import DerivativeTool from "./components/DerivativeTool";
 import VectorFieldVisualizer from "./pages/VectorFieldVisualizer";
 import CheatSheet from "./pages/CheatSheet";
 import Leaderboard from "./pages/Leaderboard";
+import Chatbot from "./components/Chatbot/Chatbot";
 
 function App() {
   return (
@@ -128,6 +129,7 @@ function App() {
               {/* Catch-all */}
               <Route path="*" element={<Layout body={<NotFound />} />} />
             </Routes>
+            <Chatbot />
           </ErrorBoundary>
         </BrowserRouter>
       </ProgressProvider>
