@@ -289,27 +289,27 @@ export default function ExtremeValueFinder() {
     <div className="ev-page">
       <style>{`
                 .ev-page {
-                    --ev-teal: #2f746b;
-                    --ev-gold: #c28a2e;
-                    --ev-blue: #314e73;
+                    --ev-teal: #3a5f32;
+                    --ev-gold: #a0720a;
+                    --ev-blue: #1a3358;
                     --ev-red: #8e3e3e;
-                    --ev-green: #2a6641;
-                    --ev-ink: #15100c;
-                    --ev-muted: #665f56;
-                    --ev-card: #fffdf8;
-                    --ev-soft: #f5f0e8;
-                    --ev-line: #ded2bf;
-                    --ev-shadow: 0 8px 32px rgba(21,16,12,0.10);
+                    --ev-green: #3a5f32;
+                    --ev-ink: #16120a;
+                    --ev-muted: #7a7268;
+                    --ev-card: #ffffff;
+                    --ev-soft: #fdf8f0;
+                    --ev-line: #d4c4a8;
+                    --ev-shadow: 0 2px 14px rgba(22, 18, 10, 0.1);
                     min-height: 100vh;
-                    background: var(--paper, #fbf7ef);
+                    background: var(--paper);
                     padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 3rem);
                 }
 
                 [data-theme="dark"] .ev-page {
-                    --ev-ink: #f5f0e8;
-                    --ev-muted: #b5a98e;
-                    --ev-card: #1e1a14;
-                    --ev-soft: #17130d;
+                    --ev-ink: #f4ede0;
+                    --ev-muted: #9a917f;
+                    --ev-card: #1e1a11;
+                    --ev-soft: #1a160d;
                     --ev-line: #3a3020;
                 }
 

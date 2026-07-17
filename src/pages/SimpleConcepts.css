@@ -1,18 +1,18 @@
-/* Simple Concepts — Partials cream / ink / gold theme */
+/* Simple Concepts — aligned to shell tokens */
 
 .simple-concepts-page {
-  --sc-ink: #16120a;
-  --sc-cream: #f4ede0;
-  --sc-parchment: #fdf8f0;
-  --sc-gold: #a0720a;
-  --sc-gold-lt: #c89318;
-  --sc-rule: #d4c4a8;
-  --sc-muted: #7a7268;
-  --sc-card: #ffffff;
-  --sc-sage: #3a5f32;
-  background: var(--sc-cream);
-  color: var(--sc-ink);
-  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  --sc-ink: var(--ink);
+  --sc-cream: var(--paper);
+  --sc-parchment: var(--card);
+  --sc-gold: var(--gold);
+  --sc-gold-lt: var(--gold);
+  --sc-rule: var(--line);
+  --sc-muted: var(--muted);
+  --sc-card: var(--card);
+  --sc-sage: var(--teal);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
   min-height: 100vh;
   padding-bottom: clamp(3rem, 7vw, 5rem);
 }
@@ -65,7 +65,7 @@
   letter-spacing: 0.18em;
   margin: 0 0 0.75rem;
   text-transform: uppercase;
-  font-family: "Source Sans 3", sans-serif;
+  font-family: inherit;
 }
 
 .simple-concepts-hero .simple-concepts-kicker {
@@ -77,7 +77,7 @@
 .concept-section h2,
 .self-reading-panel h2 {
   color: inherit;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: inherit;
   line-height: 1.12;
   margin: 0;
   font-weight: 900;
@@ -197,7 +197,7 @@
 
 .concept-card h3 {
   color: var(--sc-ink);
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: inherit;
   font-size: 1.2rem;
   line-height: 1.25;
   margin: 0 0 0.75rem;

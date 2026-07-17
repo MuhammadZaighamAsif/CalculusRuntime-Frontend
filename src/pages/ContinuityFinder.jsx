@@ -436,27 +436,27 @@ const ContinuityFinder = () => {
         <div className="app-body">
             <style>{`
                 .app-body {
-                    --continuity-ink: #111317;
-                    --continuity-muted: #665f56;
-                    --continuity-paper: #fbf7ef;
-                    --continuity-card: #fffdf8;
-                    --continuity-line: #ded2bf;
-                    --continuity-teal: #2f746b;
-                    --continuity-blue: #314e73;
-                    --continuity-gold: #c28a2e;
-                    --continuity-plum: #6b4262;
-                    --continuity-soft: #f4eee5;
-                    --continuity-shadow: 0 18px 52px rgba(28, 24, 18, 0.13);
-                    --continuity-shadow-sm: 0 8px 24px rgba(28, 24, 18, 0.08);
+                    --continuity-ink: #16120a;
+                    --continuity-muted: #7a7268;
+                    --continuity-paper: var(--paper);
+                    --continuity-card: #ffffff;
+                    --continuity-line: #d4c4a8;
+                    --continuity-teal: #3a5f32;
+                    --continuity-blue: #1a3358;
+                    --continuity-gold: #a0720a;
+                    --continuity-plum: #7c2f0a;
+                    --continuity-soft: #fdf8f0;
+                    --continuity-shadow: 0 2px 14px rgba(22, 18, 10, 0.1);
+                    --continuity-shadow-sm: 0 1px 6px rgba(22, 18, 10, 0.07);
                     background:
-                        radial-gradient(circle at 84% 8%, rgba(107, 66, 98, 0.12), transparent 26rem),
-                        radial-gradient(circle at 8% 18%, rgba(47, 116, 107, 0.14), transparent 24rem),
-                        linear-gradient(90deg, rgba(49, 78, 115, 0.08) 1px, transparent 1px),
-                        linear-gradient(180deg, rgba(49, 78, 115, 0.06) 1px, transparent 1px),
+                        radial-gradient(circle at 84% 8%, rgba(124, 47, 10, 0.08), transparent 26rem),
+                        radial-gradient(circle at 8% 18%, rgba(160, 114, 10, 0.12), transparent 24rem),
+                        linear-gradient(90deg, rgba(212, 196, 168, 0.35) 1px, transparent 1px),
+                        linear-gradient(180deg, rgba(212, 196, 168, 0.28) 1px, transparent 1px),
                         var(--continuity-paper);
                     background-size: auto, auto, 44px 44px, 44px 44px, auto;
                     color: var(--continuity-ink);
-                    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                    font-family: "Source Sans 3", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
                     min-height: 100vh;
                     padding: clamp(1rem, 4vw, 3rem);
                 }

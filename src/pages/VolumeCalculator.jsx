@@ -676,7 +676,7 @@ export default function DoubleIntegralSolver() {
     }
 
     return (
-        <div className="cv-app" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '40px 20px' }}>
+        <div className="cv-app" style={{ background: 'var(--paper)', padding: '40px 20px', minHeight: '100vh' }}>
             <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
                 {/* ── Page title ── */}

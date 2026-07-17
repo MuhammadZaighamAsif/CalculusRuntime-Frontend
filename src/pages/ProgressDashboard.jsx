@@ -2,7 +2,7 @@
 import { useProgress } from "../hooks/useProgress";
 
 // ── Small reusable components ─────────────────────────────────
-const StatCard = ({ label, value, sub, color = "#667eea" }) => (
+const StatCard = ({ label, value, sub, color = "var(--teal)" }) => (
   <div style={{ background: "var(--cv-bg-surface)", borderRadius: "12px", padding: "20px", boxShadow: "var(--cv-shadow-md)", borderTop: `4px solid ${color}` }}>
     <div style={{ fontSize: "13px", color: "var(--cv-text-secondary)", fontWeight: 600, marginBottom: "6px", textTransform: "uppercase" }}>{label}</div>
     <div style={{ fontSize: "2em", fontWeight: 900, color }}>{value}</div>
@@ -10,7 +10,7 @@ const StatCard = ({ label, value, sub, color = "#667eea" }) => (
   </div>
 );
 
-const ProgressBar = ({ percent, color = "#667eea", height = 10 }) => (
+const ProgressBar = ({ percent, color = "var(--teal)", height = 10 }) => (
   <div style={{ background: "var(--cv-bg-sunken)", borderRadius: "99px", height, overflow: "hidden" }}>
     <div style={{ width: `${Math.min(percent, 100)}%`, height: "100%", background: color, borderRadius: "99px", transition: "width 0.6s ease" }} />
   </div>
@@ -24,14 +24,14 @@ const SectionTitle = ({ children }) => (
 
 // ── Topic color map ───────────────────────────────────────────
 const TOPIC_COLORS = {
-  "partial-derivatives":  "#667eea",
-  "vector-calculus":      "#f093fb",
-  "limits-continuity":    "#4facfe",
-  "multiple-integrals":   "#43e97b",
-  "taylor-series":        "#fa709a",
-  "lagrange-multipliers": "#f6d365",
-  "stokes-theorem":       "#a18cd1",
-  "divergence-curl":      "#fda085",
+  "partial-derivatives":  "#a0720a",
+  "vector-calculus":      "#1a3358",
+  "limits-continuity":    "#3a5f32",
+  "multiple-integrals":   "#1a3358",
+  "taylor-series":        "#c89318",
+  "lagrange-multipliers": "#7c2f0a",
+  "stokes-theorem":       "#1a3358",
+  "divergence-curl":      "#3a5f32",
 };
 
 // ── Main page ─────────────────────────────────────────────────
@@ -84,9 +84,9 @@ export default function ProgressDashboard() {
       <div style={{ background: "var(--cv-bg-surface)", borderRadius: "16px", padding: "24px", marginBottom: "24px", boxShadow: "var(--cv-shadow-md)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
           <span style={{ fontWeight: 700, color: "var(--cv-text-primary)" }}>Overall Learning Progress</span>
-          <span style={{ fontWeight: 900, fontSize: "1.3em", color: "#667eea" }}>{overall.progressPercent}%</span>
+          <span style={{ fontWeight: 900, fontSize: "1.3em", color: "var(--teal)" }}>{overall.progressPercent}%</span>
         </div>
-        <ProgressBar percent={overall.progressPercent} color="#667eea" height={14} />
+        <ProgressBar percent={overall.progressPercent} color="var(--teal)" height={14} />
         <div style={{ fontSize: "12px", color: "var(--cv-text-muted)", marginTop: "8px" }}>
           {topicStats.completed} of {topicStats.total} topics completed · {topicStats.remaining} remaining
         </div>
@@ -94,12 +94,12 @@ export default function ProgressDashboard() {
 
       {/* ── Stat cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "16px", marginBottom: "8px" }}>
-        <StatCard label="Total Score"       value={overall.totalScore}          color="#667eea" />
-        <StatCard label="Avg Quiz Score"    value={`${overall.avgScore}%`}      color="#43e97b" />
-        <StatCard label="Quizzes Done"      value={`${quizStats.completed}/${quizStats.total}`} color="#4facfe" />
-        <StatCard label="Topics Completed"  value={`${topicStats.completed}/${topicStats.total}`} color="#f093fb" />
-        <StatCard label="Practice Accuracy" value={`${practice.accuracy}%`}     color="#fa709a" sub={`${practice.totalCorrect}/${practice.totalAttempts} correct`} />
-        <StatCard label="Guide Parts Done"  value={`${studyGuides.completedParts}/${studyGuides.totalParts}`} color="#fda085" />
+        <StatCard label="Total Score"       value={overall.totalScore}          color="var(--teal)" />
+        <StatCard label="Avg Quiz Score"    value={`${overall.avgScore}%`}      color="#3a5f32" />
+        <StatCard label="Quizzes Done"      value={`${quizStats.completed}/${quizStats.total}`} color="#a0720a" />
+        <StatCard label="Topics Completed"  value={`${topicStats.completed}/${topicStats.total}`} color="#1a3358" />
+        <StatCard label="Practice Accuracy" value={`${practice.accuracy}%`}     color="#7c2f0a" sub={`${practice.totalCorrect}/${practice.totalAttempts} correct`} />
+        <StatCard label="Guide Parts Done"  value={`${studyGuides.completedParts}/${studyGuides.totalParts}`} color="#c89318" />
       </div>
 
       {/* ── Quiz stats ── */}
@@ -113,7 +113,7 @@ export default function ProgressDashboard() {
               <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", background: "var(--cv-bg-sunken)", borderRadius: "8px" }}>
                 <span style={{ fontWeight: 600, color: "var(--cv-text-primary)", fontSize: "14px" }}>{q.topic}</span>
                 <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-                  <span style={{ fontWeight: 700, color: "#667eea" }}>{q.score}%</span>
+                  <span style={{ fontWeight: 700, color: "var(--teal)" }}>{q.score}%</span>
                   <span style={{ fontSize: "11px", color: "var(--cv-text-muted)" }}>{new Date(q.completed_at).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function ProgressDashboard() {
       <SectionTitle>📚 Course-wise Progress</SectionTitle>
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         {courseProgress.map((course) => {
-          const color     = TOPIC_COLORS[course.topic] || "#667eea";
+          const color     = TOPIC_COLORS[course.topic] || "var(--teal)";
           const guidePercent = Math.round((course.guideParts / course.totalGuideParts) * 100);
           return (
             <div key={course.topic} style={{ background: "var(--cv-bg-surface)", borderRadius: "12px", padding: "16px 20px", boxShadow: "var(--cv-shadow-sm)", borderLeft: `5px solid ${color}` }}>
@@ -135,7 +135,7 @@ export default function ProgressDashboard() {
                   {course.topic.replace(/-/g, " ")}
                 </span>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                  {course.topicCompleted && <span style={{ fontSize: "11px", background: "#43e97b22", color: "#43e97b", padding: "2px 8px", borderRadius: "20px", fontWeight: 700 }}>✅ Done</span>}
+                  {course.topicCompleted && <span style={{ fontSize: "11px", background: "rgba(58, 95, 50, 0.12)", color: "#3a5f32", padding: "2px 8px", borderRadius: "20px", fontWeight: 700 }}>✅ Done</span>}
                   {course.quizScore !== null && <span style={{ fontSize: "12px", color, fontWeight: 700 }}>Quiz: {course.quizScore}%</span>}
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function ProgressDashboard() {
       <SectionTitle>📖 Study Guide Completion</SectionTitle>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "12px" }}>
         {studyGuides.byTopic.map((guide) => {
-          const color   = TOPIC_COLORS[guide.topic] || "#667eea";
+          const color   = TOPIC_COLORS[guide.topic] || "var(--teal)";
           const percent = Math.round((guide.completedParts / guide.totalParts) * 100);
           return (
             <div key={guide.topic} style={{ background: "var(--cv-bg-surface)", borderRadius: "10px", padding: "14px 16px", boxShadow: "var(--cv-shadow-sm)" }}>
@@ -190,7 +190,7 @@ export default function ProgressDashboard() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
             {practice.byTopic.map((p, i) => {
               const accuracy = p.attempts > 0 ? Math.round((p.correct / p.attempts) * 100) : 0;
-              const color    = TOPIC_COLORS[p.topic] || "#667eea";
+              const color    = TOPIC_COLORS[p.topic] || "var(--teal)";
               return (
                 <div key={i} style={{ padding: "12px", background: "var(--cv-bg-sunken)", borderRadius: "8px", borderTop: `3px solid ${color}` }}>
                   <div style={{ fontWeight: 600, fontSize: "13px", color: "var(--cv-text-primary)", marginBottom: "6px", textTransform: "capitalize" }}>

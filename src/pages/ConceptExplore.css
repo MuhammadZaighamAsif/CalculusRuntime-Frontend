@@ -1,17 +1,17 @@
-/* Concept Explore — Partials cream / ink / gold theme */
+/* Concept Explore — aligned to shell tokens */
 
 .concept-explore-page {
-  --ce-ink: #16120a;
-  --ce-cream: #f4ede0;
-  --ce-parchment: #fdf8f0;
-  --ce-gold: #a0720a;
-  --ce-gold-lt: #c89318;
-  --ce-rule: #d4c4a8;
-  --ce-muted: #7a7268;
-  --ce-card: #ffffff;
-  background: var(--ce-cream);
-  color: var(--ce-ink);
-  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  --ce-ink: var(--ink);
+  --ce-cream: var(--paper);
+  --ce-parchment: var(--card);
+  --ce-gold: var(--gold);
+  --ce-gold-lt: var(--gold);
+  --ce-rule: var(--line);
+  --ce-muted: var(--muted);
+  --ce-card: var(--card);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
   min-height: 100vh;
   padding-bottom: clamp(3rem, 7vw, 5rem);
 }
@@ -95,7 +95,7 @@
 .concept-explore-hero h1,
 .concept-example-head h2,
 .concept-deep-head h2 {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: inherit;
   line-height: 1.12;
   margin: 0;
   font-weight: 900;
@@ -240,7 +240,7 @@
 
 .concept-deep-card h3,
 .concept-proof-panel h3 {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: inherit;
   font-size: 1.1rem;
   margin: 0;
   color: var(--ce-ink);
@@ -254,7 +254,7 @@
 
 .concept-proof-panel--accent {
   border-left-color: #3a5f32;
-  background: #f0faf5;
+  background: rgba(58, 95, 50, 0.08);
 }
 
 .concept-proof-panel ol,

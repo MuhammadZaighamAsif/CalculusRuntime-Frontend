@@ -548,10 +548,10 @@
       border-color: var(--gold);
       background: var(--gold-bg);
     }.partial-derivatives-guide .mcq-opt.selected{
-      border-color: var(--navy);
-      background: var(--navy-bg);
+      border-color: var(--gold);
+      background: var(--gold-bg);
     }.partial-derivatives-guide .mcq-opt.selected .mcq-opt-letter{
-      background: var(--navy);
+      background: var(--gold);
       color: #fff;
     }.partial-derivatives-guide .mcq-opt.correct{
       border-color: var(--sage);

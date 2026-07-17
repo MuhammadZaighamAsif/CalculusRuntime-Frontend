@@ -561,9 +561,9 @@
   transition: width 0.6s ease;
 }
 
-.db-chart-bar--teal { background: #2a9d8f; }
-.db-chart-bar--blue { background: #3d4f6b; }
-.db-chart-bar--purple { background: #7c5cbf; }
+.db-chart-bar--teal { background: #3a5f32; }
+.db-chart-bar--blue { background: #1a3358; }
+.db-chart-bar--purple { background: #7c2f0a; }
 
 .db-chart-pct {
   font-size: 0.78rem;
@@ -592,9 +592,9 @@
   border-radius: 50%;
 }
 
-.db-legend-dot--done { background: #2a9d8f; }
-.db-legend-dot--progress { background: #e8b84b; }
-.db-legend-dot--none { background: #d4cdc5; }
+.db-legend-dot--done { background: #3a5f32; }
+.db-legend-dot--progress { background: #c89318; }
+.db-legend-dot--none { background: #d4c4a8; }
 
 /* ── Bookmark Search ── */
 .db-bookmark-search-wrapper {
@@ -616,7 +616,7 @@
 }
 
 .db-bookmark-search:focus {
-  border-color: #2a9d8f;
+  border-color: #3a5f32;
   box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
 }
 

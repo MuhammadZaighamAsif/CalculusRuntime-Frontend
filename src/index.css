@@ -2,42 +2,46 @@
    CSS Custom Properties — Light (default)
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --ink: #111317;
-  --ink-2: #20252c;
-  --paper: #fbf7ef;
-  --paper-2: #f1eadf;
-  --card: #fffdf8;
-  --line: #ded2bf;
-  --muted: #665f56;
-  --gold: #c28a2e;
-  --gold-2: #f0c66f;
-  --teal: #2f746b;
-  --blue: #314e73;
-  --plum: #6b4262;
-  --shadow: 0 18px 50px rgba(28, 24, 18, 0.12);
-  --shadow-sm: 0 8px 24px rgba(28, 24, 18, 0.08);
-  --shadow-hard: 0 24px 80px rgba(17, 19, 23, 0.18);
+  --ink: #16120a;
+  --ink-2: #2a2318;
+  --paper: #f4ede0;
+  --paper-2: #ebe2d0;
+  --card: #ffffff;
+  --line: #d4c4a8;
+  --muted: #7a7268;
+  --gold: #a0720a;
+  --gold-2: #c89318;
+  --teal: #3a5f32;
+  --blue: #1a3358;
+  --plum: #7c2f0a;
+  --shadow: 0 2px 14px rgba(22, 18, 10, 0.1);
+  --shadow-sm: 0 1px 6px rgba(22, 18, 10, 0.07);
+  --shadow-hard: 0 18px 50px rgba(22, 18, 10, 0.14);
   --radius: 8px;
   --header-h: 64px;
+  --parchment: #fdf8f0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Dark theme — toggled via <html data-theme="dark">
    ═══════════════════════════════════════════════════════════════════════════ */
 [data-theme="dark"] {
-  --ink: #f0ece3;
-  --ink-2: #d8d0c4;
-  --paper: #111009;
+  --ink: #f4ede0;
+  --ink-2: #e8dcc8;
+  --paper: #12100a;
   --paper-2: #1a160d;
   --card: #1e1a11;
   --line: #3a3020;
   --muted: #9a917f;
-  --gold: #d4a248;
-  --gold-2: #f0c66f;
-  --teal: #4a9e93;
+  --gold: #c89318;
+  --gold-2: #e8b84b;
+  --teal: #6a9a5e;
+  --blue: #7a9bc4;
+  --plum: #c47850;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
   --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.3);
   --shadow-hard: 0 24px 80px rgba(0, 0, 0, 0.5);
+  --parchment: #1e1a11;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -87,7 +91,7 @@ body::before {
 }
 
 ::selection {
-  background: rgba(47, 116, 107, 0.2);
+  background: rgba(160, 114, 10, 0.22);
 }
 
 code {
@@ -103,7 +107,7 @@ select {
 }
 
 :focus-visible {
-  outline: 3px solid rgba(47, 116, 107, 0.35);
+  outline: 3px solid rgba(160, 114, 10, 0.35);
   outline-offset: 3px;
 }
 
@@ -277,10 +281,10 @@ select {
 /* Hamburger — hidden on desktop */
 .hamburger {
   display: none; /* shown at ≤920px breakpoint below */
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 0;
   width: 36px;
   height: 36px;
   padding: 0;
@@ -289,6 +293,7 @@ select {
   border-radius: 6px;
   cursor: pointer;
   flex-shrink: 0;
+  color: inherit;
   transition: background 0.18s;
 }
 
@@ -296,27 +301,9 @@ select {
   background: rgba(240, 198, 111, 0.15);
 }
 
-.hamburger span {
+.hamburger svg {
   display: block;
-  width: 18px;
-  height: 2px;
-  background: rgba(255, 250, 241, 0.85);
-  border-radius: 2px;
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-  transform-origin: center;
-}
-
-.hamburger--open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.hamburger--open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-.hamburger--open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  flex-shrink: 0;
 }
 
 /* ── Mobile drawer ──────────────────────────────────────────────────────── */
@@ -1318,47 +1305,58 @@ select {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   UI refresh — cleaner product shell
+   UI refresh — cream / ink / gold editorial shell (matches study guides)
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --ink: #17201c;
-  --ink-2: #24302b;
-  --paper: #f6f8f5;
-  --paper-2: #edf2ee;
+  --ink: #16120a;
+  --ink-2: #2a2318;
+  --paper: #f4ede0;
+  --paper-2: #ebe2d0;
   --card: #ffffff;
-  --line: #d7e0d9;
-  --muted: #617066;
-  --gold: #b98221;
-  --gold-2: #e7bd62;
-  --teal: #14756f;
-  --blue: #345b91;
-  --plum: #8a4d72;
-  --shadow: 0 18px 48px rgba(23, 32, 28, 0.12);
-  --shadow-sm: 0 8px 24px rgba(23, 32, 28, 0.08);
-  --shadow-hard: 0 24px 70px rgba(23, 32, 28, 0.18);
+  --line: #d4c4a8;
+  --muted: #7a7268;
+  --gold: #a0720a;
+  --gold-2: #c89318;
+  --teal: #3a5f32;
+  --blue: #1a3358;
+  --plum: #7c2f0a;
+  --shadow: 0 2px 14px rgba(22, 18, 10, 0.1);
+  --shadow-sm: 0 1px 6px rgba(22, 18, 10, 0.07);
+  --shadow-hard: 0 18px 50px rgba(22, 18, 10, 0.14);
   --radius: 8px;
+  --parchment: #fdf8f0;
 }
 
 [data-theme="dark"] {
-  --ink: #edf5ef;
-  --ink-2: #d6e2da;
-  --paper: #0e1412;
-  --paper-2: #151d1a;
-  --card: #18211e;
-  --line: #2c3a35;
-  --muted: #9fb1a7;
-  --gold: #d5a64c;
-  --teal: #53bdb4;
-  --blue: #82a9e0;
-  --plum: #d28bb5;
+  --ink: #f4ede0;
+  --ink-2: #e8dcc8;
+  --paper: #12100a;
+  --paper-2: #1a160d;
+  --card: #1e1a11;
+  --line: #3a3020;
+  --muted: #9a917f;
+  --gold: #c89318;
+  --gold-2: #e8b84b;
+  --teal: #6a9a5e;
+  --blue: #7a9bc4;
+  --plum: #c47850;
+  --parchment: #1e1a11;
 }
 
 body {
   background:
-    linear-gradient(90deg, rgba(20, 117, 111, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(52, 91, 145, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160, 114, 10, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(124, 47, 10, 0.03) 1px, transparent 1px),
     var(--paper);
   background-size: 32px 32px;
+  font-family:
+    "Source Sans 3",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
 }
 
 body::before {
@@ -1368,9 +1366,9 @@ body::before {
 .site-header {
   min-height: 72px;
   padding: 0 clamp(1rem, 3vw, 2.5rem);
-  background: color-mix(in srgb, var(--card) 88%, transparent);
+  background: color-mix(in srgb, var(--parchment) 90%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
-  box-shadow: 0 8px 24px rgba(23, 32, 28, 0.08);
+  box-shadow: 0 8px 24px rgba(22, 18, 10, 0.08);
   color: var(--ink);
   backdrop-filter: blur(18px);
 }
@@ -1381,7 +1379,7 @@ body::before {
 
 .site-brand {
   color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
   gap: 0.7rem;
 }
 
@@ -1395,12 +1393,12 @@ body::before {
   justify-content: center;
   width: 2.35rem;
   height: 2.35rem;
-  background: linear-gradient(135deg, var(--teal), var(--blue));
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
   border-radius: 8px;
-  color: white;
-  font-family: Georgia, "Times New Roman", serif;
+  color: #fdf8f0;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
   font-size: 1.35rem;
-  box-shadow: 0 10px 22px rgba(20, 117, 111, 0.2);
+  box-shadow: 0 10px 22px rgba(160, 114, 10, 0.22);
 }
 
 .brand-text {
@@ -1416,6 +1414,7 @@ body::before {
 
 .brand-text small {
   color: var(--muted);
+  font-family: "Source Sans 3", Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 750;
 }
@@ -1448,6 +1447,11 @@ body::before {
   color: var(--ink);
 }
 
+.site-nav a.active {
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 28%, var(--line));
+}
+
 .site-nav a.active::after {
   display: none;
 }
@@ -1469,16 +1473,17 @@ body::before {
 .theme-toggle:hover,
 .hamburger:hover {
   background: var(--paper-2);
-  border-color: color-mix(in srgb, var(--teal) 38%, var(--line));
+  border-color: color-mix(in srgb, var(--gold) 38%, var(--line));
   transform: translateY(-1px);
 }
 
 .hamburger {
   padding: 0;
+  color: var(--ink);
 }
 
-.hamburger span {
-  background: var(--ink);
+.hamburger svg {
+  display: block;
 }
 
 .mobile-nav {
@@ -1493,7 +1498,7 @@ body::before {
 .mobile-nav a:hover,
 .mobile-nav a.active {
   background: var(--paper-2);
-  color: var(--teal);
+  color: var(--gold);
 }
 
 .home-page {
@@ -1508,15 +1513,15 @@ body::before {
 
 .eyebrow,
 .section-kicker {
-  color: var(--teal);
+  color: var(--gold);
   letter-spacing: 0.12em;
 }
 
 .hero-copy h1,
 .guide-section h2,
 .tool-strip h2 {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight: 900;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
@@ -1537,8 +1542,14 @@ body::before {
 }
 
 .primary-action {
-  background: linear-gradient(135deg, var(--teal), var(--blue));
-  border-color: transparent;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fdf8f0;
+}
+
+.primary-action:hover {
+  background: var(--gold);
+  border-color: var(--gold);
 }
 
 .secondary-action {
@@ -1546,10 +1557,17 @@ body::before {
   border-color: var(--line);
 }
 
+.secondary-action:hover {
+  background: var(--paper-2);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
 .hero-panel {
   background:
-    linear-gradient(135deg, #16231f, #1d2e37),
+    linear-gradient(135deg, #16120a, #2a2318),
     repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(255,255,255,0.07) 29px);
+  border: 1px solid color-mix(in srgb, var(--gold) 32%, transparent);
   border-radius: 8px;
   min-height: 360px;
 }
@@ -1563,6 +1581,11 @@ body::before {
   padding: 0.85rem 1rem;
 }
 
+.home-search:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(160, 114, 10, 0.14);
+}
+
 .guide-card,
 .tool-strip,
 .home-stats,
@@ -1572,10 +1595,27 @@ body::before {
 
 .guide-card {
   min-height: 250px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-card::before {
+  background: linear-gradient(180deg, var(--gold), var(--plum));
 }
 
 .guide-card::after {
   border-radius: 8px;
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 22%, transparent);
+  color: var(--gold);
+}
+
+.guide-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--line));
+}
+
+.guide-card-icon {
+  color: var(--gold);
 }
 
 .tool-strip {
@@ -1589,13 +1629,35 @@ body::before {
   border-radius: 8px;
 }
 
+.tool-links a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.stat-num {
+  color: var(--gold);
+}
+
+.ai-feature-banner {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--gold) 10%, transparent),
+    color-mix(in srgb, var(--plum) 6%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--line));
+}
+
+.ai-feature-btn {
+  background: var(--ink);
+}
+
 .site-footer {
-  background: #17201c;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #16120a;
+  border: 1px solid rgba(200, 147, 24, 0.18);
 }
 
 [data-theme="dark"] .site-footer {
-  background: #0a0f0d;
+  background: #0a0906;
 }
 
 @media (max-width: 920px) {

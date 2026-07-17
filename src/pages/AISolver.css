@@ -97,7 +97,7 @@
   min-height: 280px;
   border-radius: 18px;
   overflow: hidden;
-  background: var(--surface, #f6f7fb);
+  background: var(--surface, var(--paper-2));
 }
 
 .ai-solver-iframe {
@@ -111,7 +111,7 @@
   padding: 24px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fff;
+  background: var(--card);
 }
 
 .ai-solver-embed-fallback p {

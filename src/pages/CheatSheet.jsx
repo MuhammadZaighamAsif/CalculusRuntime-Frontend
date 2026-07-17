@@ -100,7 +100,7 @@ export default function CheatSheet() {
 
   // ── UI ───────────────────────────────────────────────────────────────────
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 16px" }}>
+    <div className="cheatsheet-page" style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 16px" }}>
 
       {/* ── Page header ── */}
       <div style={{ textAlign: "center", marginBottom: "32px" }}>
@@ -179,11 +179,11 @@ export default function CheatSheet() {
           style={{ background: "#ffffff", borderRadius: "16px", padding: "32px", boxShadow: "var(--cv-shadow-lg)" }}
         >
           {/* PDF Header */}
-          <div style={{ textAlign: "center", borderBottom: "3px solid #667eea", paddingBottom: "16px", marginBottom: "28px" }}>
-            <h2 style={{ fontSize: "1.8em", fontWeight: 900, color: "#1a1a2e", margin: "0 0 4px" }}>
+          <div style={{ textAlign: "center", borderBottom: "3px solid var(--teal)", paddingBottom: "16px", marginBottom: "28px" }}>
+            <h2 style={{ fontSize: "1.8em", fontWeight: 900, color: "var(--ink)", margin: "0 0 4px" }}>
               📐 CalcVoyager — Formula Reference Sheet
             </h2>
-            <p style={{ color: "#666", fontSize: "13px", margin: 0 }}>
+            <p style={{ color: "var(--muted)", fontSize: "13px", margin: 0 }}>
               Generated on {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
             </p>
           </div>
@@ -195,10 +195,10 @@ export default function CheatSheet() {
               {/* Topic heading */}
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px", paddingBottom: "8px", borderBottom: `2px solid ${topic.color}` }}>
                 <div style={{ width: "14px", height: "14px", borderRadius: "50%", background: topic.color }} />
-                <h3 style={{ margin: 0, fontSize: "1.15em", fontWeight: 800, color: "#1a1a2e" }}>
+                <h3 style={{ margin: 0, fontSize: "1.15em", fontWeight: 800, color: "var(--ink)" }}>
                   {topic.title}
                 </h3>
-                <span style={{ marginLeft: "auto", fontSize: "12px", color: "#888" }}>
+                <span style={{ marginLeft: "auto", fontSize: "12px", color: "var(--muted)" }}>
                   {topic.formulas.length} formula{topic.formulas.length !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -213,11 +213,11 @@ export default function CheatSheet() {
                     <div style={{ fontWeight: 700, fontSize: "12px", color: topic.color, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       {f.name}
                     </div>
-                    <div style={{ fontFamily: "monospace", fontSize: "13px", color: "#1a1a2e", background: "#fff", padding: "8px 10px", borderRadius: "6px", marginBottom: f.note ? "6px" : 0, wordBreak: "break-word" }}>
+                    <div style={{ fontFamily: "monospace", fontSize: "13px", color: "var(--ink)", background: "#fff", padding: "8px 10px", borderRadius: "6px", marginBottom: f.note ? "6px" : 0, wordBreak: "break-word" }}>
                       {f.formula}
                     </div>
                     {f.note && (
-                      <div style={{ fontSize: "11px", color: "#666", fontStyle: "italic", marginTop: "4px" }}>
+                      <div style={{ fontSize: "11px", color: "var(--muted)", fontStyle: "italic", marginTop: "4px" }}>
                         💡 {f.note}
                       </div>
                     )}
@@ -228,7 +228,7 @@ export default function CheatSheet() {
           ))}
 
           {/* PDF Footer */}
-          <div style={{ textAlign: "center", borderTop: "1px solid #e5e7eb", paddingTop: "16px", marginTop: "16px", color: "#999", fontSize: "11px" }}>
+          <div style={{ textAlign: "center", borderTop: "1px solid #e5e7eb", paddingTop: "16px", marginTop: "16px", color: "var(--muted)", fontSize: "11px" }}>
             CalcVoyager · Multivariable Calculus Tools · calcvoyager.com
           </div>
         </div>

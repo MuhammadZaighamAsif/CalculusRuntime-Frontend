@@ -76,7 +76,7 @@ const VectorFieldVisualizer = () => {
         const bgColor = computed.getPropertyValue('--cv-bg-surface').trim() || '#ffffff';
         const gridColor = computed.getPropertyValue('--cv-border').trim() || '#e0e0e0';
         const axisColor = computed.getPropertyValue('--cv-text-muted').trim() || '#888888';
-        const arrowColor = computed.getPropertyValue('--cv-accent').trim() || '#2563eb';
+        const arrowColor = computed.getPropertyValue('--cv-accent').trim() || '#14756f';
         const pointColor = computed.getPropertyValue('--cv-error').trim() || '#dc2626';
         const dirColor = computed.getPropertyValue('--cv-success').trim() || '#16a34a';
 
@@ -223,7 +223,7 @@ const VectorFieldVisualizer = () => {
     };
 
     return (
-        <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', minHeight: '100vh', padding: '20px' }}>
+        <div style={{ fontFamily: 'inherit', background: 'var(--paper)', minHeight: '100vh', padding: '20px' }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
                 <h1 style={{ textAlign: 'center', color: 'white', fontSize: '3em', fontWeight: 700, marginBottom: '10px', textShadow: '2px 4px 6px rgba(0,0,0,0.2)' }}>

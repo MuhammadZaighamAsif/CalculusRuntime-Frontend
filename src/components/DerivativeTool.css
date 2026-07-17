@@ -20,7 +20,7 @@
 .derivative-tool__hero-tagline {
   margin: 0;
   max-width: 740px;
-  color: #334155;
+  color: var(--ink);
   font-size: 1.05rem;
   line-height: 1.75;
 }
@@ -28,7 +28,7 @@
 .derivative-tool__subtitle {
   margin: 0;
   max-width: 820px;
-  color: #6b7280;
+  color: var(--muted);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -50,7 +50,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.95rem;
   margin-top: 14px;
 }
@@ -59,8 +59,8 @@
   display: inline-flex;
   padding: 10px 16px;
   border-radius: 999px;
-  background: #eef2ff;
-  color: #1d4ed8;
+  background: var(--paper-2);
+  color: var(--blue);
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -71,23 +71,23 @@
 .derivative-tool__chip {
   padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #0f172a;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
   cursor: pointer;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
   transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
 }
 
 .derivative-tool__chip:hover {
-  background: #eff6ff;
-  border-color: #93c5fd;
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.12);
+  background: var(--paper-2);
+  border-color: color-mix(in srgb, var(--teal) 40%, white);
+  box-shadow: 0 12px 26px rgba(160, 114, 10, 0.12);
   transform: translateY(-1px);
 }
 
 .derivative-tool__chip--active {
-  background: #2563eb;
+  background: var(--teal);
   color: #ffffff;
   border-color: transparent;
 }
@@ -114,15 +114,15 @@
   align-items: center;
   padding: 10px 14px;
   border-radius: 999px;
-  background: #f1f5f9;
+  background: var(--paper-2);
 }
 
 .derivative-tool__hero-card {
   padding: 28px;
   border-radius: 28px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
   margin-top: 150px;
 }
 
@@ -133,7 +133,7 @@
 
 .derivative-tool__hero-card p {
   margin: 0 0 12px;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.75;
 }
 
@@ -146,9 +146,9 @@
 .derivative-tool__panel-card {
   padding: 24px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 
 .derivative-tool__formula-grid {
@@ -160,12 +160,12 @@
 .derivative-tool__formula-card {
   padding: 18px 20px;
   border-radius: 18px;
-  background: #f8fafc;
-  border: 1px solid #dbeafe;
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--line));
 }
 
 .derivative-tool__formula-label {
-  color: #1d4ed8;
+  color: var(--blue);
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -175,16 +175,16 @@
 
 .derivative-tool__formula-text {
   font-size: 0.98rem;
-  color: #0f172a;
+  color: var(--ink);
   line-height: 1.6;
 }
 
 .derivative-tool__examples-card {
   padding: 24px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e2e8eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 24px;
 }
 
@@ -198,19 +198,19 @@
 .derivative-tool__assistant-card {
   padding: 24px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 
 .derivative-tool__result-card--info {
-  background: #eff6ff;
-  border-color: #bfdbfe;
+  background: var(--paper-2);
+  border-color: color-mix(in srgb, var(--gold) 35%, var(--line));
 }
 
 .derivative-tool__degree-value {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--ink);
 }
 
 .derivative-tool__group--fixed h3 {
@@ -234,7 +234,7 @@
 
 .derivative-tool__examples-header p {
   margin: 0;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
 }
@@ -246,9 +246,9 @@
   margin-top: 18px;
   padding: 14px 16px;
   border-radius: 16px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
 }
 
 .derivative-tool__validation--valid {
@@ -264,9 +264,9 @@
 }
 
 .derivative-tool__validation--idle {
-  background: #f8fafc;
-  border-color: #e2e8f0;
-  color: #475569;
+  background: var(--paper);
+  border-color: var(--ink);
+  color: var(--muted);
 }
 
 .derivative-tool__validation-icon {
@@ -276,14 +276,14 @@
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: rgba(37, 99, 235, 0.12);
-  color: #2563eb;
+  background: color-mix(in srgb, var(--gold) 14%, transparent);
+  color: var(--teal);
   font-weight: 700;
 }
 
 .derivative-tool__assistant-message {
   margin-top: 0;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.8;
 }
 .derivative-tool__panel-card h2,
@@ -295,7 +295,7 @@
 .derivative-tool__panel-card p,
 .derivative-tool__syntax-note {
   margin: 0;
-  color: #475569;
+  color: var(--muted);
   line-height: 1.75;
 }
 
@@ -320,9 +320,9 @@
   max-width: 100%;
   padding: 28px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 
   display: flex;
   flex-direction: column;
@@ -332,7 +332,7 @@
 }
 
 .derivative-tool__control-panel:hover {
-  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
 
@@ -370,8 +370,8 @@
   min-width: 0;
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid #dbeafe;
-  background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--line));
+  background: linear-gradient(180deg, var(--parchment) 0%, var(--paper) 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
   height: fit-content;
 }
@@ -385,13 +385,13 @@
   margin-bottom: 10px;
   font-size: 0.96rem;
   font-weight: 700;
-  color: #1d4ed8;
+  color: var(--blue);
 }
 
 .derivative-tool__syntax-list {
   margin: 0 0 10px;
   padding-left: 18px;
-  color: #334155;
+  color: var(--ink);
   display: grid;
   gap: 8px;
   line-height: 1.6;
@@ -425,13 +425,13 @@
   max-width: 100%;
   padding: 28px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
 }
 
 .derivative-tool__control-panel:hover {
-  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
 
@@ -455,7 +455,7 @@
 
 .derivative-tool__box-header p {
   margin: 8px 0 0;
-  color: #475569;
+  color: var(--muted);
   line-height: 1.75;
 }
 
@@ -469,19 +469,19 @@
 .derivative-tool__syntax-item {
   padding: 18px 20px;
   border-radius: 18px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--paper);
+  border: 1px solid var(--line);
 }
 
 .derivative-tool__syntax-item p {
   margin: 0 0 10px;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
 .derivative-tool__syntax-item--good {
-  background: #eef2ff;
-  border-color: #c7d2fe;
+  background: var(--paper-2);
+  border-color: color-mix(in srgb, var(--gold) 35%, var(--line));
 }
 
 .derivative-tool__syntax-item--bad {
@@ -494,7 +494,7 @@
   align-items: center;
   margin-bottom: 10px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--ink);
 }
 
 .derivative-tool__formula-card h2,
@@ -507,7 +507,7 @@
 .derivative-tool__assistant-card p,
 .derivative-tool__assistant-card li {
   margin: 0 0 10px;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.6;
 }
 
@@ -524,7 +524,7 @@
   min-width: 86px;
   height: 32px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+  background: linear-gradient(135deg, var(--teal) 0%, var(--gold) 100%);
   color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
@@ -532,8 +532,8 @@
 }
 
 .derivative-tool__assistant-card--ready {
-  border-color: #7dd3fc;
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+  border-color: color-mix(in srgb, var(--gold) 40%, var(--line));
+  box-shadow: 0 0 0 4px rgba(160, 114, 10, 0.12);
 }
 
 .derivative-tool__group {
@@ -548,7 +548,7 @@
 }
 
 .derivative-tool__hint {
-  color: #475569;
+  color: var(--muted);
   font-size: 0.875rem;
 }
 
@@ -562,10 +562,10 @@
 .derivative-tool__group select {
   min-height: 50px;
   padding: 13px 15px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--line);
   border-radius: 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  color: #111827;
+  background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
+  color: var(--ink);
   font-size: 1rem;
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
@@ -574,8 +574,8 @@
 .derivative-tool__group input[type='text']:focus,
 .derivative-tool__group select:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(160, 114, 10, 0.14);
   transform: translateY(-1px);
 }
 
@@ -590,7 +590,7 @@
   appearance: none;
   height: 6px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #93c5fd 0%, #2563eb 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 40%, white) 0%, var(--teal) 100%);
   outline: none;
 }
 
@@ -599,7 +599,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #2563eb;
+  background: var(--teal);
   cursor: pointer;
   border: 2px solid transparent;
 }
@@ -610,12 +610,12 @@
   padding: 0 24px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, var(--ink) 0%, var(--gold) 100%);
   color: #ffffff;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 12px 24px rgba(160, 114, 10, 0.18);
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
@@ -626,9 +626,9 @@
 
 .derivative-tool__button:hover,
 .derivative-tool__button:focus-visible {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 14px 28px rgba(160, 114, 10, 0.22);
 }
 
 .derivative-tool__var-badges {
@@ -646,14 +646,14 @@
   min-height: 28px;
   padding: 0 10px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #334155;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 0.9rem;
 }
 
 .derivative-tool__var-badge--active {
-  background: #2563eb;
+  background: var(--teal);
   color: #ffffff;
   border-color: transparent;
 }
@@ -662,7 +662,7 @@
   width: 100%;
   min-height: 460px;
   border-radius: 20px;
-  background: #ffffff;
+  background: var(--card);
   display: none;
 }
 
@@ -677,23 +677,23 @@
   justify-content: center;
   gap: 10px;
   min-height: 420px;
-  color: #64748b;
+  color: var(--muted);
   font-size: 0.98rem;
-  background: linear-gradient(180deg, rgba(248,250,252,0.9), rgba(238,242,255,0.9));
+  background: linear-gradient(180deg, var(--parchment), var(--paper-2));
   border-radius: 20px;
   padding: 24px;
   text-align: center;
 }
 
 .derivative-tool__plot-placeholder strong {
-  color: #1e293b;
+  color: var(--ink);
   font-size: 1.05rem;
 }
 
 .derivative-tool__plot-placeholder-hint {
   margin-top: 6px;
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--muted);
 }
 
 .derivative-tool__view-tabs {
@@ -706,9 +706,9 @@
 .derivative-tool__view-tab {
   padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #0f172a;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
@@ -717,13 +717,13 @@
 
 .derivative-tool__view-tab:hover,
 .derivative-tool__view-tab:focus-visible {
-  background: #eff6ff;
-  border-color: #93c5fd;
+  background: var(--paper-2);
+  border-color: color-mix(in srgb, var(--teal) 40%, white);
   transform: translateY(-1px);
 }
 
 .derivative-tool__view-tab--active {
-  background: #2563eb;
+  background: var(--teal);
   color: #ffffff;
   border-color: transparent;
 }
@@ -734,8 +734,8 @@
   margin-bottom: 18px;
   padding: 18px;
   border-radius: 18px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--paper);
+  border: 1px solid var(--line);
 }
 
 @media (min-width: 768px) {
@@ -759,19 +759,19 @@
   margin-top: 18px;
   padding: 18px 20px;
   border-radius: 18px;
-  background: #eff6ff;
+  background: var(--paper-2);
   border: 1px solid #bfdbfe;
 }
 
 .derivative-tool__edu-note h3 {
   margin: 0 0 8px;
   font-size: 0.98rem;
-  color: #1e40af;
+  color: var(--blue);
 }
 
 .derivative-tool__edu-note p {
   margin: 0;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.75;
   font-size: 0.95rem;
 }
@@ -784,7 +784,7 @@
 [data-theme="dark"] .derivative-tool__box-header p,
 [data-theme="dark"] .derivative-tool__hint,
 [data-theme="dark"] .derivative-tool__edu-note p {
-  color: #cbd5e1;
+  color: var(--muted);
 }
 
 [data-theme="dark"] .derivative-tool__title,
@@ -792,7 +792,7 @@
 [data-theme="dark"] .derivative-tool__panel-card h3,
 [data-theme="dark"] .derivative-tool__box-title,
 [data-theme="dark"] .derivative-tool__degree-value {
-  color: #f1f5f9;
+  color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__hero-card,
@@ -801,8 +801,8 @@
 [data-theme="dark"] .derivative-tool__control-panel,
 [data-theme="dark"] .derivative-tool__visual-box,
 [data-theme="dark"] .derivative-tool__summary-box {
-  background: #1e293b;
-  border-color: #334155;
+  background: var(--card);
+  border-color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__formula-card,
@@ -810,76 +810,76 @@
 [data-theme="dark"] .derivative-tool__result-card,
 [data-theme="dark"] .derivative-tool__cross-controls,
 [data-theme="dark"] .derivative-tool__assistant-tutor {
-  background: #0f172a;
-  border-color: #334155;
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__formula-text,
 [data-theme="dark"] .derivative-tool__expression {
-  color: #e2e8f0;
-  background: #1e293b;
-  border-color: #475569;
+  color: var(--ink);
+  background: var(--card);
+  border-color: var(--muted);
 }
 
 [data-theme="dark"] .derivative-tool__chip {
-  background: #0f172a;
-  border-color: #475569;
-  color: #e2e8f0;
+  background: var(--ink);
+  border-color: var(--muted);
+  color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__view-tab {
-  background: #0f172a;
-  border-color: #475569;
-  color: #e2e8f0;
+  background: var(--ink);
+  border-color: var(--muted);
+  color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__group input[type='text'],
 [data-theme="dark"] .derivative-tool__group select {
-  background: #0f172a;
-  border-color: #475569;
-  color: #f1f5f9;
+  background: var(--ink);
+  border-color: var(--muted);
+  color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__syntax-card {
-  background: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(30,41,59,0.95) 100%);
-  border-color: #334155;
+  background: linear-gradient(180deg, var(--paper-2) 0%, var(--card) 100%);
+  border-color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__plot-placeholder {
-  background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(30,41,59,0.9));
-  color: #94a3b8;
+  background: linear-gradient(180deg, var(--paper-2), var(--card));
+  color: var(--muted);
 }
 
 [data-theme="dark"] .derivative-tool__plot-placeholder strong {
-  color: #e2e8f0;
+  color: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__plot {
-  background: #0f172a;
+  background: var(--ink);
 }
 
 [data-theme="dark"] .derivative-tool__edu-note {
   background: #172554;
-  border-color: #1e40af;
+  border-color: var(--blue);
 }
 
 [data-theme="dark"] .derivative-tool__edu-note h3 {
-  color: #93c5fd;
+  color: color-mix(in srgb, var(--teal) 40%, white);
 }
 
 [data-theme="dark"] .derivative-tool__result-card--info {
   background: #172554;
-  border-color: #1e40af;
+  border-color: var(--blue);
 }
 
 [data-theme="dark"] .derivative-tool__hero-notes span {
-  background: #0f172a;
-  color: #cbd5e1;
+  background: var(--ink);
+  color: var(--muted);
 }
 
 [data-theme="dark"] .derivative-tool__hero-copy .derivative-tool__eyebrow {
   background: #172554;
-  color: #93c5fd;
+  color: color-mix(in srgb, var(--teal) 40%, white);
 }
 
 
@@ -900,9 +900,9 @@
 .derivative-tool__visual-box,
 .derivative-tool__summary-box {
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
   padding: 22px;
 }
 
@@ -923,7 +923,7 @@
 .derivative-tool__box-title {
   margin: 0 0 16px;
   font-size: 1.05rem;
-  color: #111827;
+  color: var(--ink);
 }
 
 .derivative-tool__plot-container {
@@ -935,13 +935,13 @@
   margin-bottom: 16px;
   padding: 18px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+  background: linear-gradient(135deg, var(--paper-2) 0%, var(--paper) 100%);
   border: 1px solid #bfdbfe;
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 12px 32px rgba(160, 114, 10, 0.1);
 }
 
 .derivative-tool__assistant-tutor--ready {
-  border-color: #7dd3fc;
+  border-color: color-mix(in srgb, var(--gold) 40%, var(--line));
   box-shadow: 0 12px 32px rgba(14, 165, 233, 0.12);
 }
 
@@ -958,7 +958,7 @@
   align-items: center;
   padding: 7px 12px;
   border-radius: 999px;
-  background: #2563eb;
+  background: var(--teal);
   color: #ffffff;
   font-size: 0.8rem;
   font-weight: 700;
@@ -967,13 +967,13 @@
 }
 
 .derivative-tool__assistant-pill--subtle {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: color-mix(in srgb, var(--gold) 16%, var(--paper));
+  color: var(--blue);
 }
 
 .derivative-tool__assistant-tutor p {
   margin: 0 0 10px;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.75;
 }
 
@@ -981,7 +981,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.9rem;
 }
 
@@ -995,8 +995,8 @@
   margin-bottom: 18px;
   padding: 18px;
   border-radius: 18px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--paper);
+  border: 1px solid var(--line);
 }
 
 .derivative-tool__result-card h3 {
@@ -1007,9 +1007,9 @@
 .derivative-tool__expression {
   margin: 0;
   padding: 14px;
-  background: #ffffff;
+  background: var(--card);
   border-radius: 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--line);
   color: #1f2937;
   overflow-x: auto;
   white-space: pre-wrap;

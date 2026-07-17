@@ -171,7 +171,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.25rem;
-    background: linear-gradient(90deg, rgba(49, 78, 115, 0.22), transparent 34%), #111317;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--teal) 18%, transparent), transparent 40%), var(--card);
     border-bottom: 1px solid rgba(240, 198, 111, 0.28);
     flex-shrink: 0;
     overflow:hidden;
@@ -208,7 +208,7 @@
     height: 32px;
     border-radius: 8px;
     background: linear-gradient(135deg, var(--gold-2), var(--teal));
-    color: #111317;
+    color: var(--ink);
     font-size: 1.1rem;
     font-weight: 700;
     font-family: Georgia, serif;
@@ -231,7 +231,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #fff7dc;
+    color: var(--ink);
     line-height: 1.2;
   }
   .cb-icon-btn:active,
@@ -258,7 +258,7 @@
 }
   .cb-header-topic {
     font-size: 0.72rem;
-    color: rgba(240, 198, 111, 0.7);
+    color: var(--muted);
     line-height: 1.2;
     max-width: 180px;
     white-space: nowrap;
@@ -279,10 +279,10 @@
     justify-content: center;
     width: 30px;
     height: 30px;
-    background: rgba(255, 250, 241, 0.08);
-    border: 1px solid rgba(255, 250, 241, 0.15);
+    background: var(--paper-2);
+    border: 1px solid var(--line);
     border-radius: 6px;
-    color: rgba(255, 250, 241, 0.7);
+    color: var(--muted);
     cursor: pointer;
     font-size: 0.9rem;
     font-family: inherit;
@@ -290,8 +290,8 @@
   }
   
   .cb-icon-btn:hover {
-    background: rgba(240, 198, 111, 0.15);
-    color: var(--gold-2);
+    background: color-mix(in srgb, var(--gold) 15%, transparent);
+    color: var(--gold);
   }
   
   .cb-icon-btn--close:hover {
@@ -305,10 +305,10 @@
     justify-content: center;
     width: 30px;
     height: 30px;
-    background: rgba(255, 250, 241, 0.08);
-    border: 1px solid rgba(255, 250, 241, 0.15);
+    background: var(--paper-2);
+    border: 1px solid var(--line);
     border-radius: 6px;
-    color: rgba(255, 250, 241, 0.7);
+    color: var(--muted);
     cursor: pointer;
     font-size: 0.9rem;
     font-family: inherit;
@@ -409,7 +409,7 @@
     height: 56px;
     border-radius: 16px;
     background: linear-gradient(135deg, var(--gold-2), var(--teal));
-    color: #111317;
+    color: var(--ink);
     font-size: 1.8rem;
     font-weight: 700;
     font-family: Georgia, serif;
@@ -515,7 +515,7 @@
   
   .cb-msg-avatar--bot {
     background: linear-gradient(135deg, var(--gold-2), var(--teal));
-    color: #111317;
+    color: var(--ink);
     box-shadow: 0 2px 6px rgba(194, 138, 46, 0.25);
     font-size: 0.85rem;
   }
@@ -751,7 +751,7 @@
     height: 1.25rem;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--gold-2), var(--teal));
-    color: #111317;
+    color: var(--ink);
     font-size: 0.65rem;
     font-weight: 700;
     display: flex;

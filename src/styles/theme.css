@@ -1,79 +1,79 @@
 /* ============================================================
-   CalcVoyager — Theme System
-   Usage: Add data-theme="dark" to <html> to force dark mode.
-   Defaults to OS preference via prefers-color-scheme.
+   CalcVoyager — Tool token bridge
+   Aliases --cv-* to the shell tokens from index.css so tools
+   (volume, vector field) match Home / Header.
    ============================================================ */
 
 :root {
-  /* Surfaces */
-  --cv-bg-page:       #f5f5f5;
-  --cv-bg-surface:    #ffffff;
-  --cv-bg-raised:     #ffffff;
-  --cv-bg-sunken:     #efefef;
-  --cv-bg-overlay:    rgba(0, 0, 0, 0.04);
+  /* Surfaces → shell paper/card */
+  --cv-bg-page:       var(--paper);
+  --cv-bg-surface:    var(--card);
+  --cv-bg-raised:     var(--card);
+  --cv-bg-sunken:     var(--paper-2);
+  --cv-bg-overlay:    color-mix(in srgb, var(--ink) 4%, transparent);
 
   /* Borders */
-  --cv-border:        rgba(0, 0, 0, 0.12);
-  --cv-border-strong: rgba(0, 0, 0, 0.24);
+  --cv-border:        var(--line);
+  --cv-border-strong: color-mix(in srgb, var(--ink) 22%, transparent);
 
   /* Text */
-  --cv-text-primary:   #111111;
-  --cv-text-secondary: #555555;
-  --cv-text-muted:     #888888;
+  --cv-text-primary:   var(--ink);
+  --cv-text-secondary: var(--muted);
+  --cv-text-muted:     var(--muted);
   --cv-text-inverse:   #ffffff;
 
-  /* Brand / Accent */
-  --cv-accent:         #2563eb;
-  --cv-accent-hover:   #1d4ed8;
-  --cv-accent-light:   #dbeafe;
-  --cv-accent-text:    #1e40af;
+  /* Brand / Accent → sage/gold editorial (shell), not SaaS blue */
+  --cv-accent:         var(--teal);
+  --cv-accent-hover:   var(--gold);
+  --cv-accent-light:   color-mix(in srgb, var(--teal) 14%, var(--paper));
+  --cv-accent-text:    var(--teal);
 
   /* Semantic */
-  --cv-success:        #16a34a;
-  --cv-success-light:  #dcfce7;
-  --cv-error:          #dc2626;
-  --cv-error-light:    #fee2e2;
-  --cv-warning:        #d97706;
-  --cv-warning-light:  #fef3c7;
+  --cv-success:        #3a5f32;
+  --cv-success-light:  color-mix(in srgb, #3a5f32 12%, var(--paper));
+  --cv-error:          #b33a3a;
+  --cv-error-light:    color-mix(in srgb, #b33a3a 12%, var(--paper));
+  --cv-warning:        var(--gold);
+  --cv-warning-light:  color-mix(in srgb, var(--gold) 14%, var(--paper));
 
   /* Calculator-specific button tokens */
-  --cv-btn-digit-bg:      #ffffff;
-  --cv-btn-digit-text:    #111111;
-  --cv-btn-digit-hover:   #f0f0f0;
-  --cv-btn-op-bg:         #e8f0fe;
-  --cv-btn-op-text:       #1d4ed8;
-  --cv-btn-op-hover:      #dbeafe;
-  --cv-btn-fn-bg:         #f3f3f3;
-  --cv-btn-fn-text:       #444444;
-  --cv-btn-fn-hover:      #e8e8e8;
-  --cv-btn-eq-bg:         #2563eb;
+  --cv-btn-digit-bg:      var(--card);
+  --cv-btn-digit-text:    var(--ink);
+  --cv-btn-digit-hover:   var(--paper-2);
+  --cv-btn-op-bg:         color-mix(in srgb, var(--teal) 12%, var(--paper));
+  --cv-btn-op-text:       var(--teal);
+  --cv-btn-op-hover:      color-mix(in srgb, var(--teal) 20%, var(--paper));
+  --cv-btn-fn-bg:         var(--paper-2);
+  --cv-btn-fn-text:       var(--muted);
+  --cv-btn-fn-hover:      color-mix(in srgb, var(--ink) 6%, var(--paper));
+  --cv-btn-eq-bg:         var(--gold);
   --cv-btn-eq-text:       #ffffff;
-  --cv-btn-eq-hover:      #1d4ed8;
-  --cv-btn-clear-bg:      #fee2e2;
-  --cv-btn-clear-text:    #b91c1c;
-  --cv-btn-clear-hover:   #fecaca;
+  --cv-btn-eq-hover:      var(--gold-2);
+  --cv-btn-clear-bg:      color-mix(in srgb, #b33a3a 12%, var(--paper));
+  --cv-btn-clear-text:    #b33a3a;
+  --cv-btn-clear-hover:   color-mix(in srgb, #b33a3a 20%, var(--paper));
 
   /* Display */
-  --cv-display-bg:        #1a1a2e;
-  --cv-display-text:      #e2e8f0;
-  --cv-display-expr:      #94a3b8;
-  --cv-display-cursor:    #60a5fa;
+  --cv-display-bg:        var(--ink);
+  --cv-display-text:      var(--paper);
+  --cv-display-expr:      var(--muted);
+  --cv-display-cursor:    var(--gold);
 
   /* Input / Form */
-  --cv-input-bg:          #ffffff;
-  --cv-input-border:      rgba(0, 0, 0, 0.18);
-  --cv-input-focus:       #2563eb;
-  --cv-input-placeholder: #aaaaaa;
+  --cv-input-bg:          var(--card);
+  --cv-input-border:      var(--line);
+  --cv-input-focus:       var(--gold);
+  --cv-input-placeholder: var(--muted);
 
   /* Shadow */
-  --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08);
-  --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.10);
-  --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.12);
+  --cv-shadow-sm:  var(--shadow);
+  --cv-shadow-md:  var(--shadow);
+  --cv-shadow-lg:  0 12px 32px color-mix(in srgb, var(--ink) 12%, transparent);
 
-  /* Typography */
-  --cv-font-ui:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --cv-font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
-  --cv-font-math: 'KaTeX_Main', 'Computer Modern', serif;
+  /* Typography — match shell */
+  --cv-font-ui:   inherit;
+  --cv-font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+  --cv-font-math: "KaTeX_Main", "Computer Modern", serif;
 
   /* Motion */
   --cv-transition-fast:   100ms ease;
@@ -88,147 +88,101 @@
   --cv-radius-pill: 999px;
 }
 
-/* ── Dark mode via OS preference ──────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --cv-bg-page:       #0f0f13;
-    --cv-bg-surface:    #1a1a22;
-    --cv-bg-raised:     #222230;
-    --cv-bg-sunken:     #12121a;
-    --cv-bg-overlay:    rgba(255, 255, 255, 0.05);
-
-    --cv-border:        rgba(255, 255, 255, 0.10);
-    --cv-border-strong: rgba(255, 255, 255, 0.22);
-
-    --cv-text-primary:   #f0f0f5;
-    --cv-text-secondary: #a0a0b0;
-    --cv-text-muted:     #666680;
-    --cv-text-inverse:   #111111;
-
-    --cv-accent:         #60a5fa;
-    --cv-accent-hover:   #93c5fd;
-    --cv-accent-light:   #1e3a5f;
-    --cv-accent-text:    #93c5fd;
-
-    --cv-success:        #4ade80;
-    --cv-success-light:  #14532d;
-    --cv-error:          #f87171;
-    --cv-error-light:    #7f1d1d;
-    --cv-warning:        #fbbf24;
-    --cv-warning-light:  #78350f;
-
-    --cv-btn-digit-bg:      #222230;
-    --cv-btn-digit-text:    #f0f0f5;
-    --cv-btn-digit-hover:   #2c2c3e;
-    --cv-btn-op-bg:         #1e2d4a;
-    --cv-btn-op-text:       #93c5fd;
-    --cv-btn-op-hover:      #253a5e;
-    --cv-btn-fn-bg:         #1d1d28;
-    --cv-btn-fn-text:       #c0c0d0;
-    --cv-btn-fn-hover:      #252535;
-    --cv-btn-eq-bg:         #3b82f6;
-    --cv-btn-eq-text:       #ffffff;
-    --cv-btn-eq-hover:      #60a5fa;
-    --cv-btn-clear-bg:      #4a1515;
-    --cv-btn-clear-text:    #fca5a5;
-    --cv-btn-clear-hover:   #5c1c1c;
-
-    --cv-display-bg:        #080810;
-    --cv-display-text:      #e2e8f0;
-    --cv-display-expr:      #64748b;
-    --cv-display-cursor:    #60a5fa;
-
-    --cv-input-bg:          #1a1a22;
-    --cv-input-border:      rgba(255, 255, 255, 0.14);
-    --cv-input-focus:       #60a5fa;
-    --cv-input-placeholder: #555566;
-
-    --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.40);
-    --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.50);
-    --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.60);
-  }
-}
-
-/* ── Manual override: force dark ──────────────────────────── */
-[data-theme="dark"] {
-  --cv-bg-page:       #0f0f13;
-  --cv-bg-surface:    #1a1a22;
-  --cv-bg-raised:     #222230;
-  --cv-bg-sunken:     #12121a;
-  --cv-bg-overlay:    rgba(255, 255, 255, 0.05);
-
-  --cv-border:        rgba(255, 255, 255, 0.10);
-  --cv-border-strong: rgba(255, 255, 255, 0.22);
-
-  --cv-text-primary:   #f0f0f5;
-  --cv-text-secondary: #a0a0b0;
-  --cv-text-muted:     #666680;
-  --cv-text-inverse:   #111111;
-
-  --cv-accent:         #60a5fa;
-  --cv-accent-hover:   #93c5fd;
-  --cv-accent-light:   #1e3a5f;
-  --cv-accent-text:    #93c5fd;
-
-  --cv-success:        #4ade80;
-  --cv-success-light:  #14532d;
-  --cv-error:          #f87171;
-  --cv-error-light:    #7f1d1d;
-  --cv-warning:        #fbbf24;
-  --cv-warning-light:  #78350f;
-
-  --cv-btn-digit-bg:      #222230;
-  --cv-btn-digit-text:    #f0f0f5;
-  --cv-btn-digit-hover:   #2c2c3e;
-  --cv-btn-op-bg:         #1e2d4a;
-  --cv-btn-op-text:       #93c5fd;
-  --cv-btn-op-hover:      #253a5e;
-  --cv-btn-fn-bg:         #1d1d28;
-  --cv-btn-fn-text:       #c0c0d0;
-  --cv-btn-fn-hover:      #252535;
-  --cv-btn-eq-bg:         #3b82f6;
-  --cv-btn-eq-text:       #ffffff;
-  --cv-btn-eq-hover:      #60a5fa;
-  --cv-btn-clear-bg:      #4a1515;
-  --cv-btn-clear-text:    #fca5a5;
-  --cv-btn-clear-hover:   #5c1c1c;
-
-  --cv-display-bg:        #080810;
-  --cv-display-text:      #e2e8f0;
-  --cv-display-expr:      #64748b;
-  --cv-display-cursor:    #60a5fa;
-
-  --cv-input-bg:          #1a1a22;
-  --cv-input-border:      rgba(255, 255, 255, 0.14);
-  --cv-input-focus:       #60a5fa;
-  --cv-input-placeholder: #555566;
-
-  --cv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.40);
-  --cv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.50);
-  --cv-shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.60);
-}
-
-/* ── Manual override: force light ─────────────────────────── */
 [data-theme="light"] {
-  /* explicit resets handled by :root defaults above */
   color-scheme: light;
 }
 
-/* ── Base resets using theme tokens ──────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
+/* ── Cheat Sheet freeze ─────────────────────────────────────────────────────
+   Keep the pre-cream (sage shell) look for CheatSheet only. Global tokens
+   remapped to cream/ink/gold; this page restores the prior --cv-* / shell
+   values it relied on. Do not edit CheatSheet.jsx / formulaData.js colors.
+   ─────────────────────────────────────────────────────────────────────────── */
+.cheatsheet-page {
+  --ink: #17201c;
+  --ink-2: #24302b;
+  --paper: #f6f8f5;
+  --paper-2: #edf2ee;
+  --card: #ffffff;
+  --line: #d7e0d9;
+  --muted: #617066;
+  --gold: #b98221;
+  --gold-2: #e7bd62;
+  --teal: #14756f;
+  --blue: #345b91;
+  --plum: #8a4d72;
+  --shadow: 0 18px 48px rgba(23, 32, 28, 0.12);
+  --shadow-sm: 0 8px 24px rgba(23, 32, 28, 0.08);
+  --shadow-hard: 0 24px 70px rgba(23, 32, 28, 0.18);
+
+  --cv-bg-page: #f6f8f5;
+  --cv-bg-surface: #ffffff;
+  --cv-bg-raised: #ffffff;
+  --cv-bg-sunken: #edf2ee;
+  --cv-bg-overlay: color-mix(in srgb, #17201c 4%, transparent);
+  --cv-border: #d7e0d9;
+  --cv-border-strong: color-mix(in srgb, #17201c 22%, transparent);
+  --cv-text-primary: #17201c;
+  --cv-text-secondary: #617066;
+  --cv-text-muted: #617066;
+  --cv-accent: #14756f;
+  --cv-accent-hover: #345b91;
+  --cv-accent-light: color-mix(in srgb, #14756f 14%, #f6f8f5);
+  --cv-accent-text: #14756f;
+  --cv-warning: #b98221;
+  --cv-warning-light: color-mix(in srgb, #b98221 14%, #f6f8f5);
+  --cv-btn-op-bg: color-mix(in srgb, #14756f 12%, #f6f8f5);
+  --cv-btn-op-text: #14756f;
+  --cv-btn-op-hover: color-mix(in srgb, #14756f 20%, #f6f8f5);
+  --cv-btn-eq-bg: #14756f;
+  --cv-btn-eq-text: #ffffff;
+  --cv-btn-eq-hover: #345b91;
+  --cv-input-bg: #ffffff;
+  --cv-input-border: #d7e0d9;
+  --cv-input-focus: #14756f;
+  --cv-input-placeholder: #617066;
+  --cv-shadow-sm: 0 18px 48px rgba(23, 32, 28, 0.12);
+  --cv-shadow-md: 0 18px 48px rgba(23, 32, 28, 0.12);
+  --cv-shadow-lg: 0 12px 32px color-mix(in srgb, #17201c 12%, transparent);
+
+  min-height: calc(100vh - var(--header-h, 72px));
+  background: #f6f8f5;
+  color: #17201c;
 }
 
-body {
-  margin: 0;
-  font-family: var(--cv-font-ui);
-  background-color: var(--cv-bg-page);
-  color: var(--cv-text-primary);
-  transition: background-color var(--cv-transition-slow), color var(--cv-transition-slow);
-  -webkit-font-smoothing: antialiased;
+[data-theme="dark"] .cheatsheet-page {
+  --ink: #edf5ef;
+  --ink-2: #d6e2da;
+  --paper: #0e1412;
+  --paper-2: #151d1a;
+  --card: #18211e;
+  --line: #2c3a35;
+  --muted: #9fb1a7;
+  --gold: #d5a64c;
+  --gold-2: #e7bd62;
+  --teal: #53bdb4;
+  --blue: #82a9e0;
+  --plum: #d28bb5;
+  --cv-bg-page: #0e1412;
+  --cv-bg-surface: #18211e;
+  --cv-bg-raised: #18211e;
+  --cv-bg-sunken: #151d1a;
+  --cv-border: #2c3a35;
+  --cv-text-primary: #edf5ef;
+  --cv-text-secondary: #9fb1a7;
+  --cv-text-muted: #9fb1a7;
+  --cv-accent: #53bdb4;
+  --cv-accent-hover: #82a9e0;
+  --cv-accent-text: #53bdb4;
+  --cv-btn-eq-bg: #53bdb4;
+  --cv-btn-eq-hover: #82a9e0;
+  --cv-input-bg: #18211e;
+  --cv-input-border: #2c3a35;
+  --cv-input-focus: #53bdb4;
+  background: #0e1412;
+  color: #edf5ef;
 }
 
-/* ── Dark mode toggle button (drop anywhere in layout) ────── */
+/* Tool pages share shell background — do not re-paint body */
 .cv-theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -239,7 +193,7 @@ body {
   background: var(--cv-bg-raised);
   color: var(--cv-text-secondary);
   font-size: 13px;
-  font-family: var(--cv-font-ui);
+  font-family: inherit;
   cursor: pointer;
   transition: background var(--cv-transition-fast), color var(--cv-transition-fast);
 }

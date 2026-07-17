@@ -296,7 +296,7 @@ function DerivativeTool() {
             y: dataSets.originalData.yValues,
             mode: 'lines',
             name: `f(${activeVariable})`,
-            line: { color: '#2563eb', width: 3, shape: 'spline' },
+            line: { color: '#a0720a', width: 3, shape: 'spline' },
             connectgaps: false,
           },
           {
@@ -340,8 +340,8 @@ function DerivativeTool() {
             y: dataSets.surfaceData.yValues,
             z: dataSets.surfaceData.zValues,
             colorscale: isDark
-              ? [[0, '#1e3a5f'], [0.5, '#2563eb'], [1, '#93c5fd']]
-              : [[0, '#dbeafe'], [0.5, '#2563eb'], [1, '#1e3a8a']],
+              ? [[0, '#12100a'], [0.5, '#a0720a'], [1, '#c89318']]
+              : [[0, '#f4ede0'], [0.5, '#a0720a'], [1, '#3a5f32']],
             opacity: 0.95,
             name: 'f(x, y)',
             showscale: true,
@@ -407,7 +407,7 @@ function DerivativeTool() {
             y: crossSectionAtY.yValues,
             mode: 'lines',
             name: `y = ${crossSectionY.toFixed(2)}`,
-            line: { color: '#2563eb', width: 3 },
+            line: { color: '#a0720a', width: 3 },
             connectgaps: false,
             hovertemplate: `${activeVariable}=%{x:.3f}<br>z=%{y:.3f}<extra></extra>`,
           },
@@ -444,7 +444,7 @@ function DerivativeTool() {
             x: dataSets.surfaceData.xValues,
             y: dataSets.surfaceData.yValues,
             z: dataSets.surfaceData.zValues,
-            colorscale: [[0, '#93c5fd'], [1, '#1d4ed8']],
+            colorscale: [[0, '#c89318'], [1, '#1a3358']],
             opacity: 0.75,
             name: 'Original f(x, y)',
             showscale: false,
