@@ -2,7 +2,7 @@
  * chatApi.js — Objectives CB-1, CB-4, CB-18, CB-19
  *
  * Integrated (default):  POST {CHAT_API_URL}/api/chat/
- *                        GET  {CHAT_API_URL}/api/chat/history
+ *                        GET  {CHAT_API_URL}/api/chat/sessions
  * Standalone (Beanie):   POST {REACT_APP_CHAT_URL}/chat
  */
 
@@ -165,6 +165,42 @@ export async function sendMessageStream(
   let suggestions = [];
   let message_id = null;  // CB-12: capture for feedback
   let session_id = null;  // CB-12/CB-19: capture for feedback/export
+  let finished = false;
+
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    onDone({ suggestions, message_id, session_id });
+  };
+
+  const handleDataPayload = (payload) => {
+    if (!payload || payload === "[DONE]") {
+      finish();
+      return true;
+    }
+
+    try {
+      const parsed = JSON.parse(payload);
+      if (parsed.error) {
+        onError(new Error(parsed.error));
+        return true;
+      }
+      // Backend emits {"delta"}; aiService may emit {"token"} / {"text"}
+      const chunk = parsed.delta || parsed.token || parsed.text || "";
+      if (chunk) onToken(chunk);
+      if (Array.isArray(parsed.suggestions)) suggestions = parsed.suggestions;
+      if (parsed.message_id) message_id = parsed.message_id;
+      if (parsed.session_id) session_id = parsed.session_id;
+      if (parsed.done) {
+        finish();
+        return true;
+      }
+    } catch {
+      // plain-text token fallback (not JSON-wrapped)
+      onToken(payload);
+    }
+    return false;
+  };
 
   try {
     // eslint-disable-next-line no-constant-condition
@@ -173,31 +209,31 @@ export async function sendMessageStream(
       if (done) break;
 
       buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split("\n\n");
-      buffer = lines.pop(); // keep incomplete chunk for next read
+      // SSE events are separated by a blank line
+      const frames = buffer.split("\n\n");
+      buffer = frames.pop(); // keep incomplete frame for next read
 
-      for (const line of lines) {
-        if (!line.startsWith("data:")) continue;
-        const payload = line.replace(/^data:\s*/, "");
-
-        if (payload === "[DONE]") {
-          onDone({ suggestions, message_id, session_id });
-          return;
-        }
-
-        try {
-          const parsed = JSON.parse(payload);
-          if (parsed.token) onToken(parsed.token);
-          if (Array.isArray(parsed.suggestions)) suggestions = parsed.suggestions;
-          if (parsed.message_id) message_id = parsed.message_id;  // CB-12
-          if (parsed.session_id) session_id = parsed.session_id;  // CB-12/CB-19
-        } catch {
-          // plain-text token fallback (not JSON-wrapped)
-          if (payload) onToken(payload);
-        }
+      for (const frame of frames) {
+        if (!frame.trim() || frame.trim().startsWith(":")) continue; // heartbeat/comments
+        // A frame may include "event: …" lines before one or more "data: …" lines
+        const dataLines = frame
+          .split("\n")
+          .filter((l) => l.startsWith("data:"))
+          .map((l) => l.replace(/^data:\s?/, ""));
+        if (!dataLines.length) continue;
+        const payload = dataLines.join("\n").trim();
+        if (handleDataPayload(payload)) return;
       }
     }
-    onDone({ suggestions, message_id, session_id });
+    // Flush any trailing complete payload left in the buffer
+    if (buffer.trim()) {
+      const dataLines = buffer
+        .split("\n")
+        .filter((l) => l.startsWith("data:"))
+        .map((l) => l.replace(/^data:\s?/, ""));
+      if (dataLines.length) handleDataPayload(dataLines.join("\n").trim());
+    }
+    finish();
   } catch (err) {
     onError(new Error("Stream interrupted. Please try again."));
   }
@@ -228,12 +264,17 @@ export async function createChatSession(token, title = "New Chat") {
     return null; // fail silently — local reset still works
   }
 }
+/**
+ * fetchChatHistory — list saved chat sessions for the logged-in user.
+ * Backend exposes GET /api/chat/sessions (not /api/chat/history).
+ * Per-session messages live at GET /api/chat/history/{session_id}.
+ */
 export async function fetchChatHistory(token) {
   if (!token) return [];
 
   let response;
   try {
-    response = await fetchWithTimeout(`${CHAT_API_URL}/api/chat/history`, {
+    response = await fetchWithTimeout(`${CHAT_API_URL}/api/chat/sessions`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (err) {
@@ -248,7 +289,16 @@ export async function fetchChatHistory(token) {
 
   try {
     const data = await response.json();
-    return data.history || data.sessions || [];
+    const sessions = data.data || data.sessions || data.history || [];
+    return sessions.map((s) => ({
+      id: s.session_id || s.id,
+      session_id: s.session_id || s.id,
+      preview: s.title || "Chat session",
+      date: s.updated_at || s.last_message_at || s.created_at
+        ? new Date(s.updated_at || s.last_message_at || s.created_at).toLocaleDateString()
+        : "",
+      message_count: s.message_count,
+    }));
   } catch {
     return [];
   }
