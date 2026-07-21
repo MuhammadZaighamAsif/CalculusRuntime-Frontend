@@ -100,17 +100,20 @@ export default function CheatSheet() {
 
   // ── UI ───────────────────────────────────────────────────────────────────
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 16px" }}>
+    <div className="cheat-page">
 
       {/* ── Page header ── */}
-      <div style={{ textAlign: "center", marginBottom: "32px" }}>
-        <h1 style={{ fontSize: "2.2em", fontWeight: 900, color: "var(--cv-text-primary)", margin: "0 0 8px" }}>
-          📄 Formula Cheat Sheet
-        </h1>
-        <p style={{ color: "var(--cv-text-secondary)", fontSize: "1.05em" }}>
-          Select topics, search formulas, then download your personalised PDF.
-        </p>
+      <div className="tool-hero">
+        <div>
+          <p className="tool-hero-kicker">Formula Reference</p>
+          <h1>Formula Cheat Sheet</h1>
+          <p className="tool-hero-sub">
+            Select topics, search formulas, then download your personalised PDF.
+          </p>
+        </div>
       </div>
+
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 16px" }}>
 
       {/* ── Controls bar ── */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center", marginBottom: "24px", padding: "16px", background: "var(--cv-bg-surface)", borderRadius: "12px", boxShadow: "var(--cv-shadow-md)" }}>
@@ -152,9 +155,9 @@ export default function CheatSheet() {
               style={{
                 padding: "7px 14px",
                 borderRadius: "20px",
-                border: `2px solid ${active ? topic.color : "var(--cv-border)"}`,
-                background: active ? topic.color + "22" : "var(--cv-bg-surface)",
-                color: active ? topic.color : "var(--cv-text-secondary)",
+                border: `2px solid ${active ? "var(--cv-accent)" : "var(--cv-border)"}`,
+                background: active ? "var(--cv-accent-light)" : "var(--cv-bg-surface)",
+                color: active ? "var(--cv-accent-text, var(--cv-accent))" : "var(--cv-text-secondary)",
                 fontWeight: 600,
                 fontSize: "13px",
                 cursor: "pointer",
@@ -179,7 +182,7 @@ export default function CheatSheet() {
           style={{ background: "#ffffff", borderRadius: "16px", padding: "32px", boxShadow: "var(--cv-shadow-lg)" }}
         >
           {/* PDF Header */}
-          <div style={{ textAlign: "center", borderBottom: "3px solid #667eea", paddingBottom: "16px", marginBottom: "28px" }}>
+          <div style={{ textAlign: "center", borderBottom: "3px solid #a0720a", paddingBottom: "16px", marginBottom: "28px" }}>
             <h2 style={{ fontSize: "1.8em", fontWeight: 900, color: "#1a1a2e", margin: "0 0 4px" }}>
               📐 CalcVoyager — Formula Reference Sheet
             </h2>
@@ -233,6 +236,7 @@ export default function CheatSheet() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

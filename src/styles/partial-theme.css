@@ -1,0 +1,504 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Partial Derivatives guide theme — applied site-wide except Home + Cheat Sheet
+   Matches tokens from PartialDerivativesGuide.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-site-theme="partial"] {
+  --ink: #16120a;
+  --ink-2: #2a2418;
+  --paper: #f4ede0;
+  --paper-2: #fdf8f0;
+  --card: #fdf8f0;
+  --line: #d4c4a8;
+  --muted: #5c4f3a;
+  --gold: #a0720a;
+  --gold-2: #c89318;
+  --teal: #3a5f32;
+  --blue: #1a3358;
+  --plum: #7c2f0a;
+  --shadow: 0 2px 14px rgba(22, 18, 10, 0.1);
+  --shadow-sm: 0 1px 6px rgba(22, 18, 10, 0.07);
+  --shadow-hard: 0 8px 32px rgba(22, 18, 10, 0.14);
+  --error: #7c2f0a;
+  --chat-on-accent: #fdf8f0;
+  --chat-header-bg: #16120a;
+  --chat-text-on-fill: #fdf8f0;
+  --header-h: 72px;
+
+  /* Calculator/tool pages — match guide palette */
+  --cv-bg-page: #f4ede0;
+  --cv-bg-surface: #fdf8f0;
+  --cv-bg-raised: #fdf8f0;
+  --cv-bg-sunken: #f4ede0;
+  --cv-border: #d4c4a8;
+  --cv-text-primary: #16120a;
+  --cv-text-secondary: #5c4f3a;
+  --cv-text-muted: #7a6b52;
+  --cv-accent: #a0720a;
+  --cv-accent-hover: #c89318;
+  --cv-accent-light: rgba(160, 114, 10, 0.12);
+  --cv-accent-text: #a0720a;
+  --cv-input-bg: #fdf8f0;
+  --cv-input-border: #d4c4a8;
+  --cv-btn-eq-bg: #a0720a;
+  --cv-btn-eq-hover: #c89318;
+  --cv-btn-eq-text: #fdf8f0;
+  --cv-btn-digit-bg: #fdf8f0;
+  --cv-btn-digit-text: #16120a;
+  --cv-btn-digit-hover: #f4ede0;
+  --cv-btn-op-bg: #f0e4cb;
+  --cv-btn-op-text: #8a6209;
+  --cv-btn-op-hover: #e8d9b8;
+  --cv-btn-fn-bg: #fdf8f0;
+  --cv-btn-fn-text: #5c4f3a;
+  --cv-btn-fn-hover: #f4ede0;
+  --cv-btn-clear-bg: #f0e4cb;
+  --cv-btn-clear-text: #7c2f0a;
+  --cv-btn-clear-hover: #e8d9b8;
+}
+
+[data-site-theme="partial"][data-theme="dark"] {
+  --ink: #f4ede0;
+  --ink-2: #e8dcc8;
+  --paper: #12100c;
+  --paper-2: #1a1610;
+  --card: #211c14;
+  --line: #3d3428;
+  --muted: #b8a88a;
+  --gold: #c89318;
+  --gold-2: #e0b04a;
+  --teal: #5a8f52;
+  --blue: #2a4a78;
+  --plum: #a04520;
+
+  --cv-bg-page: #12100c;
+  --cv-bg-surface: #211c14;
+  --cv-bg-raised: #211c14;
+  --cv-bg-sunken: #1a1610;
+  --cv-border: #3d3428;
+  --cv-text-primary: #f4ede0;
+  --cv-text-secondary: #b8a88a;
+  --cv-text-muted: #9a8a72;
+  --cv-accent: #e0b04a;
+  --cv-accent-hover: #f0c66f;
+  --cv-accent-light: rgba(200, 147, 24, 0.15);
+  --cv-input-bg: #1a1610;
+  --cv-input-border: #3d3428;
+  --cv-btn-eq-bg: #c89318;
+  --cv-btn-eq-text: #16120a;
+  --cv-btn-eq-hover: #e0b04a;
+  --cv-btn-digit-bg: #211c14;
+  --cv-btn-digit-text: #f4ede0;
+  --cv-btn-digit-hover: #2a2418;
+  --cv-btn-op-bg: #2a2216;
+  --cv-btn-op-text: #e0b04a;
+  --cv-btn-op-hover: #332a1a;
+  --cv-btn-fn-bg: #1a1610;
+  --cv-btn-fn-text: #b8a88a;
+  --cv-btn-fn-hover: #241e14;
+  --cv-btn-clear-bg: #3a251a;
+  --cv-btn-clear-text: #e0956a;
+  --cv-btn-clear-hover: #462c1e;
+}
+
+[data-site-theme="partial"] body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Lora", Georgia, serif;
+}
+
+[data-site-theme="partial"] body::before {
+  display: none;
+}
+
+/* Header — dark bar with gold accent (matches Lagrange / partial guides) */
+[data-site-theme="partial"] .site-header {
+  min-height: var(--header-h);
+  background: #16120a;
+  border-bottom: 3px solid var(--gold);
+  box-shadow: var(--shadow-sm);
+  color: #f4ede0;
+  backdrop-filter: none;
+  gap: 0.5rem;
+}
+
+[data-site-theme="partial"] .site-header::after {
+  display: none;
+}
+
+[data-site-theme="partial"] .site-brand::before {
+  display: none;
+}
+
+[data-site-theme="partial"] .site-brand {
+  color: #f4ede0;
+  font-family: "Playfair Display", Georgia, serif;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+[data-site-theme="partial"] .brand-mark {
+  background: linear-gradient(135deg, var(--gold-2), var(--gold));
+  color: #16120a;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(160, 114, 10, 0.35);
+}
+
+[data-site-theme="partial"] .brand-text {
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+  line-height: 1.05;
+}
+
+[data-site-theme="partial"] .brand-text span {
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+[data-site-theme="partial"] .brand-text small {
+  color: rgba(244, 237, 224, 0.65);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[data-site-theme="partial"] .site-nav {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  gap: 0;
+  margin-left: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  scrollbar-color: rgba(200, 147, 24, 0.45) transparent;
+}
+
+[data-site-theme="partial"] .site-nav::-webkit-scrollbar-thumb {
+  background: rgba(200, 147, 24, 0.45);
+}
+
+[data-site-theme="partial"] .site-nav a {
+  color: rgba(244, 237, 224, 0.78);
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.9rem 0.55rem;
+  white-space: nowrap;
+}
+
+[data-site-theme="partial"] .site-nav a:hover,
+[data-site-theme="partial"] .site-nav a.active {
+  background: rgba(160, 114, 10, 0.14);
+  color: var(--gold-2);
+  border-bottom-color: var(--gold);
+  box-shadow: none;
+}
+
+[data-site-theme="partial"] .site-nav a.active::after {
+  display: none;
+}
+
+[data-site-theme="partial"] .header-controls {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+[data-site-theme="partial"] .theme-toggle,
+[data-site-theme="partial"] .hamburger {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 196, 168, 0.25);
+  color: #f4ede0;
+  border-radius: 6px;
+  width: auto;
+  min-width: 44px;
+  height: 38px;
+  padding: 0 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+[data-site-theme="partial"] .theme-toggle:hover,
+[data-site-theme="partial"] .hamburger:hover {
+  background: rgba(160, 114, 10, 0.22);
+  border-color: var(--gold);
+  color: var(--gold-2);
+}
+
+[data-site-theme="partial"] .hamburger span {
+  background: #f4ede0;
+}
+
+[data-site-theme="partial"] .header-login {
+  color: rgba(244, 237, 224, 0.88);
+}
+
+[data-site-theme="partial"] .header-login:hover {
+  color: var(--gold-2);
+}
+
+[data-site-theme="partial"] .header-signup {
+  background: var(--gold);
+  color: #fdf8f0;
+  border: 1px solid var(--gold-2);
+}
+
+[data-site-theme="partial"] .header-signup:hover {
+  background: var(--gold-2);
+  color: #16120a;
+  opacity: 1;
+}
+
+[data-site-theme="partial"] .header-user .header-avatar {
+  background: var(--gold);
+  color: #fdf8f0;
+  border: none;
+}
+
+[data-site-theme="partial"] .mobile-nav {
+  background: #16120a;
+  border-bottom: 1px solid rgba(160, 114, 10, 0.35);
+}
+
+[data-site-theme="partial"] .mobile-nav a {
+  color: rgba(244, 237, 224, 0.8);
+}
+
+[data-site-theme="partial"] .mobile-nav a:hover,
+[data-site-theme="partial"] .mobile-nav a.active {
+  background: rgba(160, 114, 10, 0.15);
+  color: var(--gold-2);
+}
+
+/* Footer */
+[data-site-theme="partial"] .site-footer {
+  background: #16120a;
+  border-top: 3px solid var(--gold);
+  border-bottom: none;
+  color: rgba(244, 237, 224, 0.75);
+}
+
+[data-site-theme="partial"] .site-footer a {
+  color: var(--gold-2);
+}
+
+/* Shared cards / sections on non-guide pages */
+[data-site-theme="partial"] .guide-card,
+[data-site-theme="partial"] .tool-strip,
+[data-site-theme="partial"] .home-stats {
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-site-theme="partial"] .guide-card h3,
+[data-site-theme="partial"] .guide-section h2,
+[data-site-theme="partial"] .tool-strip h2,
+[data-site-theme="partial"] .section-kicker {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--ink);
+}
+
+[data-site-theme="partial"] .section-kicker,
+[data-site-theme="partial"] .eyebrow {
+  color: var(--gold);
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.18em;
+}
+
+[data-site-theme="partial"] .primary-action {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #16120a;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+[data-site-theme="partial"] .secondary-action {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+/* Pages that reuse home-page markup (study plan, etc.) — flat guide paper,
+   no teal/purple grid overlays from the home hero */
+[data-site-theme="partial"] .home-page {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+[data-site-theme="partial"] .home-page .guide-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem clamp(1rem, 4vw, 2.5rem);
+}
+
+[data-site-theme="partial"] .home-page .guide-section > p {
+  color: var(--muted);
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.05rem;
+}
+
+[data-site-theme="partial"] .auth-page {
+  background: var(--paper);
+}
+
+[data-site-theme="partial"] .auth-card {
+  background: var(--card);
+  border-color: var(--line);
+}
+
+/* Volume calculator — replace legacy purple hero with guide cream/gold */
+[data-site-theme="partial"] .volume-calc-page {
+  background: var(--paper) !important;
+  padding: 2.5rem 1.25rem;
+  min-height: calc(100vh - var(--header-h));
+}
+
+[data-site-theme="partial"] .volume-calc-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+[data-site-theme="partial"] .volume-calc-page h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--ink) !important;
+  text-shadow: none !important;
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
+[data-site-theme="partial"] .volume-calc-page .volume-calc-hero p,
+[data-site-theme="partial"] .volume-calc-page p[style*="rgba(255,255,255"] {
+  color: var(--muted) !important;
+  font-size: 1.05rem;
+  text-align: center;
+  margin: 0 0 2rem;
+}
+
+[data-site-theme="partial"] .study-guide-page {
+  background: var(--paper);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Shared ink hero banner — matches the Simple Concepts hero. Used on tool
+   pages (Cheat Sheet, Continuity Analyzer) so every page opens the same way.
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-site-theme="partial"] .tool-hero {
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200, 146, 42, 0.06) 40px, rgba(200, 146, 42, 0.06) 41px),
+    #16120a;
+  color: #f4ede0;
+  overflow: hidden;
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 6vw, 3.5rem);
+}
+
+[data-site-theme="partial"] .tool-hero > div {
+  margin: 0 auto;
+  max-width: 1160px;
+}
+
+[data-site-theme="partial"] .tool-hero .tool-hero-kicker {
+  color: #c89318;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+[data-site-theme="partial"] .tool-hero h1 {
+  color: #f4ede0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.12;
+  margin: 0;
+  max-width: 900px;
+  text-align: left;
+}
+
+[data-site-theme="partial"] .tool-hero .tool-hero-sub {
+  color: rgba(250, 247, 242, 0.72);
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: 1.7;
+  margin: 1.15rem 0 0;
+  max-width: 720px;
+  text-align: left;
+}
+
+/* Unify hero banner size across the study guides with the concepts hero */
+[data-site-theme="partial"] .vector-calculus-guide header,
+[data-site-theme="partial"] .partial-derivatives-guide .ch-hdr {
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 6vw, 3.5rem);
+}
+
+[data-site-theme="partial"] .vector-calculus-guide header h1,
+[data-site-theme="partial"] .partial-derivatives-guide .ch-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  line-height: 1.12;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Continuity Analyzer — swap its teal/blue/plum palette for the gold theme
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-site-theme="partial"] .app-body {
+  --continuity-ink: #16120a;
+  --continuity-muted: #5c4f3a;
+  --continuity-paper: #f4ede0;
+  --continuity-card: #fdf8f0;
+  --continuity-line: #d4c4a8;
+  --continuity-teal: #a0720a;
+  --continuity-blue: #8a6209;
+  --continuity-gold: #c89318;
+  --continuity-plum: #a0720a;
+  background: var(--paper);
+  font-family: "Lora", Georgia, serif;
+  padding-top: 0 !important;
+}
+
+/* Full-bleed hero: stretch past the page padding to the viewport edges */
+[data-site-theme="partial"] .app-body .tool-hero {
+  margin: 0 calc(50% - 50vw) clamp(2rem, 5vw, 3rem) !important;
+}
+
+[data-site-theme="partial"] .app-body .section-title,
+[data-site-theme="partial"] .app-body .input-title {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+[data-site-theme="partial"] .app-body .calculate-button {
+  background: linear-gradient(135deg, #a0720a, #c89318);
+  color: #fdf8f0;
+}
+
+[data-site-theme="partial"] .app-body .calculate-button:hover {
+  background: #c89318;
+}
+
+[data-site-theme="partial"] .app-body .clear-button {
+  background: var(--continuity-card);
+  border-color: var(--continuity-line);
+  color: var(--continuity-ink);
+}
+
+[data-site-theme="partial"] .app-body .toolbar-button {
+  color: #8a6209;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Cheat Sheet — full-bleed hero above the centered sheet container
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-site-theme="partial"] .cheat-page {
+  background: var(--paper);
+  min-height: calc(100vh - var(--header-h));
+}

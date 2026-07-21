@@ -1021,8 +1021,13 @@ const ContinuityFinder = () => {
             `}</style>
 
             <div className="app-container">
-                <h1 className="app-title">Continuity Analyzer</h1>
-                <div className="app-subtitle">Multi-Variable Function Continuity Analysis</div>
+                <div className="tool-hero">
+                    <div>
+                        <p className="tool-hero-kicker">Interactive Tool</p>
+                        <h1>Continuity Analyzer</h1>
+                        <p className="tool-hero-sub">Multi-variable function continuity analysis: test where a function is defined, where it breaks, and why.</p>
+                    </div>
+                </div>
 
                 {/* Demo Examples */}
                 <div className="demo-section">
