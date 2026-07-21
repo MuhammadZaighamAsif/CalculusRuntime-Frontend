@@ -1,8 +1,10 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import "./Leaderboard.css";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8002";
 
 function quizAveragePercent(quizScores) {
   const entries = Object.values(quizScores || {});
@@ -73,15 +75,32 @@ export default function Leaderboard() {
   const { user } = useAuth();
   const { progress, stats, setLeaderboardOptIn } = useProgress();
   const optedIn = Boolean(progress.leaderboardOptIn);
+  const [peers, setPeers] = useState([]);
+
+  // Anonymized entries for every opted-in user, fetched from the backend.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/progress/leaderboard`);
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!cancelled) setPeers(Array.isArray(data.entries) ? data.entries : []);
+      } catch {
+        // Backend unreachable — fall back to showing only local stats.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [optedIn]);
 
   const youStats = useMemo(() => {
     const topics = stats.completedCount || 0;
     const quizPct = quizAveragePercent(progress.quizScores);
     return {
       id: "you",
-      label: user?.username
-        ? `Learner ${user.username.slice(0, 1).toUpperCase()}`
-        : "You",
+      label: user?.username || "You",
       topics,
       quizPct,
       isYou: true,
@@ -91,15 +110,34 @@ export default function Leaderboard() {
   const quizCount = Object.keys(progress.quizScores || {}).length;
   const hasProgress = youStats.topics > 0 || quizCount > 0;
 
-  // Real data only — no hardcoded peer entries.
-  const topicRows = useMemo(
-    () => (optedIn && hasProgress ? [youStats] : []),
-    [optedIn, hasProgress, youStats],
+  // Other users from the backend (your own server entry is replaced by
+  // fresher local stats below).
+  const peerRows = useMemo(
+    () =>
+      peers
+        .filter((p) => !user?.id || p.userId !== user.id)
+        .map((p) => ({
+          id: `user-${p.userId}`,
+          label: p.label,
+          topics: Number(p.topics) || 0,
+          quizPct: Number(p.quizPct) || 0,
+          quizCount: Number(p.quizCount) || 0,
+          isYou: false,
+        })),
+    [peers, user?.id],
   );
-  const quizRows = useMemo(
-    () => (optedIn && quizCount > 0 ? [youStats] : []),
-    [optedIn, quizCount, youStats],
-  );
+
+  const topicRows = useMemo(() => {
+    const rows = [...peerRows];
+    if (optedIn && hasProgress) rows.push(youStats);
+    return rows.sort((a, b) => b.topics - a.topics);
+  }, [peerRows, optedIn, hasProgress, youStats]);
+
+  const quizRows = useMemo(() => {
+    const rows = peerRows.filter((p) => p.quizCount > 0);
+    if (optedIn && quizCount > 0) rows.push(youStats);
+    return rows.sort((a, b) => b.quizPct - a.quizPct);
+  }, [peerRows, optedIn, quizCount, youStats]);
 
   return (
     <main className="lb-page">
@@ -107,17 +145,18 @@ export default function Leaderboard() {
         <p className="lb-kicker">Your progress</p>
         <h1>Leaderboard</h1>
         <p className="lb-lead">
-          Anonymized ranking from your real quiz scores and completed topics.
-          Submit a quiz from Practice or any study-guide quiz to appear here.
+          Ranking from real quiz scores and completed topics across all
+          learners. Submit a quiz from Practice or any study-guide quiz to
+          appear here.
         </p>
       </header>
 
       <section className="lb-privacy">
         <div>
-          <h2>Share anonymized progress?</h2>
+          <h2>Share your progress?</h2>
           <p>
-            When enabled, your topic completion and quiz averages appear here as
-            an anonymous learner entry. Turn this off anytime.
+            When enabled, your topic completion and quiz averages appear here
+            under your username. Turn this off anytime.
           </p>
           {!user && (
             <p className="lb-note">
@@ -138,7 +177,7 @@ export default function Leaderboard() {
             type="checkbox"
             checked={optedIn}
             onChange={(e) => setLeaderboardOptIn(e.target.checked)}
-            aria-label="Opt in to anonymized leaderboard"
+            aria-label="Opt in to the leaderboard"
           />
           <span className="lb-toggle__ui" aria-hidden="true" />
           <span className="lb-toggle__text">
@@ -147,23 +186,26 @@ export default function Leaderboard() {
         </label>
       </section>
 
-      {!optedIn ? (
-        <div className="lb-empty" role="status">
-          <h2>Leaderboard hidden</h2>
-          <p>
-            You are opted out. Enable the toggle above, or use{" "}
-            <strong>Submit to Leaderboard</strong> after a quiz, to show your
-            anonymized progress graphs.
-          </p>
-        </div>
-      ) : !hasProgress ? (
-        <div className="lb-empty" role="status">
-          <h2>No progress yet</h2>
-          <p>
-            Complete a study-guide section or submit a quiz score — then your
-            real stats will show here. There is no placeholder peer data.
-          </p>
-        </div>
+      {topicRows.length === 0 && quizRows.length === 0 ? (
+        !optedIn ? (
+          <div className="lb-empty" role="status">
+            <h2>Leaderboard hidden</h2>
+            <p>
+              You are opted out and no other learners have shared progress yet.
+              Enable the toggle above, or use{" "}
+              <strong>Submit to Leaderboard</strong> after a quiz, to show your
+              progress graphs.
+            </p>
+          </div>
+        ) : (
+          <div className="lb-empty" role="status">
+            <h2>No progress yet</h2>
+            <p>
+              Complete a study-guide section or submit a quiz score — then your
+              real stats will show here. There is no placeholder peer data.
+            </p>
+          </div>
+        )
       ) : (
         <>
           <div className="lb-summary">
@@ -184,7 +226,7 @@ export default function Leaderboard() {
           <div className="lb-grid">
             <BarChart
               title="Topics completed"
-              subtitle="Your anonymized progress"
+              subtitle="All opted-in learners"
               rows={topicRows}
               valueKey="topics"
               maxValue={Math.max(12, youStats.topics)}
