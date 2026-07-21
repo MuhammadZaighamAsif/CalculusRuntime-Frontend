@@ -232,7 +232,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: color-mix(in srgb, var(--gold-2) 25%, var(--card));
+    /* Mix against the constant light token — --card goes dark in dark mode and
+       would render the title invisible on the dark header bar. */
+    color: color-mix(in srgb, var(--gold-2) 25%, var(--chat-text-on-fill));
     line-height: 1.2;
   }
   .cb-icon-btn:active,
@@ -274,16 +276,18 @@
     flex-shrink: 0;
   }
   
+  /* Header sits on a theme-constant dark bar, so icon color must come from the
+     constant light token (--chat-text-on-fill), not --card which flips in dark mode. */
   .cb-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 30px;
     height: 30px;
-    background: color-mix(in srgb, var(--card) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--card) 15%, transparent);
+    background: color-mix(in srgb, var(--chat-text-on-fill) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--chat-text-on-fill) 15%, transparent);
     border-radius: 6px;
-    color: color-mix(in srgb, var(--card) 70%, transparent);
+    color: color-mix(in srgb, var(--chat-text-on-fill) 70%, transparent);
     cursor: pointer;
     font-size: 0.9rem;
     font-family: inherit;
@@ -306,10 +310,10 @@
     justify-content: center;
     width: 30px;
     height: 30px;
-    background: color-mix(in srgb, var(--card) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--card) 15%, transparent);
+    background: color-mix(in srgb, var(--chat-text-on-fill) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--chat-text-on-fill) 15%, transparent);
     border-radius: 6px;
-    color: color-mix(in srgb, var(--card) 70%, transparent);
+    color: color-mix(in srgb, var(--chat-text-on-fill) 70%, transparent);
     cursor: pointer;
     font-size: 0.9rem;
     font-family: inherit;
@@ -1507,4 +1511,14 @@
   color: color-mix(in srgb, var(--gold) 70%, black);
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+/* Dark mode: the darkened-gold text/fill above lands on dark surfaces and
+   drops below 3:1 — switch to the light gold tokens instead. */
+[data-theme="dark"] .cb-progress-fill {
+  background: var(--gold);
+}
+
+[data-theme="dark"] .cb-complete-badge {
+  color: var(--gold-2);
 }
