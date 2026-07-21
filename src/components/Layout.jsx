@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Chatbot from "./Chatbot/Chatbot"; // <-- Chatbot yahaan import ho gaya
 
 function Layout({ body }) {
   const [darkMode, setDarkMode] = useState(() => {
@@ -32,7 +31,6 @@ function Layout({ body }) {
     <>
       <Header darkMode={darkMode} onToggleDark={toggle} />
       {body}
-      <Chatbot /> {/* <-- Chatbot ab har page par footer se upar show hoga */}
       <Footer />
     </>
   );

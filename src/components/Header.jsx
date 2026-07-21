@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Sun, Moon, Menu, X } from "lucide-react";
 
 const navLinks = [
 
@@ -96,7 +97,17 @@ function Header({ darkMode, onToggleDark }) {
           onClick={onToggleDark}
           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
-          {darkMode ? "☀️ Light" : "🌙 Dark"}
+          {darkMode ? (
+            <>
+              <Sun size={16} strokeWidth={2} />
+              <span> Light</span>
+            </>
+          ) : (
+            <>
+              <Moon size={16} strokeWidth={2} />
+              <span> Dark</span>
+            </>
+          )}
         </button>
 
         {user ? (
@@ -107,8 +118,23 @@ function Header({ darkMode, onToggleDark }) {
           </div>
         ) : (
           <div className="header-auth">
-            <Link to="/login"  className="header-login">Sign in</Link>
-            <Link to="/signup" className="header-signup">Sign up</Link>
+            <Link
+              to="/login"
+              className="header-login"
+              style={{ color: darkMode ? undefined : "#1a1a1a" }}
+            >
+              Sign in
+            </Link>
+            <Link
+              to="/signup"
+              className="header-signup"
+              style={{
+                color: darkMode ? undefined : "#ffffff",
+                backgroundColor: darkMode ? undefined : "#1a1a1a",
+              }}
+            >
+              Sign up
+            </Link>
           </div>
         )}
 
@@ -119,9 +145,7 @@ function Header({ darkMode, onToggleDark }) {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
         >
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
+          {menuOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
         </button>
       </div>
 
@@ -162,8 +186,20 @@ function Header({ darkMode, onToggleDark }) {
           </>
         ) : (
           <>
-            <Link to="/login"  onClick={() => setMenuOpen(false)}>Sign in</Link>
-            <Link to="/signup" onClick={() => setMenuOpen(false)}>Sign up</Link>
+            <Link
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              style={{ color: darkMode ? undefined : "#1a1a1a" }}
+            >
+              Sign in
+            </Link>
+            <Link
+              to="/signup"
+              onClick={() => setMenuOpen(false)}
+              style={{ color: darkMode ? undefined : "#1a1a1a" }}
+            >
+              Sign up
+            </Link>
           </>
         )}
       </nav>

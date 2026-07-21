@@ -193,10 +193,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Repository**: [github.com/SENODROOM/CalcVoyager](https://github.com/SENODROOM/CalcVoyager)
 - **Issues**: [Report a bug or request a feature](https://github.com/SENODROOM/CalcVoyager/issues)
 
-## Screenshots
-
-*(Add screenshots of your application here)*
-
----
 
 Made with ❤️ by SENODROOM

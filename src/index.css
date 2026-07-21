@@ -1337,6 +1337,10 @@ select {
   --shadow-sm: 0 8px 24px rgba(23, 32, 28, 0.08);
   --shadow-hard: 0 24px 70px rgba(23, 32, 28, 0.18);
   --radius: 8px;
+   --error: #c94040;
+   --chat-on-accent: #111317;
+   --chat-header-bg: #111317;
+   --chat-text-on-fill: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -1351,6 +1355,10 @@ select {
   --teal: #53bdb4;
   --blue: #82a9e0;
   --plum: #d28bb5;
+   --error: #ff8080;
+   --chat-on-accent: #111317;
+   --chat-header-bg: #111317;
+   --chat-text-on-fill: #ffffff;
 }
 
 body {
