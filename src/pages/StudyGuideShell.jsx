@@ -610,6 +610,13 @@ function StudyGuideShell({
     const root = rootRef.current;
     if (!root) return undefined;
 
+    // Inject markup imperatively instead of dangerouslySetInnerHTML: React 19
+    // re-applies __html on unrelated re-renders (e.g. recordVisit progress
+    // updates), which wiped the KaTeX output ~1s after load.
+    if (markup) {
+      root.innerHTML = markup;
+    }
+
     // Do not depend on `children` — parent visit/progress re-renders were tearing
     // down MCQ listeners and wiping selected / correct / wrong styles mid-click.
     let cancelled = false;
@@ -647,7 +654,7 @@ function StudyGuideShell({
     <main className={`study-guide-page ${resolvedClass}`}>
       <style>{styles + integrationStyles}</style>
       {markup ? (
-        <div ref={rootRef} dangerouslySetInnerHTML={{ __html: markup }} />
+        <div ref={rootRef} suppressHydrationWarning />
       ) : (
         <div ref={rootRef}>{children}</div>
       )}
